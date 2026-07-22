@@ -73,6 +73,8 @@
   --color-bass-red: hsl(357, 74%, 47%);
   --color-bass-white: hsl(0, 0%, 100%);
   --color-bass-dark: hsl(351, 80%, 2%);
+  --color-bass-black: hsl(0, 0%, 0%);
+  --color-bass-bg: hsl(351, 80%, 2%);
   --color-bass-grey-dark: hsl(357, 16%, 28%);
   --color-bass-grey-med: hsl(357, 15%, 52%);
   --color-bass-grey-light: hsl(356, 16%, 80%);

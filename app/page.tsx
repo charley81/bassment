@@ -1,83 +1,78 @@
-/*
- * BASSMENT — Home Page (v1-latest, node #368:3)
- * Dark bg (#090102), 1728px max width, JetBrains Mono
- */
+/* BASSMENT — Home (v1-latest) */
 import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-
-const events = [
-  { img: "/images/event-dlr.png", title: "DLR b2b Break", date: "Sat 01 Nov", support: "with SP:MC, Hydro" },
-  { img: "/images/event-goldie.png", title: "Goldie - Timeless Set", date: "Fri 07 Nov", support: "with MC GQ" },
-  { img: "/images/event-calibre.png", title: "Calibre - Deep Cuts", date: "Sat 15 Nov", support: "All Night Long" },
-  { img: "/images/event-sully.png", title: "Sully b2b Tim Reaper", date: "Fri 21 Nov", support: "Jungle Special" },
-];
+import { NewsletterForm } from "@/components/forms/newsletter-form";
+import {
+  Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,
+} from "@/components/ui/carousel";
+import { heroData, featuredEvent, upcomingEvents, venueHomeData, residentDjs, newsletterData } from "@/lib/data";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-full bg-[#090102]">
+    <div className="flex flex-col min-h-full">
       <Header />
 
-      {/* HERO — 1728×900, image bg + red overlay */}
-      <section className="relative h-[900px] w-full overflow-hidden bg-[#333]">
-        <Image src="/images/hero-bg-home-3ab357.png" alt="" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-[var(--color-primary)]/10" />
-        <div className="absolute left-20 top-[280px] flex flex-col gap-8 max-w-[1343px] z-10">
-          <div className="flex flex-col gap-2">
-            <p className="text-base font-medium uppercase text-[var(--color-bass-grey-med)]">DRUM & BASS | TECHSTEP | DRUMFUNK | JUNGLE</p>
-            <h1 className="text-[128px] font-extrabold leading-none text-white">FEEL THE BASS</h1>
+      {/* HERO */}
+      <section className="relative h-[600px] md:h-[900px] w-full overflow-hidden">
+        <Image src={heroData.image} alt="" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-[var(--color-primary)]/10 z-[1]" />
+        <div className="relative z-[2] pt-[200px] md:pt-[280px] px-6 md:px-20 flex flex-col gap-4 md:gap-8 max-w-[1343px]">
+          <div className="flex flex-col gap-1 md:gap-2">
+            <p className="text-label-medium text-bass-grey-light">{heroData.eyebrow}</p>
+            <h1 className="text-hero text-bass-white">{heroData.headline}</h1>
           </div>
-          <div className="flex flex-col gap-8">
-            <p className="text-base leading-6 text-[var(--color-bass-grey-med)] max-w-[676px]">Manhattan&apos;s only Valve Sound System venue. 96,000 watts of hand-built analog power.</p>
-            <Link href="/events" className="inline-flex h-14 px-10 items-center justify-center rounded-lg bg-white text-base font-bold text-[#090102] hover:bg-[var(--color-bass-grey-light)] transition-colors">Get Tickets</Link>
+          <div className="flex flex-col gap-6 md:gap-8">
+            <p className="text-body-sm text-bass-grey-light max-w-[676px]">{heroData.description}</p>
+            <Link href="/events" className="inline-flex h-14 px-10 items-center justify-center rounded-lg bg-bass-white text-btn text-bass-dark hover:bg-bass-grey-light transition-colors w-fit">{heroData.cta}</Link>
           </div>
         </div>
       </section>
 
-      {/* FEATURED EVENT — padding 160px 80px */}
-      <section className="py-[160px] px-20">
+      {/* FEATURED EVENT */}
+      <section className="py-20 md:py-[160px] px-6 md:px-20">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-4">
-          <h2 className="text-[48px] font-bold uppercase text-white">Next event</h2>
-          <div className="flex rounded overflow-hidden">
-            <div className="w-[768px] h-[1028px] relative shrink-0">
-              <Image src="/images/dillinja-valve-featured.png" alt="Dillinja" fill className="object-cover" />
+          <h2 className="text-section-heading text-bass-white">Next event</h2>
+          <div className="flex flex-col md:flex-row rounded overflow-hidden">
+            <div className="w-full md:w-[768px] h-[400px] md:h-[1028px] relative shrink-0">
+              <Image src={featuredEvent.image} alt={featuredEvent.title} fill className="object-cover" />
             </div>
-            <div className="flex-1 flex flex-col justify-center gap-8 p-12 bg-[#090102]">
-              <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-2">
-                  <p className="text-base text-[var(--color-bass-grey-med)]">FRI / 24 OCT</p>
-                  <h3 className="text-[36px] font-bold text-white">Dillinja — Valve Sound System Takeover</h3>
+            <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 p-6 md:p-12">
+              <div className="flex flex-col gap-6 md:gap-8">
+                <div className="flex flex-col gap-1 md:gap-2">
+                  <p className="text-nav text-bass-grey-light">{featuredEvent.date}</p>
+                  <h3 className="text-subtitle text-bass-white">{featuredEvent.title}</h3>
                 </div>
-                <p className="text-base text-[var(--color-primary)]">with Lemon D, Goldie, and DJ Storm</p>
-                <p className="text-base leading-relaxed text-[var(--color-bass-grey-med)]">A legendary sound system meets its creators. The Valve Sound System returns to its spiritual Manhattan home for an all-night exploration of the foundation.</p>
+                <p className="text-nav text-[var(--color-primary)]">{featuredEvent.support}</p>
+                <p className="text-body text-bass-grey-light">{featuredEvent.description}</p>
               </div>
-              <div className="flex items-center gap-4">
-                <Link href="/events/dillinja-valve" className="inline-flex h-14 px-6 items-center justify-center rounded-lg bg-[var(--color-primary)] text-base font-bold text-white hover:bg-[var(--color-primary)]/80 transition-colors">Get Tickets</Link>
-                <span className="inline-flex h-8 px-3 items-center rounded-full bg-[var(--color-bass-grey-dark)] border border-[var(--color-bass-grey-light)] text-base font-bold uppercase text-[var(--color-bass-grey-light)]">ON SALE NOW</span>
+              <div className="flex items-center gap-4 flex-wrap">
+                <Link href="/events/dillinja-valve" className="inline-flex h-14 px-6 items-center justify-center rounded-lg bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors">{featuredEvent.cta}</Link>
+                <span className="inline-flex h-8 px-3 items-center rounded-full bg-bass-grey-dark border border-bass-grey-light text-label text-bass-grey-light">{featuredEvent.badge}</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* UPCOMING — padding 120px 80px, gap 64 */}
-      <section className="py-[120px] px-20">
-        <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
+      {/* UPCOMING */}
+      <section className="py-20 md:py-[120px] px-6 md:px-20">
+        <div className="max-w-[1280px] mx-auto flex flex-col gap-12 md:gap-16">
           <div className="flex justify-between items-end">
-            <h2 className="text-[48px] font-bold text-white">UPCOMING</h2>
-            <Link href="/events" className="text-base underline text-[var(--color-primary)] hover:text-white transition-colors">View All Events →</Link>
+            <h2 className="text-section-title text-bass-white">UPCOMING</h2>
+            <Link href="/events" className="text-link text-[var(--color-primary)] hover:text-bass-white transition-colors">View All Events →</Link>
           </div>
-          <div className="flex gap-8">
-            {events.map((e, i) => (
-              <Link key={i} href={`/events/${e.title.toLowerCase().replace(/\s+/g, "-")}`} className="relative flex flex-col h-[380px] w-[296px] rounded overflow-hidden group shrink-0">
-                <Image src={e.img} alt={e.title} fill className="object-cover" />
-                <div className="absolute bottom-0 left-0 right-0 h-[180px]" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%)" }} />
-                <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-10">
-                  <span className="text-[30px] font-bold uppercase text-white leading-tight">{e.title}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {upcomingEvents.map((e) => (
+              <Link key={e.id} href={`/events/${e.id}`} className="relative flex flex-col h-[300px] md:h-[380px] rounded overflow-hidden group">
+                <Image src={e.image} alt={e.title} fill className="object-cover" />
+                <div className="absolute bottom-0 left-0 right-0 h-[180px] z-[1]" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%)" }} />
+                <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-[2]">
+                  <span className="text-heading text-bass-white leading-tight">{e.title}</span>
                   <div className="flex justify-between">
-                    <span className="text-base text-[var(--color-bass-grey-light)]">{e.date}</span>
-                    <span className="text-base text-[var(--color-bass-grey-light)]">{e.support}</span>
+                    <span className="text-nav text-bass-grey-light">{e.date}</span>
+                    <span className="text-nav text-bass-grey-light">{e.support}</span>
                   </div>
                 </div>
               </Link>
@@ -86,57 +81,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VENUE — padding 140px 80px */}
-      <section className="py-[140px] px-20">
-        <div className="max-w-[1280px] mx-auto flex items-center gap-12">
-          <div className="w-[616px] h-[721px] relative shrink-0 rounded-lg overflow-hidden">
-            <Image src="/images/venue-space-ab4185.png" alt="Venue" fill className="object-cover" />
+      {/* VENUE */}
+      <section className="py-20 md:py-[140px] px-6 md:px-20">
+        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          <div className="w-full md:w-[616px] h-[400px] md:h-[721px] relative shrink-0 rounded-lg overflow-hidden">
+            <Image src={venueHomeData.image} alt="Venue" fill className="object-cover" />
           </div>
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-2">
-              <p className="text-base uppercase text-[var(--color-primary)]">THE SPACE</p>
-              <h3 className="text-[36px] font-bold text-white">Built beneath the city. Tuned to the subway.</h3>
+          <div className="flex flex-col gap-6 md:gap-8">
+            <div className="flex flex-col gap-1 md:gap-2">
+              <p className="text-eyebrow text-[var(--color-primary)]">{venueHomeData.eyebrow}</p>
+              <h3 className="text-subtitle text-bass-white">{venueHomeData.title}</h3>
             </div>
-            <p className="text-base leading-relaxed text-[var(--color-bass-grey-med)]">Located four stories beneath 70 Pine Street, BASSMENT is a reinforced concrete chamber designed for physical frequency. No decor, no distractions, just the largest analog sound system in North America.</p>
-            <Link href="/venue" className="inline-flex h-12 px-5 items-center justify-center rounded-lg bg-[var(--color-primary)] text-base font-medium text-[#EEE] hover:bg-[var(--color-primary)]/80 transition-colors">Explore the Venue →</Link>
+            <p className="text-body text-bass-grey-light">{venueHomeData.description}</p>
+            <Link href="/venue" className="inline-flex h-12 px-5 items-center justify-center rounded-lg bg-[var(--color-primary)] text-btn-ghost text-bass-text hover:bg-[var(--color-primary)]/80 transition-colors w-fit">{venueHomeData.cta}</Link>
           </div>
         </div>
       </section>
 
-      {/* RESIDENT DJ — padding 120px 80px, centered */}
-      <section className="py-[120px] px-20 flex flex-col items-center gap-4">
-        <p className="text-base font-medium uppercase text-[var(--color-primary)]">RESIDENT</p>
-        <div className="flex flex-col items-center gap-8 max-w-[520px]">
-          <div className="w-[240px] h-[240px] relative rounded-full overflow-hidden">
-            <Image src="/images/dj-storm.png" alt="DJ Storm" fill className="object-cover" />
-          </div>
-          <h3 className="text-[36px] font-bold text-center text-white">DJ STORM</h3>
-          <p className="text-base leading-relaxed text-center text-[var(--color-bass-grey-med)]">The First Lady of Drum & Bass. A master of the techstep and jungle foundations, curating the BASSMENT sound since night one.</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {["Jungle", "Amen", "Techstep"].map((t) => (
-              <span key={t} className="inline-flex h-8 px-3 items-center rounded-lg border border-[var(--color-bass-grey-light)] bg-[var(--color-bass-grey-dark)] text-base text-[var(--color-bass-grey-light)]">{t}</span>
+      {/* RESIDENT DJ CAROUSEL */}
+      <section className="py-20 md:py-[120px] px-6 md:px-20 flex flex-col items-center gap-4">
+        <p className="text-label-medium text-[var(--color-primary)]">RESIDENT</p>
+        <Carousel className="w-full max-w-[520px]" opts={{ loop: true }}>
+          <CarouselContent>
+            {residentDjs.map((dj) => (
+              <CarouselItem key={dj.name} className="flex flex-col items-center gap-8">
+                <div className="w-[180px] h-[180px] md:w-[240px] md:h-[240px] relative rounded-full overflow-hidden">
+                  <Image src={dj.image} alt={dj.name} fill className="object-cover" />
+                </div>
+                <h3 className="text-subtitle-center text-bass-white">{dj.name}</h3>
+                <p className="text-body text-center text-bass-grey-light">{dj.description}</p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {dj.tags.map((t) => (
+                    <span key={t} className="inline-flex h-8 px-3 items-center rounded-lg border border-bass-grey-light bg-bass-grey-dark text-nav text-bass-grey-light">{t}</span>
+                  ))}
+                </div>
+              </CarouselItem>
             ))}
+          </CarouselContent>
+          <div className="flex justify-center gap-3 mt-6">
+            <CarouselPrevious className="static w-10 h-10 rounded-full border border-bass-border text-arrow text-bass-text hover:border-[var(--color-primary)] translate-y-0" />
+            <CarouselNext className="static w-10 h-10 rounded-full border border-bass-border text-arrow text-bass-text hover:border-[var(--color-primary)] translate-y-0" />
           </div>
-          <div className="flex items-center gap-3">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className={`w-2 h-2 rounded-full ${i === 0 ? "bg-white" : "border border-[var(--color-bass-grey-dark)]"}`} />
-            ))}
-          </div>
-        </div>
+        </Carousel>
       </section>
 
-      {/* NEWSLETTER — padding 120px 0, #533C3D bg */}
-      <section className="py-[120px] flex flex-col items-center bg-[var(--color-bass-grey-dark)]">
-        <div className="flex flex-col items-center gap-8 max-w-[520px]">
+      {/* NEWSLETTER */}
+      <section className="py-20 md:py-[120px] flex flex-col items-center bg-bass-grey-dark px-6">
+        <div className="flex flex-col items-center gap-6 md:gap-8 max-w-[520px]">
           <div className="flex flex-col items-center gap-2">
-            <h3 className="text-[36px] font-bold text-center text-white">GET EARLY ACCESS</h3>
-            <p className="text-base text-center text-[var(--color-bass-grey-med)]">Tickets drop to our mailing list first. Don&apos;t get locked out.</p>
+            <h3 className="text-subtitle-center text-bass-white">{newsletterData.title}</h3>
+            <p className="text-center text-bass-grey-light">{newsletterData.description}</p>
           </div>
-          <div className="flex gap-1 w-full">
-            <input type="email" placeholder="your@email.com" className="flex-1 h-14 px-5 rounded-lg bg-[#090102] border border-[var(--color-bass-border)] text-base text-[var(--color-bass-grey-med)] placeholder:text-[var(--color-bass-grey-med)] focus:outline-none focus:border-[var(--color-primary)]" />
-            <button className="h-14 px-6 rounded-lg bg-[var(--color-primary)] text-base font-bold text-white hover:bg-[var(--color-primary)]/80 transition-colors shrink-0">Subscribe</button>
-          </div>
-          <p className="text-sm text-[var(--color-bass-grey-light)]">Unsubscribe at any timE</p>
+          <NewsletterForm />
         </div>
       </section>
 
