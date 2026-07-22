@@ -28,7 +28,7 @@ export default async function EventDetail({
 
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="w-full md:w-[739px] h-[500px] md:h-[990px] relative shrink-0">
-              <Image src={eventDetailData.image} alt="" fill className="object-cover" />
+              <Image src={event.image} alt={event.title} fill className="object-cover" />
             </div>
             <div className="flex flex-col gap-6 md:gap-8 flex-1">
               <div className="flex flex-col gap-6 md:gap-8">

@@ -49,7 +49,7 @@ export default function Home() {
                 <p className="text-body text-bass-grey-light">{featuredEvent.description}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <Link href="/events/dillinja-valve" className="inline-flex h-14 px-6 items-center justify-center rounded-lg bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors">{featuredEvent.cta}</Link>
+                <Link href="/events" className="inline-flex h-14 px-6 items-center justify-center rounded-lg bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors">{featuredEvent.cta}</Link>
                 <span className="inline-flex h-8 px-3 items-center rounded-full bg-bass-grey-dark border border-bass-grey-light text-label text-bass-grey-light">{featuredEvent.badge}</span>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* NEWSLETTER */}
-      <section className="py-20 md:py-[120px] flex flex-col items-center bg-bass-grey-dark px-6">
+      <section id="newsletter" className="py-20 md:py-[120px] flex flex-col items-center bg-bass-grey-dark px-6">
         <div className="flex flex-col items-center gap-6 md:gap-8 max-w-[520px]">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-subtitle-center text-bass-white">{newsletterData.title}</h3>

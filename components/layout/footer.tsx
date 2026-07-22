@@ -20,7 +20,7 @@ export function Footer() {
             </div>
             <div className="flex flex-col gap-4">
               <span className="text-label text-bass-grey-med">{footerData.subscribeLabel}</span>
-              <Link href="#newsletter" className="inline-flex h-14 px-6 items-center justify-center rounded-lg border border-bass-grey-med text-label text-bass-white hover:border-[var(--color-primary)] transition-colors w-fit">
+              <Link href="/#newsletter" className="inline-flex h-14 px-6 items-center justify-center rounded-lg border border-bass-grey-med text-label text-bass-white hover:border-[var(--color-primary)] transition-colors w-fit">
                 {footerData.newsletterCta}
               </Link>
             </div>

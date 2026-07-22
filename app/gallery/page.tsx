@@ -12,7 +12,6 @@ export default function Gallery() {
         <div className="flex flex-col gap-10 md:gap-12 w-full max-w-[1280px]">
           <div className="flex justify-between items-end">
             <h1 className="text-h1 text-bass-white">GALLERY</h1>
-            <button className="h-10 px-4 flex items-center rounded-lg bg-bass-grey-dark border border-bass-grey-light text-nav text-bass-grey-light">Filter by Event ▾</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {galleryImages.map((img, i) => (
