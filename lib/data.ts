@@ -239,13 +239,13 @@ export const faqTitle = "FAQ";
 
 export const faqItems: FaqItem[] = [
   { question: "Where is BASSMENT located?", answer: "70 Pine Street, Manhattan. Enter through the unmarked door on the east side of the building. Take the stairs down three flights. You'll hear it before you see it." },
-  { question: "What are the age restrictions?", answer: "" },
+  { question: "What are the age restrictions?", answer: "All events are 21+. Valid government ID required. No exceptions." },
   { question: "How do I buy tickets?", answer: "All tickets are sold through our website via DICE. Sign up to the mailing list for early access — our events sell out fast. Day-of tickets are occasionally available at the door, cash only." },
-  { question: "What is the Valve Sound System?", answer: "" },
-  { question: "Can I take photos inside?", answer: "" },
-  { question: "Is there a coat check?", answer: "" },
-  { question: "What time do headliners usually go on?", answer: "" },
-  { question: "Do you serve food?", answer: "" },
+  { question: "What is the Valve Sound System?", answer: "The Valve Sound System is a custom-built, hand-wired analog sound system designed by Dillinja and Lemon D in 2001. It delivers 96,000 watts of pure Class A valve amplification — there is nothing else like it on earth." },
+  { question: "Can I take photos inside?", answer: "No flash photography. Phone photos are fine. No professional cameras or recording equipment without prior approval." },
+  { question: "Is there a coat check?", answer: "Yes. $5 cash or Venmo. Available from doors until 30 minutes before close." },
+  { question: "What time do headliners usually go on?", answer: "Headliners typically play 1AM–3AM. Set times are posted on our Instagram the day of each event." },
+  { question: "Do you serve food?", answer: "We do not serve food. There are several late-night spots within walking distance on Fulton Street." },
 ];
 
 /* ── 404 Page ── */

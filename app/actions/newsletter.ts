@@ -2,6 +2,10 @@
 
 import { Resend } from "resend";
 
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_FROM = process.env.RESEND_FROM_EMAIL || "BASSMENT <onboarding@resend.dev>";
+const CONTACT_TO = process.env.RESEND_CONTACT_EMAIL || "hello@bassment.com";
+
 interface NewsletterValues {
   email: string;
 }
@@ -9,17 +13,16 @@ interface NewsletterValues {
 export async function subscribeNewsletter(
   values: NewsletterValues
 ): Promise<{ success: boolean; error?: string }> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  if (!RESEND_API_KEY) {
     console.warn("RESEND_API_KEY not configured. Subscription not saved:", values.email);
     return { success: false, error: "Email service not configured." };
   }
 
   try {
-    const resend = new Resend(apiKey);
+    const resend = new Resend(RESEND_API_KEY);
     await resend.emails.send({
-      from: "BASSMENT <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL || "hello@bassment.com",
+      from: RESEND_FROM,
+      to: CONTACT_TO,
       subject: "New Newsletter Subscription",
       text: `New subscriber: ${values.email}`,
     });

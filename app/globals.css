@@ -495,4 +495,14 @@
     font-weight: 400;
     font-size: 2.5rem;
   }
+
+  /* Gradient overlay for event cards — black→transparent */
+  .event-card-gradient {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+  }
+
+  /* Greyscale filter for venue / gallery images */
+  .img-greyscale {
+    filter: grayscale(100%);
+  }
 }

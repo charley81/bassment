@@ -11,7 +11,7 @@ export default function Venue() {
       <Header />
 
       <section className="relative h-[600px] md:h-[900px] w-full overflow-hidden">
-        <Image src={venueHeroData.image} alt="" fill className="object-cover" />
+        <Image src={venueHeroData.image} alt="" fill className="object-cover img-greyscale" />
         <div className="absolute inset-0 bg-[var(--color-primary)]/10 z-[1]" />
         <div className="absolute left-6 md:left-20 bottom-20 md:bottom-[213px] flex flex-col gap-4 max-w-[800px] z-[2]">
           <h1 className="text-h6 text-bass-white">{venueHeroData.headline}</h1>

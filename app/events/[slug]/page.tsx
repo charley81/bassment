@@ -1,11 +1,24 @@
 /* BASSMENT — Event Detail (v1-latest) */
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { eventDetailData } from "@/lib/data";
+import { EventCard } from "@/components/shared/event-card";
+import { eventDetailData, eventsPageData } from "@/lib/data";
 
-export default function EventDetail() {
+export default async function EventDetail({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const event = eventsPageData.find((e) => e.id === slug) ?? null;
+
+  if (!event) {
+    notFound();
+  }
+
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
       <Header />
@@ -19,7 +32,7 @@ export default function EventDetail() {
             </div>
             <div className="flex flex-col gap-6 md:gap-8 flex-1">
               <div className="flex flex-col gap-6 md:gap-8">
-                <h1 className="text-h5 text-bass-white">{eventDetailData.title}</h1>
+                <h1 className="text-h5 text-bass-white">{event.title.toUpperCase()}</h1>
                 <div className="flex flex-col gap-3">
                   <div className="flex justify-between">
                     {eventDetailData.setTimes.map((s) => (
@@ -87,17 +100,7 @@ export default function EventDetail() {
             <h3 className="text-more-events text-bass-text">MORE EVENTS</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {eventDetailData.relatedEvents.map((e) => (
-                <Link key={e.id} href="#" className="relative flex flex-col h-[300px] md:h-[380px] rounded-lg overflow-hidden">
-                  <Image src={e.image} alt={e.title} fill className="object-cover" />
-                  <div className="absolute bottom-0 left-0 right-0 h-[180px] z-[1]" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%)" }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-1.5 z-[2]">
-                    <span className="text-heading text-bass-white">{e.title}</span>
-                    <div className="flex justify-between">
-                      <span className="text-nav text-bass-grey-med">{e.date}</span>
-                      <span className="text-nav text-bass-grey-med">{e.support}</span>
-                    </div>
-                  </div>
-                </Link>
+                <EventCard key={e.id} event={e} />
               ))}
             </div>
           </div>

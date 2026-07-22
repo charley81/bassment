@@ -1,8 +1,7 @@
 /* BASSMENT — Events (v1-latest) */
-import Image from "next/image";
-import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { EventCard } from "@/components/shared/event-card";
 import { eventsPageData } from "@/lib/data";
 
 export default function Events() {
@@ -21,17 +20,7 @@ export default function Events() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {eventsPageData.map((e) => (
-              <Link key={e.id} href={`/events/${e.id}`} className="relative flex flex-col h-[300px] md:h-[380px] rounded-lg overflow-hidden group">
-                <Image src={e.image} alt={e.title} fill className="object-cover" />
-                <div className="absolute bottom-0 left-0 right-0 h-[180px] z-[1]" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%)" }} />
-                <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-[2]">
-                  <span className="text-heading text-bass-white leading-tight">{e.title}</span>
-                  <div className="flex justify-between">
-                    <span className="text-nav text-bass-grey-med">{e.date}</span>
-                    <span className="text-nav text-bass-grey-med">{e.support}</span>
-                  </div>
-                </div>
-              </Link>
+              <EventCard key={e.id} event={e} />
             ))}
           </div>
         </div>
