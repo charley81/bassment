@@ -45,7 +45,7 @@ function FormMessage({ className, ...props }: React.HTMLAttributes<HTMLParagraph
   const { error } = React.useContext(FormFieldContext);
   if (!error) return null;
   return (
-    <p className={cn("text-sm text-[var(--color-primary)]", className)} {...props}>
+    <p className={cn("text-sm text-(--color-primary)", className)} {...props}>
       {error}
     </p>
   );

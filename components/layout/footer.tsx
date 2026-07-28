@@ -12,7 +12,7 @@ export function Footer() {
               <span className="text-label text-bass-grey-med">{footerData.socialsLabel}</span>
               <div className="flex gap-3">
                 {socialLinks.map((s) => (
-                  <Link key={s.label} href={s.href} className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-[var(--color-primary)] hover:bg-[var(--color-primary)]/20 transition-colors" aria-label={s.label}>
+                  <Link key={s.label} href={s.href} className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) hover:bg-(--color-primary)/20 transition-colors" aria-label={s.label}>
                     <span className="text-social-icon text-bass-grey-light">{s.label}</span>
                   </Link>
                 ))}
@@ -20,7 +20,7 @@ export function Footer() {
             </div>
             <div className="flex flex-col gap-4">
               <span className="text-label text-bass-grey-med">{footerData.subscribeLabel}</span>
-              <Link href="/#newsletter" className="inline-flex h-14 px-6 items-center justify-center rounded-lg border border-bass-grey-med text-label text-bass-white hover:border-[var(--color-primary)] transition-colors w-fit">
+              <Link href="/#newsletter" className="inline-flex h-14 px-6 items-center justify-center rounded-lg border border-bass-grey-med text-label text-bass-white hover:border-(--color-primary) transition-colors w-fit">
                 {footerData.newsletterCta}
               </Link>
             </div>
@@ -32,7 +32,7 @@ export function Footer() {
                 <span className="text-label text-bass-grey-med">{col.title}</span>
                 <div className="flex flex-col gap-3">
                   {col.links.map((link) => (
-                    <Link key={link.label} href={link.href} className="text-footer-link text-bass-white hover:text-[var(--color-primary)] transition-colors">
+                    <Link key={link.label} href={link.href} className="text-footer-link text-bass-white hover:text-(--color-primary) transition-colors">
                       {link.label}
                     </Link>
                   ))}

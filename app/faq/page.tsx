@@ -14,7 +14,7 @@ export default function FAQ() {
           <Accordion className="flex flex-col">
             {faqItems.map((faq, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b border-bass-grey-dark py-6">
-                <AccordionTrigger className="text-faq-question text-bass-white hover:text-[var(--color-primary)] transition-colors [&[data-state=open]>span]:text-bass-grey-light">
+                <AccordionTrigger className="text-faq-question text-bass-white hover:text-(--color-primary) transition-colors [&[data-state=open]>span]:text-bass-grey-light">
                   {faq.question}
                 </AccordionTrigger>
                 {faq.answer && (

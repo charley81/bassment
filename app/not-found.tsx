@@ -16,7 +16,7 @@ export default function NotFound() {
           </div>
           <div className="flex flex-col items-center gap-6 md:gap-8">
             <p className="text-body-center text-bass-grey-med max-w-[480px]">{notFoundData.description}</p>
-            <Link href="/" className="inline-flex h-12 px-6 items-center justify-center rounded-lg text-btn text-bass-white hover:text-[var(--color-primary)] transition-colors">{notFoundData.cta}</Link>
+            <Link href="/" className="inline-flex h-12 px-6 items-center justify-center rounded-lg text-btn text-bass-white hover:text-(--color-primary) transition-colors">{notFoundData.cta}</Link>
           </div>
         </div>
       </main>

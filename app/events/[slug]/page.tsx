@@ -55,7 +55,7 @@ export default async function EventDetail({
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <Link href="#" className="flex items-center justify-center h-[60px] px-8 rounded-lg bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors">{eventDetailData.cta}</Link>
+                <Link href="#" className="flex items-center justify-center h-[60px] px-8 rounded-lg bg-(--color-primary) text-btn text-bass-white hover:bg-(--color-primary)/80 transition-colors">{eventDetailData.cta}</Link>
                 <span className="inline-flex self-start px-3 py-1.5 rounded-full bg-bass-dark border border-bass-grey-med text-label text-bass-grey-med">{eventDetailData.badge}</span>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default async function EventDetail({
                 <p key={i} className="text-nav text-bass-grey-light">{d}</p>
               ))}
             </div>
-            <Link href="/faq" className="text-link text-bass-white hover:text-[var(--color-primary)] transition-colors">{eventDetailData.venueInfo.faqLink}</Link>
+            <Link href="/faq" className="text-link text-bass-white hover:text-(--color-primary) transition-colors">{eventDetailData.venueInfo.faqLink}</Link>
           </div>
 
           <div className="relative w-full md:w-[800px] h-[200px] md:h-[300px] mx-auto mt-16 md:mt-20 rounded-lg overflow-hidden border border-bass-border">
