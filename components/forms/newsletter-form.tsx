@@ -32,7 +32,7 @@ export function NewsletterForm() {
       });
 
       const [netlifyRes] = await Promise.allSettled([
-        fetch('/', {
+        fetch('/__forms.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: netlifyPayload.toString(),
@@ -58,17 +58,6 @@ export function NewsletterForm() {
 
   return (
     <>
-      {/* Hidden HTML form for Netlify build-time detection */}
-      <form
-        name="newsletter"
-        method="POST"
-        data-netlify="true"
-        className="hidden"
-        aria-hidden="true"
-      >
-        <input type="email" name="email" />
-      </form>
-
       <Form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex gap-1 w-full">
         <FormField name="email" error={errors.email?.message} className="flex-1">

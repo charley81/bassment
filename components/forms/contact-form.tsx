@@ -37,7 +37,7 @@ export function ContactForm() {
       })
 
       const [netlifyRes] = await Promise.allSettled([
-        fetch('/', {
+        fetch('/__forms.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: netlifyPayload.toString(),
@@ -49,7 +49,6 @@ export function ContactForm() {
         toast.success("Message sent! We'll get back to you soon.")
         form.reset()
       } else {
-        // If Netlify fails but Resend succeeds, still show success
         toast.success("Message sent! We'll get back to you soon.")
         form.reset()
       }
@@ -64,19 +63,6 @@ export function ContactForm() {
 
   return (
     <>
-      {/* Hidden HTML form for Netlify build-time detection */}
-      <form
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        className="hidden"
-        aria-hidden="true"
-      >
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message" />
-      </form>
-
       <Form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-8"
