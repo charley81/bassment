@@ -21,7 +21,7 @@ export function EventCard({
       href={`/events/${event.id}`}
       className={`
         group relative flex flex-col overflow-hidden rounded-lg
-        h-300 md:h-380
+        h-[300px] md:h-[380px]
         ${faded ? "opacity-50" : ""}
       `}
     >
@@ -35,7 +35,7 @@ export function EventCard({
       />
 
       {/* Gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-180 z-1 event-card-gradient" />
+      <div className="absolute bottom-0 left-0 right-0 h-[180px] z-1 bg-gradient-to-b from-transparent to-black/85" />
 
       {/* Text overlay */}
       <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-2">

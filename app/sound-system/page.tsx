@@ -16,8 +16,8 @@ export default function SoundSystem() {
       <SoundHistory />
       <SoundSpecs />
       <SoundQuote />
-      <section className="py-20 md:py-160 flex justify-center">
-        <Link href="/events" className="btn-cta px-8">
+      <section className="py-20 md:py-[160px] flex justify-center">
+        <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
           {soundCtaData.label}
         </Link>
       </section>

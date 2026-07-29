@@ -5,11 +5,11 @@ import { featuredEvent } from '@/lib/data'
 
 export function FeaturedEvent() {
   return (
-    <section className="py-20 md:py-640 px-6 md:px-20">
+    <section className="py-20 md:py-[640px] px-6 md:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
         <div className="flex flex-col md:flex-row rounded overflow-hidden">
-          <div className="w-full md:w-3xl h-400 md:h-1028 relative shrink-0">
+          <div className="w-full md:w-3xl h-[400px] md:h-[1028px] relative shrink-0">
             <Image
               src={featuredEvent.image}
               alt={featuredEvent.title}
@@ -33,7 +33,7 @@ export function FeaturedEvent() {
               </p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <Link href="/events" className="btn-cta px-6">
+              <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-6">
                 {featuredEvent.cta}
               </Link>
               <span className="inline-flex h-8 px-3 items-center rounded-full bg-bass-grey-dark border border-bass-grey-light text-label text-bass-grey-light">

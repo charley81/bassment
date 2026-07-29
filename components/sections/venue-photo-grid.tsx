@@ -15,12 +15,12 @@ export function VenuePhotoGrid() {
         {rows.map((row, ri) => (
           <div
             key={ri}
-            className="flex flex-col md:flex-row gap-4 h-auto md:h-420"
+            className="flex flex-col md:flex-row gap-4 h-auto md:h-[420px]"
           >
             {row.map((src, i) => (
               <div
                 key={i}
-                className="relative w-full h-250 md:h-full md:flex-1 rounded-lg overflow-hidden"
+                className="relative w-full h-[250px] md:h-full md:flex-1 rounded-lg overflow-hidden"
               >
                 <Image
                   src={src}

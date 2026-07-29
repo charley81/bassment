@@ -9,7 +9,7 @@ export function SoundHero() {
         src={soundHeroData.image}
         alt=""
         fill
-        className="object-cover img-greyscale"
+        className="object-cover grayscale"
       />
       <div className="absolute inset-0 bg-primary/10 z-1" />
       <div className="relative z-2 flex flex-col gap-6 md:gap-8 max-w-800">

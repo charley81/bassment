@@ -15,7 +15,7 @@ export default function Gallery() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {galleryImages.map((img, i) => (
-              <div key={i} className={`relative rounded-lg overflow-hidden ${[0, 9, 10].includes(i) ? 'h-500' : 'h-300'}`}>
+              <div key={i} className={`relative rounded-lg overflow-hidden ${[0, 9, 10].includes(i) ? 'h-[500px]' : 'h-300'}`}>
                 <Image src={img.src} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
             ))}

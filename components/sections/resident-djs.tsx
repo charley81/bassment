@@ -13,14 +13,14 @@ export function ResidentDjs() {
   return (
     <section className="py-20 md:py-120 px-6 md:px-20 flex flex-col items-center gap-4">
       <p className="text-label-medium text-primary">RESIDENT</p>
-      <Carousel className="w-full max-w-520" opts={{ loop: true }}>
+      <Carousel className="w-full max-w-[520px]" opts={{ loop: true }}>
         <CarouselContent>
           {residentDjs.map((dj) => (
             <CarouselItem
               key={dj.name}
               className="flex flex-col items-center gap-8"
             >
-              <div className="w-180 h-180 md:w-60 md:h-60 relative rounded-full overflow-hidden">
+              <div className="w-[180px] h-[180px] md:w-60 md:h-60 relative rounded-full overflow-hidden">
                 <Image
                   src={dj.image}
                   alt={dj.name}

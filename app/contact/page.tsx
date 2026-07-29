@@ -10,7 +10,7 @@ export default function Contact() {
       <Header />
       <div className="h-120 md:h-40 shrink-0" />
       <main className="py-10 pb-20 md:pb-40 flex flex-col items-center px-6">
-        <div className="w-full max-w-640 flex flex-col gap-12 md:gap-16">
+        <div className="w-full max-w-[640px] flex flex-col gap-12 md:gap-16">
           <div className="flex flex-col items-center gap-4">
             <h1 className="text-h3 text-bass-white">{contactData.title}</h1>
             <p className="text-center-18 text-bass-grey-med">{contactData.subtitle}</p>

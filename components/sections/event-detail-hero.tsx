@@ -19,7 +19,7 @@ export function EventDetailHero({ event }: EventDetailHeroProps) {
       </Link>
 
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-        <div className="w-full md:w-739 h-500 md:h-990 relative shrink-0">
+        <div className="w-full md:w-[739px] h-[500px] md:h-[990px] relative shrink-0">
           <Image
             src={event.image}
             alt={event.title}
@@ -64,7 +64,7 @@ export function EventDetailHero({ event }: EventDetailHeroProps) {
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <Link href="#" className="btn-cta px-8">
+            <Link href="#" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
               {eventDetailData.cta}
             </Link>
             <span className="inline-flex self-start px-3 py-1.5 rounded-full bg-bass-dark border border-bass-grey-med text-label text-bass-grey-med">

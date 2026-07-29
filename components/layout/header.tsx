@@ -4,7 +4,7 @@ import { navItems, socialLinks } from '@/lib/data'
 
 export function Header() {
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-6 md:px-20 max-w-1728 mx-auto w-full">
+    <header className="absolute top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-6 md:px-20 max-w-[1728px] mx-auto w-full">
       <Link
         href="/"
         className="text-logo text-bass-white transition-colors shrink-0"
