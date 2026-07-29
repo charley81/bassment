@@ -103,42 +103,42 @@ export const residentDjs: ResidentDj[] = [
     description:
       'Co-founder of Valve Sound System. A pioneer who shaped the sound of drum & bass from its earliest days.',
     tags: ['Valve', 'Techstep', 'Foundation'],
-    image: '/images/dj-storm.png',
+    image: '/images/dillinja-valve-featured.png',
   },
   {
     name: 'DOC SCOTT',
     description:
       'Founder of 31 Records. A selector whose sets span the full spectrum of drum & bass history.',
     tags: ['31 Records', 'Jungle', 'Drumfunk'],
-    image: '/images/dj-storm.png',
+    image: '/images/event-doc-scott.png',
   },
   {
     name: 'FLIGHT',
     description:
       'One of the most respected voices in drum & bass. A selector with an encyclopedic knowledge of the music.',
     tags: ['Jungle', 'Amen', 'Deep Cuts'],
-    image: '/images/dj-storm.png',
+    image: '/images/event-dlr.png',
   },
   {
     name: 'MANTRA',
     description:
       'Co-founder of Rupture. Championing the deeper, darker side of drum & bass since 2006.',
     tags: ['Rupture', 'Techstep', 'Amen'],
-    image: '/images/dj-storm.png',
+    image: '/images/event-storm.png',
   },
   {
     name: 'DOUBLE O',
     description:
       'Rupture co-founder. Pushing the boundaries of jungle and drumfunk with every selection.',
     tags: ['Jungle', 'Drumfunk', 'Rupture'],
-    image: '/images/dj-storm.png',
+    image: '/images/event-om-unit.png',
   },
   {
     name: 'ANT TC1',
     description:
       'Founder of Dispatch Recordings. A tastemaker whose imprint defines the cutting edge of drum & bass.',
     tags: ['Dispatch', 'Techstep', 'Deep'],
-    image: '/images/dj-storm.png',
+    image: '/images/event-dbridge.png',
   },
 ]
 

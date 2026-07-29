@@ -158,23 +158,25 @@
   --sidebar-ring: hsl(357, 74%, 47%);
 }
 
-/* Base element styles (Tailwind v4 — plain CSS, no @layer) */
-*,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
-  border-color: var(--border);
-  outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
-}
+/* Base element styles */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
 
-html {
-  font-family: var(--font-jetbrains-mono), monospace;
+  html {
+    font-family: var(--font-jetbrains-mono), monospace;
+  }
 }
 
 /*
