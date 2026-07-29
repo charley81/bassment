@@ -8,8 +8,8 @@ export default function Events() {
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
       <Header />
-      <main className="pt-[200px] md:pt-[280px] pb-20 md:pb-[120px] px-6 md:px-20 flex flex-col items-center gap-12 md:gap-16">
-        <div className="w-full max-w-[1280px] flex flex-col gap-10 md:gap-12">
+      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-6 md:px-20 flex flex-col items-center gap-12 md:gap-16">
+        <div className="w-full max-w-7xl flex flex-col gap-10 md:gap-12">
           <h1 className="text-h1 text-bass-white">EVENTS</h1>
           <div className="flex gap-10">
             <div className="flex flex-col gap-2">

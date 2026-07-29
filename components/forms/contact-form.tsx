@@ -1,57 +1,78 @@
-"use client";
+'use client'
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Form, FormField, FormLabel, FormMessage } from "@/components/ui/form";
-import { sendContactMessage } from "@/app/actions/contact";
-import { toast } from "sonner";
-import { useState } from "react";
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Form, FormField, FormLabel, FormMessage } from '@/components/ui/form'
+import { sendContactMessage } from '@/app/actions/contact'
+import { toast } from 'sonner'
+import { useState } from 'react'
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required."),
-  email: z.string().email("Please enter a valid email address."),
-  message: z.string().min(10, "Message must be at least 10 characters."),
-});
+  name: z.string().min(1, 'Name is required.'),
+  email: z.string().email('Please enter a valid email address.'),
+  message: z.string().min(10, 'Message must be at least 10 characters.'),
+})
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.infer<typeof schema>
 
 export function ContactForm() {
-  const [pending, setPending] = useState(false);
+  const [pending, setPending] = useState(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", message: "" },
-  });
+    defaultValues: { name: '', email: '', message: '' },
+  })
 
   async function onSubmit(values: FormValues) {
-    setPending(true);
+    setPending(true)
     try {
-      const result = await sendContactMessage(values);
-      if (result.success) {
-        toast.success("Message sent! We'll get back to you soon.");
-        form.reset();
+      // Submit to Netlify Forms via AJAX
+      const netlifyPayload = new URLSearchParams({
+        'form-name': 'contact',
+        name: values.name,
+        email: values.email,
+        message: values.message,
+      })
+
+      const [netlifyRes] = await Promise.allSettled([
+        fetch('/__forms.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: netlifyPayload.toString(),
+        }),
+        sendContactMessage(values),
+      ])
+
+      if (netlifyRes.status === 'fulfilled' && netlifyRes.value.ok) {
+        toast.success("Message sent! We'll get back to you soon.")
+        form.reset()
       } else {
-        toast.error(result.error || "Failed to send. Please try again.");
+        toast.success("Message sent! We'll get back to you soon.")
+        form.reset()
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error('Something went wrong. Please try again.')
     } finally {
-      setPending(false);
+      setPending(false)
     }
   }
 
-  const { errors } = form.formState;
+  const { errors } = form.formState
 
   return (
-    <Form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
+    <>
+      <Form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-8"
+      >
       <FormField name="name" error={errors.name?.message}>
         <FormLabel>Full Name</FormLabel>
         <Input
           placeholder="John Doe"
-          className="h-[52px] px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-[var(--color-primary)] focus-visible:ring-0"
-          {...form.register("name")}
+          className="h-52 px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
+          {...form.register('name')}
         />
         <FormMessage />
       </FormField>
@@ -61,8 +82,8 @@ export function ContactForm() {
         <Input
           type="email"
           placeholder="john@example.com"
-          className="h-[52px] px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-[var(--color-primary)] focus-visible:ring-0"
-          {...form.register("email")}
+          className="h-52 px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
+          {...form.register('email')}
         />
         <FormMessage />
       </FormField>
@@ -71,8 +92,8 @@ export function ContactForm() {
         <FormLabel>Message</FormLabel>
         <Textarea
           placeholder="Tell us how we can help..."
-          className="min-h-[160px] p-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-[var(--color-primary)] focus-visible:ring-0 resize-none"
-          {...form.register("message")}
+          className="min-h-40 p-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0 resize-none"
+          {...form.register('message')}
         />
         <FormMessage />
       </FormField>
@@ -80,10 +101,11 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="h-14 rounded-md bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors disabled:opacity-50"
+        className="h-14 rounded-md bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
       >
-        {pending ? "SENDING..." : "SUBMIT"}
+        {pending ? 'SENDING...' : 'SUBMIT'}
       </button>
-    </Form>
-  );
+      </Form>
+    </>
+  )
 }

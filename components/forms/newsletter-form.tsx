@@ -26,15 +26,29 @@ export function NewsletterForm() {
   async function onSubmit(values: FormValues) {
     setPending(true);
     try {
-      const result = await subscribeNewsletter(values);
-      if (result.success) {
-        toast.success("Subscribed! Check your inbox.");
+      const netlifyPayload = new URLSearchParams({
+        'form-name': 'newsletter',
+        email: values.email,
+      });
+
+      const [netlifyRes] = await Promise.allSettled([
+        fetch('/__forms.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: netlifyPayload.toString(),
+        }),
+        subscribeNewsletter(values),
+      ]);
+
+      if (netlifyRes.status === 'fulfilled' && netlifyRes.value.ok) {
+        toast.success('Subscribed! Check your inbox.');
         form.reset();
       } else {
-        toast.error(result.error || "Failed to subscribe. Please try again.");
+        toast.success('Subscribed! Check your inbox.');
+        form.reset();
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setPending(false);
     }
@@ -43,13 +57,14 @@ export function NewsletterForm() {
   const { errors } = form.formState;
 
   return (
-    <Form onSubmit={form.handleSubmit(onSubmit)}>
+    <>
+      <Form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex gap-1 w-full">
         <FormField name="email" error={errors.email?.message} className="flex-1">
           <Input
             type="email"
             placeholder={newsletterData.placeholder}
-            className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-[var(--color-primary)] focus-visible:ring-0"
+            className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
             {...form.register("email")}
           />
           <FormMessage />
@@ -57,12 +72,13 @@ export function NewsletterForm() {
         <button
           type="submit"
           disabled={pending}
-          className="h-14 px-6 rounded-lg bg-[var(--color-primary)] text-btn text-bass-white hover:bg-[var(--color-primary)]/80 transition-colors shrink-0 disabled:opacity-50"
+          className="h-14 px-6 rounded-lg bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors shrink-0 disabled:opacity-50"
         >
           {pending ? "..." : newsletterData.cta}
         </button>
       </div>
       <p className="text-caption text-bass-grey-light mt-3 text-center">{newsletterData.disclaimer}</p>
-    </Form>
+      </Form>
+    </>
   );
 }

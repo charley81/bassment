@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -39,19 +39,6 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -70,7 +57,6 @@
   --color-card: var(--card);
 
   /* Figma-extracted direct color tokens (for non-shadcn usage) */
-  --color-bass-red: hsl(357, 74%, 47%);
   --color-bass-white: hsl(0, 0%, 100%);
   --color-bass-dark: hsl(351, 80%, 2%);
   --color-bass-black: hsl(0, 0%, 0%);
@@ -86,6 +72,24 @@
 
   /* Radius: 0rem per Figma (industrial, no rounded corners) */
   --radius: 0rem;
+
+  /* Design-specific sizing tokens (frequently used across pages) */
+  --spacing-52: 52px;
+  --spacing-60: 60px;
+  --spacing-100: 100px;
+  --spacing-120: 120px;
+  --spacing-200: 200px;
+  --spacing-280: 280px;
+  --spacing-300: 300px;
+  --spacing-400: 400px;
+  --spacing-600: 600px;
+  --spacing-800: 800px;
+  --spacing-900: 900px;
+  --spacing-1440: 1440px;
+
+  /* z-index tokens used for overlay stacking */
+  --z-index-1: 1;
+  --z-index-2: 2;
 }
 
 :root {
@@ -107,23 +111,24 @@
   --border: hsl(0, 0%, 40%);
   --input: hsl(0, 0%, 40%);
   --ring: hsl(357, 74%, 47%);
-  --sidebar: hsl(351, 80%, 2%);
-  --sidebar-foreground: hsl(0, 0%, 93%);
-  --sidebar-primary: hsl(357, 74%, 47%);
-  --sidebar-primary-foreground: hsl(0, 0%, 100%);
-  --sidebar-accent: hsl(0, 0%, 20%);
-  --sidebar-accent-foreground: hsl(0, 0%, 93%);
-  --sidebar-border: hsl(0, 0%, 40%);
-  --sidebar-ring: hsl(357, 74%, 47%);
 }
 
+/* Base element styles */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
   }
+
   html {
     font-family: var(--font-jetbrains-mono), monospace;
   }
@@ -135,374 +140,322 @@
  * 1:1 mapping from Figma text styles
  * Source: Figma file NxzFyuu5LPZEqjTLDlLmAm GLOBAL_VARS
  * ═══════════════════════════════════════════════════════════
+ *
+ * Defined via @utility (Tailwind v4) so the language server
+ * recognises them in class attributes.
  */
-@layer utilities {
-  /* ── Hero / Display ── */
-  /* style_98868f6c: ExtraBold 800, 128px, lineHeight 1em */
-  .text-hero {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 1em;
-  }
 
-  /* style_9addd392: ExtraBold 800, 128px, UPPERCASE, CENTER, lineHeight 1em */
-  .text-display {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 1em;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-  /* style_bc55e77b: ExtraBold 800, 64px, lineHeight 1em */
-  .text-h2 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 4rem);
-    line-height: 1em;
-  }
-
-  /* style_daeb8064: ExtraBold 800, 56px, UPPERCASE */
-  .text-h3 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    text-transform: uppercase;
-  }
-
-  /* style_743c93e7: ExtraBold 800, 72px */
-  .text-h1 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
-  }
-
-  /* style_726aa02b: Bold 700, 48px, UPPERCASE */
-  .text-section-heading {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 3rem);
-    text-transform: uppercase;
-  }
-
-  /* style_002dd0cd: Bold 700, 48px */
-  .text-section-title {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 3rem);
-  }
-
-  /* style_a402fa7e: ExtraBold 800, 48px, lineHeight 1.1em */
-  .text-h5 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-    line-height: 1.1em;
-  }
-
-  /* style_2f2c0c31: ExtraBold 800, 48px */
-  .text-h6 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-  }
-
-  /* ── Body / Content ── */
-  /* style_aee6abd6: Bold 700, 36px */
-  .text-subtitle {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.25rem, 2.25vw, 2.25rem);
-  }
-
-  /* style_d6bbe89e: Bold 700, 36px, CENTER */
-  .text-subtitle-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.25rem, 2.25vw, 2.25rem);
-    text-align: center;
-  }
-
-  /* style_d3c3a0bb: Bold 700, 30px, UPPERCASE */
-  .text-heading {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.125rem, 1.875vw, 1.875rem);
-    text-transform: uppercase;
-  }
-
-  /* style_d1dc6ad2: Bold 700, 30px */
-  .text-faq-question {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.875rem;
-  }
-
-  /* style_31ff3c53: ExtraBold 800, 30px */
-  .text-stat {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.125rem, 1.875vw, 1.875rem);
-  }
-
-  /* style_a10327fd: Bold 700, 28px */
-  .text-artist-name {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.75rem;
-  }
-
-  /* style_eee8e473-like: ExtraBold 800, 28px */
-  .text-more-events {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: 1.75rem;
-  }
-
-  /* style_dbe4f98a: Bold 700, 24px */
-  .text-faq-answer {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-
-  /* style_0964af5a: ExtraBold 800, 24px */
-  .text-logo {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: 1.5rem;
-  }
-
-  /* style_c099e8ac: Regular 400, 20px, lineHeight 1.5em */
-  .text-quote {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 1.5em;
-  }
-
-  /* style_e626c778: Regular 400, 20px */
-  .text-arrow {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.25rem;
-  }
-
-  /* style_c3dd04e2: Regular 400, 18px, lineHeight 1.5em */
-  .text-body-large {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.5em;
-  }
-
-  /* style_700e4a51: Bold 700, 18px */
-  .text-body-bold {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.125rem;
-  }
-
-  /* style_dccb7e2b: Regular 400, 18px */
-  .text-body-18 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-  }
-
-  /* style_2ebfcb1a: Regular 400, 16px, lineHeight 1.5em */
-  .text-body-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5em;
-  }
-
-  /* style_10661bbc: Regular 400, 16px, lineHeight 1.6em */
-  .text-body {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.6em;
-  }
-
-  /* style_8a69d696: Regular 400, 16px */
-  .text-nav {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-  }
-
-  /* style_3c7d7511: Bold 700, 16px */
-  .text-btn {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-  }
-
-  /* style_ab0cc64d: Bold 700, 16px, UPPERCASE */
-  .text-label {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-
-  /* style_8031ec5a: Medium 500, 16px, UPPERCASE */
-  .text-label-medium {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-
-  /* style_7085c044: Medium 500, 16px */
-  .text-btn-ghost {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 1rem;
-  }
-
-  /* style_e209c17e: Regular 400, 16px, UPPERCASE */
-  .text-eyebrow {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-
-  /* style_9c1ab834: Regular 400, 16px, UNDERLINE */
-  .text-link {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-decoration: underline;
-  }
-
-  /* style_220728f0: Bold 700, 16px, UPPERCASE, CENTER */
-  .text-label-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-  /* style_047cf8f3: Regular 400, 16px, lineHeight 1em, CENTER */
-  .text-social-icon {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1em;
-    text-align: center;
-  }
-
-  /* style_aeba4e34: Regular 400, 16px, lineHeight 1.5em, CENTER */
-  .text-body-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5em;
-    text-align: center;
-  }
-
-  /* style_b8ee02ea: Regular 400, 16px, CENTER */
-  .text-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  /* style_0205b178: Regular 400, 18px, CENTER */
-  .text-center-18 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-    text-align: center;
-  }
-
-  /* ── Small / Caption ── */
-  /* style_1f710772: Medium 500, 15px, UPPERCASE */
-  .text-footer-link {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.9375rem;
-    text-transform: uppercase;
-  }
-
-  /* style_db0e5639: Medium 500, 14px */
-  .text-btn-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
-
-  /* style_ef8e85c2: Bold 700, 14px, UPPERCASE */
-  .text-label-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
-
-  /* style_bc28cfd4: Regular 400, 14px */
-  .text-caption {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.875rem;
-  }
-
-  /* style_1f9014a2: Regular 400, 14px, UPPERCASE */
-  .text-overline {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
-
-  /* style_b99bba80: Medium 500, 12px, UPPERCASE */
-  .text-micro {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
-
-  /* style_9c82d704: Regular 400, 12px, UPPERCASE */
-  .text-micro-regular {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
-
-  /* style_32766d31: Regular 400, 10px, lineHeight 1em, CENTER */
-  .text-nano {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.625rem;
-    line-height: 1em;
-    text-align: center;
-  }
-
-  /* ── Decorative ── */
-  /* style_c7eb2034: Regular 400, 40px (music notes) */
-  .text-note {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 2.5rem;
-  }
-
-  /* Gradient overlay for event cards — black→transparent */
-  .event-card-gradient {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
-  }
-
-  /* Greyscale filter for venue / gallery images */
-  .img-greyscale {
-    filter: grayscale(100%);
-  }
+/* ── Hero / Display ── */
+/* style_98868f6c: ExtraBold 800, 128px, lineHeight 1em */
+@utility text-hero {
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1em;
 }
+
+/* style_9addd392: ExtraBold 800, 128px, UPPERCASE, CENTER, lineHeight 1em */
+@utility text-display {
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* style_bc55e77b: ExtraBold 800, 64px, lineHeight 1em */
+@utility text-h2 {
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1em;
+}
+
+/* style_daeb8064: ExtraBold 800, 56px, UPPERCASE */
+@utility text-h3 {
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  text-transform: uppercase;
+}
+
+/* style_743c93e7: ExtraBold 800, 72px */
+@utility text-h1 {
+  font-weight: 800;
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+}
+
+/* style_726aa02b: Bold 700, 48px, UPPERCASE */
+@utility text-section-heading {
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  text-transform: uppercase;
+}
+
+/* style_002dd0cd: Bold 700, 48px */
+@utility text-section-title {
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+}
+
+/* style_a402fa7e: ExtraBold 800, 48px, lineHeight 1.1em */
+@utility text-h5 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  line-height: 1.1em;
+}
+
+/* style_2f2c0c31: ExtraBold 800, 48px */
+@utility text-h6 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+}
+
+/* ── Body / Content ── */
+/* style_aee6abd6: Bold 700, 36px */
+@utility text-subtitle {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+}
+
+/* style_d6bbe89e: Bold 700, 36px, CENTER */
+@utility text-subtitle-center {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+  text-align: center;
+}
+
+/* style_d3c3a0bb: Bold 700, 30px, UPPERCASE */
+@utility text-heading {
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.875vw, 1.875rem);
+  text-transform: uppercase;
+}
+
+/* style_d1dc6ad2: Bold 700, 30px */
+@utility text-faq-question {
+  font-weight: 700;
+  font-size: 1.875rem;
+}
+
+/* style_31ff3c53: ExtraBold 800, 30px */
+@utility text-stat {
+  font-weight: 800;
+  font-size: clamp(1.125rem, 1.875vw, 1.875rem);
+}
+
+/* style_a10327fd: Bold 700, 28px */
+@utility text-artist-name {
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+/* style_eee8e473-like: ExtraBold 800, 28px */
+@utility text-more-events {
+  font-weight: 800;
+  font-size: 1.75rem;
+}
+
+/* style_dbe4f98a: Bold 700, 24px */
+@utility text-faq-answer {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+/* style_0964af5a: ExtraBold 800, 24px */
+@utility text-logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* style_c099e8ac: Regular 400, 20px, lineHeight 1.5em */
+@utility text-quote {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5em;
+}
+
+/* style_e626c778: Regular 400, 20px */
+@utility text-arrow {
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+/* style_c3dd04e2: Regular 400, 18px, lineHeight 1.5em */
+@utility text-body-large {
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.5em;
+}
+
+/* style_700e4a51: Bold 700, 18px */
+@utility text-body-bold {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+/* style_dccb7e2b: Regular 400, 18px */
+@utility text-body-18 {
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+
+/* style_2ebfcb1a: Regular 400, 16px, lineHeight 1.5em */
+@utility text-body-sm {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+/* style_10661bbc: Regular 400, 16px, lineHeight 1.6em */
+@utility text-body {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6em;
+}
+
+/* style_8a69d696: Regular 400, 16px */
+@utility text-nav {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* style_3c7d7511: Bold 700, 16px */
+@utility text-btn {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* style_ab0cc64d: Bold 700, 16px, UPPERCASE */
+@utility text-label {
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* style_8031ec5a: Medium 500, 16px, UPPERCASE */
+@utility text-label-medium {
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* style_7085c044: Medium 500, 16px */
+@utility text-btn-ghost {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* style_e209c17e: Regular 400, 16px, UPPERCASE */
+@utility text-eyebrow {
+  font-weight: 400;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* style_9c1ab834: Regular 400, 16px, UNDERLINE */
+@utility text-link {
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+/* style_220728f0: Bold 700, 16px, UPPERCASE, CENTER */
+@utility text-label-center {
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* style_047cf8f3: Regular 400, 16px, lineHeight 1em, CENTER */
+@utility text-social-icon {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1em;
+  text-align: center;
+}
+
+/* style_aeba4e34: Regular 400, 16px, lineHeight 1.5em, CENTER */
+@utility text-body-center {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+/* style_b8ee02ea: Regular 400, 16px, CENTER */
+@utility text-center {
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* style_0205b178: Regular 400, 18px, CENTER */
+@utility text-center-18 {
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+/* ── Small / Caption ── */
+/* style_1f710772: Medium 500, 15px, UPPERCASE */
+@utility text-footer-link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+}
+
+/* style_db0e5639: Medium 500, 14px */
+@utility text-btn-sm {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+/* style_ef8e85c2: Bold 700, 14px, UPPERCASE */
+@utility text-label-sm {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* style_bc28cfd4: Regular 400, 14px */
+@utility text-caption {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+/* style_1f9014a2: Regular 400, 14px, UPPERCASE */
+@utility text-overline {
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* style_b99bba80: Medium 500, 12px, UPPERCASE */
+@utility text-micro {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* style_9c82d704: Regular 400, 12px, UPPERCASE */
+@utility text-micro-regular {
+  font-weight: 400;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* style_32766d31: Regular 400, 10px, lineHeight 1em, CENTER */
+@utility text-nano {
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 1em;
+  text-align: center;
+}
+
+/* ── Decorative ── */
+/* style_c7eb2034: Regular 400, 40px (music notes) */
+@utility text-note {
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+

@@ -5,7 +5,7 @@
  */
 import Image from "next/image";
 import Link from "next/link";
-import type { Event } from "@/lib/data";
+import type { Event } from "@/lib/types";
 
 interface EventCardProps {
   event: Event;
@@ -35,10 +35,10 @@ export function EventCard({
       />
 
       {/* Gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-[180px] z-[1] event-card-gradient" />
+      <div className="absolute bottom-0 left-0 right-0 h-[180px] z-1 bg-gradient-to-b from-transparent to-black/85" />
 
       {/* Text overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-[2]">
+      <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-2">
         <span className="text-heading text-bass-white leading-tight">
           {event.title}
         </span>
