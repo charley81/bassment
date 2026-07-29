@@ -7,7 +7,7 @@ export function Header() {
     <header className="absolute top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-6 md:px-20 max-w-[1728px] mx-auto w-full">
       <Link
         href="/"
-        className="text-logo text-bass-white hover:text-(--color-primary) transition-colors shrink-0"
+        className="text-logo text-bass-white transition-colors shrink-0"
       >
         BASSMENT
       </Link>
@@ -26,14 +26,16 @@ export function Header() {
         <div className="w-px h-4 bg-bass-grey-med" />
         <div className="flex items-center gap-3">
           {socialLinks.map((s) => (
-            <Link
+            <a
               key={s.label}
               href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) text-social-icon text-bass-grey-light hover:text-bass-white transition-colors"
               aria-label={s.label}
             >
               {s.label}
-            </Link>
+            </a>
           ))}
         </div>
         <Link
@@ -66,14 +68,16 @@ export function Header() {
             <hr className="border-bass-grey-dark" />
             <div className="flex gap-3">
               {socialLinks.map((s) => (
-                <Link
+                <a
                   key={s.label}
                   href={s.href}
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) text-social-icon text-bass-grey-light"
                   aria-label={s.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {s.label}
-                </Link>
+                </a>
               ))}
             </div>
             <Link

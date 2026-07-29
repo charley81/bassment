@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/dist/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -70,7 +70,6 @@
   --color-card: var(--card);
 
   /* Figma-extracted direct color tokens (for non-shadcn usage) */
-  --color-bass-red: hsl(357, 74%, 47%);
   --color-bass-white: hsl(0, 0%, 100%);
   --color-bass-dark: hsl(351, 80%, 2%);
   --color-bass-black: hsl(0, 0%, 0%);
@@ -498,11 +497,50 @@
 
   /* Gradient overlay for event cards — black→transparent */
   .event-card-gradient {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
   }
 
   /* Greyscale filter for venue / gallery images */
   .img-greyscale {
     filter: grayscale(100%);
+  }
+
+  /* ── Button / CTA link helpers ── */
+  .btn-cta {
+    display: inline-flex;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    background: var(--primary);
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary-foreground);
+    transition: color 0.2s, background 0.2s;
+    width: fit-content;
+  }
+  .btn-cta:hover {
+    background: color-mix(in srgb, var(--primary) 80%, transparent);
+  }
+  .btn-cta--sm {
+    height: 3rem;
+    padding-inline: 1.25rem;
+    font-weight: 500;
+  }
+  .btn-cta--ghost {
+    height: 3rem;
+    padding-inline: 1.25rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    font-weight: 500;
+  }
+  .btn-cta--ghost:hover {
+    border-color: var(--primary);
   }
 }

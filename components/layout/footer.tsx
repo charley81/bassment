@@ -12,9 +12,9 @@ export function Footer() {
               <span className="text-label text-bass-grey-med">{footerData.socialsLabel}</span>
               <div className="flex gap-3">
                 {socialLinks.map((s) => (
-                  <Link key={s.label} href={s.href} className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) hover:bg-(--color-primary)/20 transition-colors" aria-label={s.label}>
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) hover:bg-(--color-primary)/20 transition-colors" aria-label={s.label}>
                     <span className="text-social-icon text-bass-grey-light">{s.label}</span>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
