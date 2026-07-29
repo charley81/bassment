@@ -1,13 +1,24 @@
 /* BASSMENT — Venue Photo Grid Section */
 import Image from "next/image";
-import { venuePhotos } from "@/lib/data";
 
-const rows: [string, string, string][] = [
-  [venuePhotos[0], venuePhotos[1], venuePhotos[2]],
-  [venuePhotos[3], venuePhotos[4], venuePhotos[5]],
-];
+function imageUrl(img: unknown): string {
+  const i = img as { asset?: { url?: string } } | undefined
+  return i?.asset?.url || '/images/placeholder.png'
+}
 
-export function VenuePhotoGrid() {
+interface Props {
+  images?: unknown[] | null;
+}
+
+export function VenuePhotoGrid({ images }: Props) {
+  const items = images || []
+  if (items.length === 0) return null
+
+  const rows: string[][] = []
+  for (let i = 0; i < items.length; i += 3) {
+    rows.push(items.slice(i, i + 3).map(imageUrl))
+  }
+
   return (
     <section className="py-20 md:py-120 px-6 md:px-20 flex flex-col items-center gap-8">
       <h2 className="text-label-center text-bass-white">THE SPACE TODAY</h2>
