@@ -7,8 +7,8 @@ import { structure } from './sanity/structure'
 export default defineConfig({
   name: 'bassment',
   title: 'BASSMENT CMS',
-  projectId: 'cp66glrr',
-  dataset: 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'cp66glrr',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     structureTool({ structure }),
     visionTool(),

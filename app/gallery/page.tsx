@@ -1,10 +1,21 @@
-/* BASSMENT — Gallery (v1-latest) */
+/* BASSMENT — Gallery */
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { galleryImages } from "@/lib/data";
+import { getGallery } from "@/lib/sanity/fetch";
+import type { SanityGalleryImage } from "@/lib/sanity/types";
 
-export default function Gallery() {
+export const revalidate = 3600
+
+function imageUrl(img: SanityGalleryImage): string {
+  const i = img.image as unknown as { asset?: { url?: string } } | undefined
+  return i?.asset?.url || '/images/placeholder.png'
+}
+
+export default async function Gallery() {
+  const images = await getGallery()
+  const items = images || []
+
   return (
     <div className="flex flex-col min-h-full">
       <Header />
@@ -14,11 +25,17 @@ export default function Gallery() {
             <h1 className="text-h1 text-bass-white">GALLERY</h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {galleryImages.map((img, i) => (
-              <div key={i} className={`relative rounded-lg overflow-hidden ${[0, 9, 10].includes(i) ? 'h-[500px]' : 'h-300'}`}>
-                <Image src={img.src} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-              </div>
-            ))}
+            {items.length > 0 ? (
+              items.map((item, i) => (
+                <div key={item._id} className={`relative rounded-lg overflow-hidden ${item.size === 'tall' ? 'h-[500px]' : 'h-300'}`}>
+                  <Image src={imageUrl(item)} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
+              ))
+            ) : (
+              <p className="text-body text-bass-grey-med py-12 col-span-full text-center">
+                No images yet.
+              </p>
+            )}
           </div>
         </div>
       </main>
