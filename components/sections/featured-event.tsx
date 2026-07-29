@@ -5,7 +5,7 @@ import { featuredEvent } from '@/lib/data'
 
 export function FeaturedEvent() {
   return (
-    <section className="py-20 md:py-[640px] px-6 md:px-20">
+    <section className="py-20 md:py-120 px-6 md:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
         <div className="flex flex-col md:flex-row rounded overflow-hidden">

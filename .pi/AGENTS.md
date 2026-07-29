@@ -26,12 +26,12 @@ Read the following to get the full context of the project:
 - **Component Library:** shadcn/ui
 - **CMS:** Sanity (headless, all content editable by non-technical promoters)
 - **Animation:** Framer Motion + GSAP ScrollTrigger
-- **Hosting:** Vercel
-- **Ticketing:** External API integration (DICE)
+- **Hosting:** Netlify
+- **Ticketing:** Ticket Fairy (external API/widget)
 
 ## Business Goals
 
-1. **Sell tickets** — Primary conversion. Every page funnels toward ticket purchase via external ticketing API (DICE).
+1. **Sell tickets** — Primary conversion. Every page funnels toward ticket purchase via Ticket Fairy integration.
 2. **Drive venue attendance** — Get people physically to the venue.
 3. **Mailing list signups** — Secondary conversion. Capture users for future event marketing and early ticket access.
 
