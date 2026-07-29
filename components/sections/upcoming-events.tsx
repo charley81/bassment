@@ -5,13 +5,13 @@ import { upcomingEvents } from "@/lib/data";
 
 export function UpcomingEvents() {
   return (
-    <section className="py-20 md:py-[120px] px-6 md:px-20">
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-12 md:gap-16">
+    <section className="py-20 md:py-120 px-6 md:px-20">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
         <div className="flex justify-between items-end">
           <h2 className="text-section-title text-bass-white">UPCOMING</h2>
           <Link
             href="/events"
-            className="text-link text-(--color-primary) hover:text-bass-white transition-colors"
+            className="text-link text-primary hover:text-bass-white transition-colors"
           >
             View All Events →
           </Link>

@@ -50,7 +50,7 @@ export function ContactForm() {
         <FormLabel>Full Name</FormLabel>
         <Input
           placeholder="John Doe"
-          className="h-[52px] px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-(--color-primary) focus-visible:ring-0"
+          className="h-52 px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
           {...form.register("name")}
         />
         <FormMessage />
@@ -61,7 +61,7 @@ export function ContactForm() {
         <Input
           type="email"
           placeholder="john@example.com"
-          className="h-[52px] px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-(--color-primary) focus-visible:ring-0"
+          className="h-52 px-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
           {...form.register("email")}
         />
         <FormMessage />
@@ -71,7 +71,7 @@ export function ContactForm() {
         <FormLabel>Message</FormLabel>
         <Textarea
           placeholder="Tell us how we can help..."
-          className="min-h-[160px] p-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-(--color-primary) focus-visible:ring-0 resize-none"
+          className="min-h-40 p-4 rounded-lg bg-bass-dark border border-bass-grey-med text-nav placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0 resize-none"
           {...form.register("message")}
         />
         <FormMessage />
@@ -80,7 +80,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="h-14 rounded-md bg-(--color-primary) text-btn text-bass-white hover:bg-(--color-primary)/80 transition-colors disabled:opacity-50"
+        className="h-14 rounded-md bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
       >
         {pending ? "SENDING..." : "SUBMIT"}
       </button>

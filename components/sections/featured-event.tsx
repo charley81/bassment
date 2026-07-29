@@ -1,15 +1,15 @@
 /* BASSMENT — Featured Event Section */
-import Image from "next/image";
-import Link from "next/link";
-import { featuredEvent } from "@/lib/data";
+import Image from 'next/image'
+import Link from 'next/link'
+import { featuredEvent } from '@/lib/data'
 
 export function FeaturedEvent() {
   return (
-    <section className="py-20 md:py-[160px] px-6 md:px-20">
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-4">
+    <section className="py-20 md:py-640 px-6 md:px-20">
+      <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
         <div className="flex flex-col md:flex-row rounded overflow-hidden">
-          <div className="w-full md:w-[768px] h-[400px] md:h-[1028px] relative shrink-0">
+          <div className="w-full md:w-3xl h-400 md:h-1028 relative shrink-0">
             <Image
               src={featuredEvent.image}
               alt={featuredEvent.title}
@@ -27,9 +27,7 @@ export function FeaturedEvent() {
                   {featuredEvent.title}
                 </h3>
               </div>
-              <p className="text-nav text-(--color-primary)">
-                {featuredEvent.support}
-              </p>
+              <p className="text-nav text-primary">{featuredEvent.support}</p>
               <p className="text-body text-bass-grey-light">
                 {featuredEvent.description}
               </p>
@@ -46,5 +44,5 @@ export function FeaturedEvent() {
         </div>
       </div>
     </section>
-  );
+  )
 }

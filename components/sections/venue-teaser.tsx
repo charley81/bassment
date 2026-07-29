@@ -5,9 +5,9 @@ import { venueHomeData } from "@/lib/data";
 
 export function VenueTeaser() {
   return (
-    <section className="py-20 md:py-[140px] px-6 md:px-20">
-      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-        <div className="w-full md:w-[616px] h-[400px] md:h-[721px] relative shrink-0 rounded-lg overflow-hidden">
+    <section className="py-20 md:py-140 px-6 md:px-20">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+        <div className="w-full md:w-616 h-400 md:h-721 relative shrink-0 rounded-lg overflow-hidden">
           <Image
             src={venueHomeData.image}
             alt="Venue"
@@ -17,7 +17,7 @@ export function VenueTeaser() {
         </div>
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col gap-1 md:gap-2">
-            <p className="text-eyebrow text-(--color-primary)">
+            <p className="text-eyebrow text-primary">
               {venueHomeData.eyebrow}
             </p>
             <h3 className="text-subtitle text-bass-white">
@@ -29,7 +29,7 @@ export function VenueTeaser() {
           </p>
           <Link
             href="/venue"
-            className="inline-flex h-12 px-5 items-center justify-center rounded-lg bg-(--color-primary) text-btn-ghost text-bass-text hover:bg-(--color-primary)/80 transition-colors w-fit"
+            className="inline-flex h-12 px-5 items-center justify-center rounded-lg bg-primary text-btn-ghost text-bass-text hover:bg-primary/80 transition-colors w-fit"
           >
             {venueHomeData.cta}
           </Link>

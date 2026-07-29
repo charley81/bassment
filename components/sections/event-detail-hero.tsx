@@ -19,7 +19,7 @@ export function EventDetailHero({ event }: EventDetailHeroProps) {
       </Link>
 
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-        <div className="w-full md:w-[739px] h-[500px] md:h-[990px] relative shrink-0">
+        <div className="w-full md:w-739 h-500 md:h-990 relative shrink-0">
           <Image
             src={event.image}
             alt={event.title}

@@ -4,7 +4,7 @@ import { navItems, socialLinks } from '@/lib/data'
 
 export function Header() {
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-6 md:px-20 max-w-[1728px] mx-auto w-full">
+    <header className="absolute top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-6 md:px-20 max-w-1728 mx-auto w-full">
       <Link
         href="/"
         className="text-logo text-bass-white transition-colors shrink-0"
@@ -18,7 +18,7 @@ export function Header() {
           <Link
             key={item.label}
             href={item.href}
-            className="text-nav text-bass-white hover:text-(--color-primary) transition-colors"
+            className="text-nav text-bass-white hover:text-primary transition-colors"
           >
             {item.label}
           </Link>
@@ -31,7 +31,7 @@ export function Header() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) text-social-icon text-bass-grey-light hover:text-bass-white transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-primary text-social-icon text-bass-grey-light hover:text-bass-white transition-colors"
               aria-label={s.label}
             >
               {s.label}
@@ -40,7 +40,7 @@ export function Header() {
         </div>
         <Link
           href="/events"
-          className="h-10 px-5 flex items-center justify-center rounded-lg text-btn-sm text-bass-white hover:text-(--color-primary) transition-colors"
+          className="h-10 px-5 flex items-center justify-center rounded-lg text-btn-sm text-bass-white hover:text-primary transition-colors"
         >
           Get Tickets
         </Link>
@@ -60,7 +60,7 @@ export function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-nav text-bass-white hover:text-(--color-primary) transition-colors"
+                className="text-nav text-bass-white hover:text-primary transition-colors"
               >
                 {item.label}
               </Link>
@@ -71,7 +71,7 @@ export function Header() {
                 <a
                   key={s.label}
                   href={s.href}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-(--color-primary) text-social-icon text-bass-grey-light"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-bass-grey-dark border border-primary text-social-icon text-bass-grey-light"
                   aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"

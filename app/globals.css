@@ -85,6 +85,48 @@
 
   /* Radius: 0rem per Figma (industrial, no rounded corners) */
   --radius: 0rem;
+
+  /* Design-specific sizing tokens from Figma (used across pages) */
+  --spacing-52: 52px;
+  --spacing-60: 60px;
+  --spacing-100: 100px;
+  --spacing-120: 120px;
+  --spacing-140: 140px;
+  --spacing-150: 150px;
+  --spacing-180: 180px;
+  --spacing-200: 200px;
+  --spacing-213: 213px;
+  --spacing-216: 216px;
+  --spacing-250: 250px;
+  --spacing-280: 280px;
+  --spacing-300: 300px;
+  --spacing-342: 342px;
+  --spacing-380: 380px;
+  --spacing-400: 400px;
+  --spacing-420: 420px;
+  --spacing-480: 480px;
+  --spacing-500: 500px;
+  --spacing-520: 520px;
+  --spacing-600: 600px;
+  --spacing-616: 616px;
+  --spacing-640: 640px;
+  --spacing-676: 676px;
+  --spacing-700: 700px;
+  --spacing-720: 720px;
+  --spacing-721: 721px;
+  --spacing-739: 739px;
+  --spacing-800: 800px;
+  --spacing-900: 900px;
+  --spacing-990: 990px;
+  --spacing-1000: 1000px;
+  --spacing-1028: 1028px;
+  --spacing-1343: 1343px;
+  --spacing-1440: 1440px;
+  --spacing-1728: 1728px;
+
+  /* z-index tokens used for overlay stacking */
+  --z-index-1: 1;
+  --z-index-2: 2;
 }
 
 :root {
@@ -116,16 +158,23 @@
   --sidebar-ring: hsl(357, 74%, 47%);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    font-family: var(--font-jetbrains-mono), monospace;
-  }
+/* Base element styles (Tailwind v4 — plain CSS, no @layer) */
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--border);
+  outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+html {
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 /*
@@ -134,413 +183,420 @@
  * 1:1 mapping from Figma text styles
  * Source: Figma file NxzFyuu5LPZEqjTLDlLmAm GLOBAL_VARS
  * ═══════════════════════════════════════════════════════════
+ *
+ * Defined via @utility (Tailwind v4) so the language server
+ * recognises them in class attributes.
  */
-@layer utilities {
-  /* ── Hero / Display ── */
-  /* style_98868f6c: ExtraBold 800, 128px, lineHeight 1em */
-  .text-hero {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 1em;
-  }
 
-  /* style_9addd392: ExtraBold 800, 128px, UPPERCASE, CENTER, lineHeight 1em */
-  .text-display {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 1em;
-    text-transform: uppercase;
-    text-align: center;
-  }
+/* ── Hero / Display ── */
+/* style_98868f6c: ExtraBold 800, 128px, lineHeight 1em */
+@utility text-hero {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1em;
+}
 
-  /* style_bc55e77b: ExtraBold 800, 64px, lineHeight 1em */
-  .text-h2 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 4rem);
-    line-height: 1em;
-  }
+/* style_9addd392: ExtraBold 800, 128px, UPPERCASE, CENTER, lineHeight 1em */
+@utility text-display {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1em;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-  /* style_daeb8064: ExtraBold 800, 56px, UPPERCASE */
-  .text-h3 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    text-transform: uppercase;
-  }
+/* style_bc55e77b: ExtraBold 800, 64px, lineHeight 1em */
+@utility text-h2 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1em;
+}
 
-  /* style_743c93e7: ExtraBold 800, 72px */
-  .text-h1 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
-  }
+/* style_daeb8064: ExtraBold 800, 56px, UPPERCASE */
+@utility text-h3 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  text-transform: uppercase;
+}
 
-  /* style_726aa02b: Bold 700, 48px, UPPERCASE */
-  .text-section-heading {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 3rem);
-    text-transform: uppercase;
-  }
+/* style_743c93e7: ExtraBold 800, 72px */
+@utility text-h1 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+}
 
-  /* style_002dd0cd: Bold 700, 48px */
-  .text-section-title {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 3rem);
-  }
+/* style_726aa02b: Bold 700, 48px, UPPERCASE */
+@utility text-section-heading {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  text-transform: uppercase;
+}
 
-  /* style_a402fa7e: ExtraBold 800, 48px, lineHeight 1.1em */
-  .text-h5 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-    line-height: 1.1em;
-  }
+/* style_002dd0cd: Bold 700, 48px */
+@utility text-section-title {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+}
 
-  /* style_2f2c0c31: ExtraBold 800, 48px */
-  .text-h6 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-  }
+/* style_a402fa7e: ExtraBold 800, 48px, lineHeight 1.1em */
+@utility text-h5 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  line-height: 1.1em;
+}
 
-  /* ── Body / Content ── */
-  /* style_aee6abd6: Bold 700, 36px */
-  .text-subtitle {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.25rem, 2.25vw, 2.25rem);
-  }
+/* style_2f2c0c31: ExtraBold 800, 48px */
+@utility text-h6 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+}
 
-  /* style_d6bbe89e: Bold 700, 36px, CENTER */
-  .text-subtitle-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.25rem, 2.25vw, 2.25rem);
-    text-align: center;
-  }
+/* ── Body / Content ── */
+/* style_aee6abd6: Bold 700, 36px */
+@utility text-subtitle {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+}
 
-  /* style_d3c3a0bb: Bold 700, 30px, UPPERCASE */
-  .text-heading {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: clamp(1.125rem, 1.875vw, 1.875rem);
-    text-transform: uppercase;
-  }
+/* style_d6bbe89e: Bold 700, 36px, CENTER */
+@utility text-subtitle-center {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.25vw, 2.25rem);
+  text-align: center;
+}
 
-  /* style_d1dc6ad2: Bold 700, 30px */
-  .text-faq-question {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.875rem;
-  }
+/* style_d3c3a0bb: Bold 700, 30px, UPPERCASE */
+@utility text-heading {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.875vw, 1.875rem);
+  text-transform: uppercase;
+}
 
-  /* style_31ff3c53: ExtraBold 800, 30px */
-  .text-stat {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: clamp(1.125rem, 1.875vw, 1.875rem);
-  }
+/* style_d1dc6ad2: Bold 700, 30px */
+@utility text-faq-question {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1.875rem;
+}
 
-  /* style_a10327fd: Bold 700, 28px */
-  .text-artist-name {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.75rem;
-  }
+/* style_31ff3c53: ExtraBold 800, 30px */
+@utility text-stat {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: clamp(1.125rem, 1.875vw, 1.875rem);
+}
 
-  /* style_eee8e473-like: ExtraBold 800, 28px */
-  .text-more-events {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: 1.75rem;
-  }
+/* style_a10327fd: Bold 700, 28px */
+@utility text-artist-name {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1.75rem;
+}
 
-  /* style_dbe4f98a: Bold 700, 24px */
-  .text-faq-answer {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
+/* style_eee8e473-like: ExtraBold 800, 28px */
+@utility text-more-events {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: 1.75rem;
+}
 
-  /* style_0964af5a: ExtraBold 800, 24px */
-  .text-logo {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 800;
-    font-size: 1.5rem;
-  }
+/* style_dbe4f98a: Bold 700, 24px */
+@utility text-faq-answer {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
 
-  /* style_c099e8ac: Regular 400, 20px, lineHeight 1.5em */
-  .text-quote {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 1.5em;
-  }
+/* style_0964af5a: ExtraBold 800, 24px */
+@utility text-logo {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
 
-  /* style_e626c778: Regular 400, 20px */
-  .text-arrow {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.25rem;
-  }
+/* style_c099e8ac: Regular 400, 20px, lineHeight 1.5em */
+@utility text-quote {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.5em;
+}
 
-  /* style_c3dd04e2: Regular 400, 18px, lineHeight 1.5em */
-  .text-body-large {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.5em;
-  }
+/* style_e626c778: Regular 400, 20px */
+@utility text-arrow {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
 
-  /* style_700e4a51: Bold 700, 18px */
-  .text-body-bold {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1.125rem;
-  }
+/* style_c3dd04e2: Regular 400, 18px, lineHeight 1.5em */
+@utility text-body-large {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.5em;
+}
 
-  /* style_dccb7e2b: Regular 400, 18px */
-  .text-body-18 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-  }
+/* style_700e4a51: Bold 700, 18px */
+@utility text-body-bold {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
 
-  /* style_2ebfcb1a: Regular 400, 16px, lineHeight 1.5em */
-  .text-body-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5em;
-  }
+/* style_dccb7e2b: Regular 400, 18px */
+@utility text-body-18 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1.125rem;
+}
 
-  /* style_10661bbc: Regular 400, 16px, lineHeight 1.6em */
-  .text-body {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.6em;
-  }
+/* style_2ebfcb1a: Regular 400, 16px, lineHeight 1.5em */
+@utility text-body-sm {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
 
-  /* style_8a69d696: Regular 400, 16px */
-  .text-nav {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-  }
+/* style_10661bbc: Regular 400, 16px, lineHeight 1.6em */
+@utility text-body {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6em;
+}
 
-  /* style_3c7d7511: Bold 700, 16px */
-  .text-btn {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-  }
+/* style_8a69d696: Regular 400, 16px */
+@utility text-nav {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+}
 
-  /* style_ab0cc64d: Bold 700, 16px, UPPERCASE */
-  .text-label {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
+/* style_3c7d7511: Bold 700, 16px */
+@utility text-btn {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1rem;
+}
 
-  /* style_8031ec5a: Medium 500, 16px, UPPERCASE */
-  .text-label-medium {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
+/* style_ab0cc64d: Bold 700, 16px, UPPERCASE */
+@utility text-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
 
-  /* style_7085c044: Medium 500, 16px */
-  .text-btn-ghost {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 1rem;
-  }
+/* style_8031ec5a: Medium 500, 16px, UPPERCASE */
+@utility text-label-medium {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
 
-  /* style_e209c17e: Regular 400, 16px, UPPERCASE */
-  .text-eyebrow {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
+/* style_7085c044: Medium 500, 16px */
+@utility text-btn-ghost {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 500;
+  font-size: 1rem;
+}
 
-  /* style_9c1ab834: Regular 400, 16px, UNDERLINE */
-  .text-link {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-decoration: underline;
-  }
+/* style_e209c17e: Regular 400, 16px, UPPERCASE */
+@utility text-eyebrow {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
 
-  /* style_220728f0: Bold 700, 16px, UPPERCASE, CENTER */
-  .text-label-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    text-align: center;
-  }
+/* style_9c1ab834: Regular 400, 16px, UNDERLINE */
+@utility text-link {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: underline;
+}
 
-  /* style_047cf8f3: Regular 400, 16px, lineHeight 1em, CENTER */
-  .text-social-icon {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1em;
-    text-align: center;
-  }
+/* style_220728f0: Bold 700, 16px, UPPERCASE, CENTER */
+@utility text-label-center {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-  /* style_aeba4e34: Regular 400, 16px, lineHeight 1.5em, CENTER */
-  .text-body-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5em;
-    text-align: center;
-  }
+/* style_047cf8f3: Regular 400, 16px, lineHeight 1em, CENTER */
+@utility text-social-icon {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1em;
+  text-align: center;
+}
 
-  /* style_b8ee02ea: Regular 400, 16px, CENTER */
-  .text-center {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1rem;
-    text-align: center;
-  }
+/* style_aeba4e34: Regular 400, 16px, lineHeight 1.5em, CENTER */
+@utility text-body-center {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5em;
+  text-align: center;
+}
 
-  /* style_0205b178: Regular 400, 18px, CENTER */
-  .text-center-18 {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 1.125rem;
-    text-align: center;
-  }
+/* style_b8ee02ea: Regular 400, 16px, CENTER */
+@utility text-center {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+}
 
-  /* ── Small / Caption ── */
-  /* style_1f710772: Medium 500, 15px, UPPERCASE */
-  .text-footer-link {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.9375rem;
-    text-transform: uppercase;
-  }
+/* style_0205b178: Regular 400, 18px, CENTER */
+@utility text-center-18 {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-align: center;
+}
 
-  /* style_db0e5639: Medium 500, 14px */
-  .text-btn-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.875rem;
-  }
+/* ── Small / Caption ── */
+/* style_1f710772: Medium 500, 15px, UPPERCASE */
+@utility text-footer-link {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+}
 
-  /* style_ef8e85c2: Bold 700, 14px, UPPERCASE */
-  .text-label-sm {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
+/* style_db0e5639: Medium 500, 14px */
+@utility text-btn-sm {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
 
-  /* style_bc28cfd4: Regular 400, 14px */
-  .text-caption {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.875rem;
-  }
+/* style_ef8e85c2: Bold 700, 14px, UPPERCASE */
+@utility text-label-sm {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
 
-  /* style_1f9014a2: Regular 400, 14px, UPPERCASE */
-  .text-overline {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
+/* style_bc28cfd4: Regular 400, 14px */
+@utility text-caption {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
 
-  /* style_b99bba80: Medium 500, 12px, UPPERCASE */
-  .text-micro {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 500;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
+/* style_1f9014a2: Regular 400, 14px, UPPERCASE */
+@utility text-overline {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
 
-  /* style_9c82d704: Regular 400, 12px, UPPERCASE */
-  .text-micro-regular {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
+/* style_b99bba80: Medium 500, 12px, UPPERCASE */
+@utility text-micro {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
 
-  /* style_32766d31: Regular 400, 10px, lineHeight 1em, CENTER */
-  .text-nano {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 0.625rem;
-    line-height: 1em;
-    text-align: center;
-  }
+/* style_9c82d704: Regular 400, 12px, UPPERCASE */
+@utility text-micro-regular {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
 
-  /* ── Decorative ── */
-  /* style_c7eb2034: Regular 400, 40px (music notes) */
-  .text-note {
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 400;
-    font-size: 2.5rem;
-  }
+/* style_32766d31: Regular 400, 10px, lineHeight 1em, CENTER */
+@utility text-nano {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 1em;
+  text-align: center;
+}
 
-  /* Gradient overlay for event cards — black→transparent */
-  .event-card-gradient {
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(0, 0, 0, 0.85) 100%
-    );
-  }
+/* ── Decorative ── */
+/* style_c7eb2034: Regular 400, 40px (music notes) */
+@utility text-note {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 400;
+  font-size: 2.5rem;
+}
 
-  /* Greyscale filter for venue / gallery images */
-  .img-greyscale {
-    filter: grayscale(100%);
-  }
+/*
+ * ── Component-level style helpers ──
+ * Plain CSS (not @utility) since these aren't generic utilities.
+ */
 
-  /* ── Button / CTA link helpers ── */
-  .btn-cta {
-    display: inline-flex;
-    height: 3.5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius);
-    background: var(--primary);
-    font-family: var(--font-jetbrains-mono), monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--primary-foreground);
-    transition: color 0.2s, background 0.2s;
-    width: fit-content;
-  }
-  .btn-cta:hover {
-    background: color-mix(in srgb, var(--primary) 80%, transparent);
-  }
-  .btn-cta--sm {
-    height: 3rem;
-    padding-inline: 1.25rem;
-    font-weight: 500;
-  }
-  .btn-cta--ghost {
-    height: 3rem;
-    padding-inline: 1.25rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--foreground);
-    font-weight: 500;
-  }
-  .btn-cta--ghost:hover {
-    border-color: var(--primary);
-  }
+/* Gradient overlay for event cards — black→transparent */
+.event-card-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+/* Greyscale filter for venue / gallery images */
+.img-greyscale {
+  filter: grayscale(100%);
+}
+
+/* ── Button / CTA link helpers ── */
+.btn-cta {
+  display: inline-flex;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  background: var(--primary);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-foreground);
+  transition: color 0.2s, background 0.2s;
+  width: fit-content;
+}
+.btn-cta:hover {
+  background: color-mix(in srgb, var(--primary) 80%, transparent);
+}
+.btn-cta--sm {
+  height: 3rem;
+  padding-inline: 1.25rem;
+  font-weight: 500;
+}
+.btn-cta--ghost {
+  height: 3rem;
+  padding-inline: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-weight: 500;
+}
+.btn-cta--ghost:hover {
+  border-color: var(--primary);
 }

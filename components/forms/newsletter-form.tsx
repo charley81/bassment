@@ -49,7 +49,7 @@ export function NewsletterForm() {
           <Input
             type="email"
             placeholder={newsletterData.placeholder}
-            className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-(--color-primary) focus-visible:ring-0"
+            className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
             {...form.register("email")}
           />
           <FormMessage />
@@ -57,7 +57,7 @@ export function NewsletterForm() {
         <button
           type="submit"
           disabled={pending}
-          className="h-14 px-6 rounded-lg bg-(--color-primary) text-btn text-bass-white hover:bg-(--color-primary)/80 transition-colors shrink-0 disabled:opacity-50"
+          className="h-14 px-6 rounded-lg bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors shrink-0 disabled:opacity-50"
         >
           {pending ? "..." : newsletterData.cta}
         </button>
