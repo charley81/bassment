@@ -1,7 +1,13 @@
 /* BASSMENT — Sound System Specs Section */
-import { soundSpecs } from "@/lib/data";
 
-export function SoundSpecs() {
+interface Props {
+  specs?: { value: string; label: string }[] | null;
+}
+
+export function SoundSpecs({ specs }: Props) {
+  const items = specs || []
+  if (items.length === 0) return null
+
   return (
     <section className="py-20 md:py-120 px-6 md:px-20 flex flex-col items-center gap-16 md:gap-20">
       <p className="text-label text-bass-white">THE SPECS</p>
@@ -11,17 +17,13 @@ export function SoundSpecs() {
             key={start}
             className="flex justify-center gap-10 md:gap-20 flex-1"
           >
-            {soundSpecs.slice(start, start + 2).map((s) => (
+            {items.slice(start, start + 2).map((s) => (
               <div
                 key={s.label}
                 className="flex flex-col items-center gap-3 flex-1"
               >
-                <span className="text-h6 text-bass-grey-light">
-                  {s.value}
-                </span>
-                <span className="text-label-medium text-bass-grey-med">
-                  {s.label}
-                </span>
+                <span className="text-h6 text-bass-grey-light">{s.value}</span>
+                <span className="text-label-medium text-bass-grey-med">{s.label}</span>
               </div>
             ))}
           </div>
