@@ -9,6 +9,7 @@ export default defineConfig({
   title: 'BASSMENT CMS',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'cp66glrr',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  basePath: '/studio',
   plugins: [
     structureTool({ structure }),
     visionTool(),
