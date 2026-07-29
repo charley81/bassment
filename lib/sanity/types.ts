@@ -17,7 +17,7 @@ export interface SanitySiteSettings {
 export interface SanityEvent {
   _id: string
   title: string
-  slug: { current: string }
+  slug: string
   date: string // ISO datetime
   doorsOpen?: string
   supportText?: string
@@ -34,7 +34,7 @@ export interface SanityEvent {
 export interface SanityArtist {
   _id: string
   name: string
-  slug: { current: string }
+  slug: string
   role: 'resident' | 'guest'
   description?: unknown // block content
   tags?: string[]

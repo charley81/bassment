@@ -8,7 +8,7 @@ import type { Event } from "@/lib/types";
 function mapEvent(e: SanityEvent): Event {
   const img = e.image as unknown as { asset?: { url?: string } } | undefined
   return {
-    id: e.slug?.current || e._id,
+    id: e.slug || e._id,
     title: e.title,
     date: e.date
       ? new Date(e.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' })

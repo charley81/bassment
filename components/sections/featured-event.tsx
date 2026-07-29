@@ -60,7 +60,7 @@ export async function FeaturedEvent() {
               </p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <Link href={`/events/${event.slug?.current || ''}`} className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-6">
+              <Link href={`/events/${event.slug || ''}`} className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-6">
                 Get Tickets
               </Link>
               {event.badge && (
