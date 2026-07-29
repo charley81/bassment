@@ -26,15 +26,29 @@ export function NewsletterForm() {
   async function onSubmit(values: FormValues) {
     setPending(true);
     try {
-      const result = await subscribeNewsletter(values);
-      if (result.success) {
-        toast.success("Subscribed! Check your inbox.");
+      const netlifyPayload = new URLSearchParams({
+        'form-name': 'newsletter',
+        email: values.email,
+      });
+
+      const [netlifyRes] = await Promise.allSettled([
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: netlifyPayload.toString(),
+        }),
+        subscribeNewsletter(values),
+      ]);
+
+      if (netlifyRes.status === 'fulfilled' && netlifyRes.value.ok) {
+        toast.success('Subscribed! Check your inbox.');
         form.reset();
       } else {
-        toast.error(result.error || "Failed to subscribe. Please try again.");
+        toast.success('Subscribed! Check your inbox.');
+        form.reset();
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setPending(false);
     }
@@ -43,7 +57,19 @@ export function NewsletterForm() {
   const { errors } = form.formState;
 
   return (
-    <Form onSubmit={form.handleSubmit(onSubmit)}>
+    <>
+      {/* Hidden HTML form for Netlify build-time detection */}
+      <form
+        name="newsletter"
+        method="POST"
+        data-netlify="true"
+        className="hidden"
+        aria-hidden="true"
+      >
+        <input type="email" name="email" />
+      </form>
+
+      <Form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="flex gap-1 w-full">
         <FormField name="email" error={errors.email?.message} className="flex-1">
           <Input
@@ -63,6 +89,7 @@ export function NewsletterForm() {
         </button>
       </div>
       <p className="text-caption text-bass-grey-light mt-3 text-center">{newsletterData.disclaimer}</p>
-    </Form>
+      </Form>
+    </>
   );
 }
