@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { getFeaturedEvent, getNextEvent } from '@/lib/sanity/fetch'
+import { TicketCta } from '@/components/ticket-cta'
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -62,9 +63,7 @@ export async function FeaturedEvent() {
               </p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <Link href={`/events/${event.slug || ''}`} className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-6">
-                Get Tickets
-              </Link>
+              <TicketCta status={event.ticketStatus} slug={event.slug} ticketPrice={event.ticketPrice} />
               {event.badge && (
                 <span className="inline-flex h-8 px-3 items-center rounded-full bg-bass-grey-dark border border-bass-grey-light text-label text-bass-grey-light">
                   {event.badge}

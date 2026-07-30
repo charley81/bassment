@@ -25,6 +25,7 @@ export interface SanityEvent {
   description?: unknown // block content
   image: SanityImage
   ticketUrl?: string
+  ticketPrice?: number
   ticketStatus: 'onSale' | 'lowTickets' | 'soldOut' | 'atDoor' | 'past'
   featured?: boolean
   badge?: string

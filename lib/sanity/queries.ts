@@ -39,7 +39,8 @@ export const ALL_EVENTS_QUERY = groq`
     ticketUrl,
     ticketStatus,
     featured,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
@@ -67,7 +68,8 @@ export const FEATURED_EVENT_QUERY = groq`
     ticketUrl,
     ticketStatus,
     featured,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
@@ -95,7 +97,8 @@ export const NEXT_EVENT_QUERY = groq`
     ticketUrl,
     ticketStatus,
     featured,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
@@ -113,7 +116,8 @@ export const UPCOMING_EVENTS_QUERY = groq`
     },
     ticketUrl,
     ticketStatus,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
@@ -131,7 +135,8 @@ export const PAST_EVENTS_QUERY = groq`
     },
     ticketUrl,
     ticketStatus,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
@@ -159,7 +164,8 @@ export const EVENT_BY_SLUG_QUERY = groq`
     ticketUrl,
     ticketStatus,
     featured,
-    badge
+    badge,
+    ticketPrice
   }
 `
 
