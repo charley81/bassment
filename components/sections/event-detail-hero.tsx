@@ -27,6 +27,7 @@ export function EventDetailHero({ event, targetDate }: EventDetailHeroProps) {
             alt={event.title}
             fill
             className="object-cover"
+            priority
           />
         </div>
         <div className="flex flex-col gap-6 md:gap-8 flex-1">
