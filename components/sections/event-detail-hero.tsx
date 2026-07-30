@@ -4,13 +4,16 @@ import Link from "next/link";
 import type { Event } from "@/lib/types";
 import { eventDetailData } from "@/lib/data";
 import { Countdown } from "@/components/event-countdown";
+import { TicketCta } from "@/components/ticket-cta";
 
 interface EventDetailHeroProps {
   event: Event;
   targetDate?: string;
+  ticketStatus?: string;
+  ticketUrl?: string | null;
 }
 
-export function EventDetailHero({ event, targetDate }: EventDetailHeroProps) {
+export function EventDetailHero({ event, targetDate, ticketStatus, ticketUrl }: EventDetailHeroProps) {
   return (
     <>
       <Link
@@ -56,9 +59,7 @@ export function EventDetailHero({ event, targetDate }: EventDetailHeroProps) {
             {targetDate && <Countdown targetDate={targetDate} />}
           </div>
           <div className="flex flex-col gap-4">
-            <Link href="#" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
-              {eventDetailData.cta}
-            </Link>
+            <TicketCta status={ticketStatus} url={ticketUrl} />
             <span className="inline-flex self-start px-3 py-1.5 rounded-full bg-bass-dark border border-bass-grey-med text-label text-bass-grey-med">
               {eventDetailData.badge}
             </span>
