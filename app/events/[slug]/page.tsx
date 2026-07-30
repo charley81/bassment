@@ -8,7 +8,6 @@ import { EventDescription } from "@/components/sections/event-description";
 import { VenueInfoCard } from "@/components/sections/venue-info-card";
 import { RelatedEvents } from "@/components/sections/related-events";
 import { getEventBySlug } from "@/lib/sanity/fetch";
-import { Countdown } from "@/components/event-countdown";
 import type { SanityEvent } from "@/lib/sanity/types";
 import type { Event } from "@/lib/types";
 
@@ -44,8 +43,7 @@ export default async function EventDetail({ params }: Props) {
       <Header />
       <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-6 md:px-20 flex flex-col items-center">
         <div className="w-full max-w-7xl flex flex-col gap-10 md:gap-12">
-          <EventDetailHero event={event} />
-          {sanityEvent.date && <Countdown targetDate={sanityEvent.date} />}
+          <EventDetailHero event={event} targetDate={sanityEvent.date} />
           <EventLineup />
           <EventDescription />
           <VenueInfoCard />

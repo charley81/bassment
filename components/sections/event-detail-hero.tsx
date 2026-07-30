@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Event } from "@/lib/types";
 import { eventDetailData } from "@/lib/data";
+import { Countdown } from "@/components/event-countdown";
 
 interface EventDetailHeroProps {
   event: Event;
+  targetDate?: string;
 }
 
-export function EventDetailHero({ event }: EventDetailHeroProps) {
+export function EventDetailHero({ event, targetDate }: EventDetailHeroProps) {
   return (
     <>
       <Link
@@ -50,6 +52,7 @@ export function EventDetailHero({ event }: EventDetailHeroProps) {
             <p className="text-btn text-bass-grey-med">
               {eventDetailData.dateLine}
             </p>
+            {targetDate && <Countdown targetDate={targetDate} />}
           </div>
           <div className="flex flex-col gap-4">
             <Link href="#" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
