@@ -1,7 +1,7 @@
 /* BASSMENT — Featured Event Section */
 import Image from 'next/image'
 import Link from 'next/link'
-import { getFeaturedEvent } from '@/lib/sanity/fetch'
+import { getFeaturedEvent, getNextEvent } from '@/lib/sanity/fetch'
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -23,7 +23,9 @@ function toPlainText(blocks: unknown): string {
 }
 
 export async function FeaturedEvent() {
-  const event = await getFeaturedEvent()
+  let event = await getFeaturedEvent()
+  // Fall back to closest future event if no event is explicitly featured
+  if (!event) event = await getNextEvent()
 
   if (!event) return null
 

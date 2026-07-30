@@ -8,8 +8,11 @@ import { EventDescription } from "@/components/sections/event-description";
 import { VenueInfoCard } from "@/components/sections/venue-info-card";
 import { RelatedEvents } from "@/components/sections/related-events";
 import { getEventBySlug } from "@/lib/sanity/fetch";
+import { Countdown } from "@/components/event-countdown";
 import type { SanityEvent } from "@/lib/sanity/types";
 import type { Event } from "@/lib/types";
+
+export const revalidate = 3600
 
 function mapEvent(e: SanityEvent): Event {
   const img = e.image as unknown as { asset?: { url?: string } } | undefined
@@ -42,6 +45,7 @@ export default async function EventDetail({ params }: Props) {
       <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-6 md:px-20 flex flex-col items-center">
         <div className="w-full max-w-7xl flex flex-col gap-10 md:gap-12">
           <EventDetailHero event={event} />
+          {sanityEvent.date && <Countdown targetDate={sanityEvent.date} />}
           <EventLineup />
           <EventDescription />
           <VenueInfoCard />

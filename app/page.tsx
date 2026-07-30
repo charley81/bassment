@@ -1,4 +1,4 @@
-/* BASSMENT — Home (v1-latest) */
+/* BASSMENT — Home */
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HomeHero } from "@/components/sections/home-hero";
@@ -7,6 +7,8 @@ import { UpcomingEvents } from "@/components/sections/upcoming-events";
 import { VenueTeaser } from "@/components/sections/venue-teaser";
 import { ResidentDjs } from "@/components/sections/resident-djs";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
+
+export const revalidate = 3600
 
 export default function Home() {
   return (

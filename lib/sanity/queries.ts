@@ -71,6 +71,34 @@ export const FEATURED_EVENT_QUERY = groq`
   }
 `
 
+export const NEXT_EVENT_QUERY = groq`
+  *[_type == "event" && date >= now()] | order(date asc)[0] {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    doorsOpen,
+    supportText,
+    "lineup": lineup[]-> {
+      _id,
+      name,
+      "slug": slug.current,
+      role,
+      tags,
+      "image": image.asset->url
+    },
+    description,
+    "image": image {
+      asset-> { _id, url },
+      alt
+    },
+    ticketUrl,
+    ticketStatus,
+    featured,
+    badge
+  }
+`
+
 export const UPCOMING_EVENTS_QUERY = groq`
   *[_type == "event" && date >= now()] | order(date asc) {
     _id,
