@@ -9,7 +9,7 @@ interface Props {
 
 export function VenueHero({ headline, subtitle, image }: Props) {
   return (
-    <section className="relative h-600 md:h-900 w-full overflow-hidden">
+    <section className="relative h-600 md:h-900 w-full overflow-hidden bg-bass-dark">
       <Image
         src={image}
         alt=""

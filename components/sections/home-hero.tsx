@@ -5,7 +5,7 @@ import { heroData } from '@/lib/data'
 
 export function HomeHero() {
   return (
-    <section className="relative h-600 md:h-900 w-full overflow-hidden">
+    <section className="relative h-600 md:h-900 w-full overflow-hidden bg-bass-dark">
       <Image
         src={heroData.image}
         alt=""
