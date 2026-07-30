@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { client } from '@/lib/sanity/client'
 import { groq } from 'next-sanity'
 
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Tickets not available for this event' }, { status: 400 })
     }
 
+    const stripe = getStripe()
     const paymentIntent = await stripe.paymentIntents.create({
       amount: event.ticketPrice,
       currency: 'usd',
