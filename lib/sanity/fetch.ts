@@ -3,6 +3,7 @@ import { cache } from 'react'
 import {
   ALL_EVENTS_QUERY,
   FEATURED_EVENT_QUERY,
+  NEXT_EVENT_QUERY,
   UPCOMING_EVENTS_QUERY,
   PAST_EVENTS_QUERY,
   EVENT_BY_SLUG_QUERY,
@@ -46,6 +47,10 @@ export const getAllEvents = cache(() =>
 
 export const getFeaturedEvent = cache(() =>
   sanityFetch<SanityEvent>(FEATURED_EVENT_QUERY)
+)
+
+export const getNextEvent = cache(() =>
+  sanityFetch<SanityEvent>(NEXT_EVENT_QUERY)
 )
 
 export const getUpcomingEvents = cache(() =>
