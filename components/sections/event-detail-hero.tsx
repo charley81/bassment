@@ -50,18 +50,6 @@ export function EventDetailHero({ event }: EventDetailHeroProps) {
             <p className="text-btn text-bass-grey-med">
               {eventDetailData.dateLine}
             </p>
-            <div className="flex gap-6">
-              {eventDetailData.countdown.map((c) => (
-                <div key={c.label} className="flex flex-col gap-2">
-                  <span className="text-h6 text-bass-grey-light">
-                    {c.num}
-                  </span>
-                  <span className="text-label-medium text-bass-grey-med">
-                    {c.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
           <div className="flex flex-col gap-4">
             <Link href="#" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
