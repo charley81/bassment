@@ -15,6 +15,7 @@ export const event = defineType({
     defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true }, validation: (r) => r.required() }),
     defineField({ name: 'altText', title: 'Alt Text', type: 'string' }),
     defineField({ name: 'ticketUrl', title: 'Ticket URL', type: 'url' }),
+    defineField({ name: 'ticketPrice', title: 'Ticket Price (cents)', type: 'number', description: 'e.g. 2500 = $25.00, 5000 = $50.00' }),
     defineField({ name: 'ticketStatus', title: 'Ticket Status', type: 'string', options: { list: ['onSale', 'lowTickets', 'soldOut', 'atDoor', 'past'] }, initialValue: 'onSale', validation: (r) => r.required() }),
     defineField({ name: 'featured', title: 'Featured Event', type: 'boolean', initialValue: false }),
     defineField({ name: 'badge', title: 'Badge', type: 'string', description: 'e.g. "ON SALE NOW", "LOW TICKETS"' }),
