@@ -3,9 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import {
   Elements,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
+  PaymentElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
@@ -13,10 +11,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-const inputClass =
-  'h-14 px-4 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-text placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0 w-full'
-
-function CardForm({ clientSecret, onSuccess }: { clientSecret: string; onSuccess: () => void }) {
+function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState('')
@@ -29,14 +24,16 @@ function CardForm({ clientSecret, onSuccess }: { clientSecret: string; onSuccess
     setLoading(true)
     setError('')
 
-    const { error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardNumberElement)!,
+    const { error: submitError } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin + window.location.pathname.replace('/buy', '/confirmation'),
       },
+      redirect: 'if_required',
     })
 
-    if (confirmError) {
-      setError(confirmError.message || 'Payment failed')
+    if (submitError) {
+      setError(submitError.message || 'Payment failed')
       setLoading(false)
     } else {
       onSuccess()
@@ -45,25 +42,8 @@ function CardForm({ clientSecret, onSuccess }: { clientSecret: string; onSuccess
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-bold uppercase text-bass-grey-med">Card Number</label>
-          <CardNumberElement className={inputClass} />
-        </div>
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2 flex-1">
-            <label className="text-sm font-bold uppercase text-bass-grey-med">Expiry</label>
-            <CardExpiryElement className={inputClass} />
-          </div>
-          <div className="flex flex-col gap-2 flex-1">
-            <label className="text-sm font-bold uppercase text-bass-grey-med">CVC</label>
-            <CardCvcElement className={inputClass} />
-          </div>
-        </div>
-      </div>
-
+      <PaymentElement />
       {error && <p className="text-sm text-primary">{error}</p>}
-
       <button
         type="submit"
         disabled={!stripe || loading}
@@ -83,7 +63,7 @@ interface Props {
 export function StripeCheckoutForm({ clientSecret, onSuccess }: Props) {
   return (
     <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
-      <CardForm clientSecret={clientSecret} onSuccess={onSuccess} />
+      <CheckoutForm onSuccess={onSuccess} />
     </Elements>
   )
 }
