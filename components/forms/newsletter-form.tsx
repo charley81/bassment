@@ -59,6 +59,7 @@ export function NewsletterForm() {
   return (
     <>
       <Form onSubmit={form.handleSubmit(onSubmit)}>
+      <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="flex gap-1 w-full">
         <FormField name="email" error={errors.email?.message} className="flex-1">
           <Input
