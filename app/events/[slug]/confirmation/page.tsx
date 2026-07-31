@@ -17,7 +17,7 @@ export default async function ConfirmationPage({ params }: Props) {
           <div className="flex flex-col gap-4">
             <h1 className="text-h2 text-bass-white">You&apos;re In.</h1>
             <p className="text-body text-bass-grey-light">
-              Your ticket has been purchased. See you at the show.
+              Your ticket has been purchased. A confirmation email is on the way.
             </p>
           </div>
           <div className="flex gap-4">
