@@ -1,7 +1,14 @@
 /* BASSMENT — Sound System Specs Section */
+import { CountUp } from '@/components/animations/count-up'
 
 interface Props {
   specs?: { value: string; label: string }[] | null;
+}
+
+function parseSpec(v: string): { num: number; suffix: string } | null {
+  const match = v.match(/^(\d+)(.*)$/)
+  if (!match) return null
+  return { num: parseInt(match[1]), suffix: match[2] || '' }
 }
 
 export function SoundSpecs({ specs }: Props) {
@@ -17,15 +24,20 @@ export function SoundSpecs({ specs }: Props) {
             key={start}
             className="flex justify-center gap-10 md:gap-20 flex-1"
           >
-            {items.slice(start, start + 2).map((s) => (
-              <div
-                key={s.label}
-                className="flex flex-col items-center gap-3 flex-1"
-              >
-                <span className="text-h6 text-bass-grey-light">{s.value}</span>
-                <span className="text-label-medium text-bass-grey-med">{s.label}</span>
-              </div>
-            ))}
+            {items.slice(start, start + 2).map((s) => {
+              const parsed = parseSpec(s.value)
+              return (
+                <div
+                  key={s.label}
+                  className="flex flex-col items-center gap-3 flex-1"
+                >
+                  <span className="text-h6 text-bass-grey-light">
+                    {parsed ? <CountUp target={parsed.num} suffix={parsed.suffix} /> : s.value}
+                  </span>
+                  <span className="text-label-medium text-bass-grey-med">{s.label}</span>
+                </div>
+              )
+            })}
           </div>
         ))}
       </div>

@@ -7,6 +7,7 @@ import { UpcomingEvents } from "@/components/sections/upcoming-events";
 import { VenueTeaser } from "@/components/sections/venue-teaser";
 import { ResidentDjs } from "@/components/sections/resident-djs";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 
 export const revalidate = 3600
 
@@ -15,11 +16,11 @@ export default function Home() {
     <div className="flex flex-col min-h-full">
       <Header />
       <HomeHero />
-      <FeaturedEvent />
-      <UpcomingEvents />
-      <VenueTeaser />
+      <ScrollReveal><FeaturedEvent /></ScrollReveal>
+      <ScrollReveal><UpcomingEvents /></ScrollReveal>
+      <ScrollReveal><VenueTeaser /></ScrollReveal>
       <ResidentDjs />
-      <NewsletterSignup />
+      <ScrollReveal><NewsletterSignup /></ScrollReveal>
       <Footer />
     </div>
   );
