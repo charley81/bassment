@@ -16,6 +16,7 @@ export function SoundQuote({ quote, image }: Props) {
         alt=""
         fill
         className="object-cover grayscale"
+        priority
       />
       <div className="absolute inset-0 bg-primary/10 z-1" />
       <p className="relative z-2 text-body text-center text-bass-dark max-w-800">
