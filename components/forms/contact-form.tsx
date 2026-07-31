@@ -67,6 +67,7 @@ export function ContactForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-8"
       >
+      <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
       <FormField name="name" error={errors.name?.message}>
         <FormLabel>Full Name</FormLabel>
         <Input
