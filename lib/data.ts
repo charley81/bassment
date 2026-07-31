@@ -305,7 +305,6 @@ export const eventDetailData = {
     ],
     faqLink: 'View full FAQ →',
   },
-  mapImage: '/images/detail-map.png',
   relatedEvents: [
     {
       id: 'dlr',

@@ -39,9 +39,9 @@ export default async function Venue() {
       <VenueStats stats={venue?.stats} />
       <VenuePlan />
       <VenueMap
-        fallbackImage={venue ? imageUrl(venue.mapFallbackImage) : undefined}
         lat={settings?.venueLat}
         lng={settings?.venueLng}
+        address={settings?.venueAddress}
       />
       <section className="h-[150px] md:h-[216px] flex items-center justify-center">
         <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-10">

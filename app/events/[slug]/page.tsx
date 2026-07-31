@@ -8,7 +8,6 @@ import { EventDescription } from "@/components/sections/event-description";
 import { VenueInfoCard } from "@/components/sections/venue-info-card";
 import { RelatedEvents } from "@/components/sections/related-events";
 import { getEventBySlug, getSiteSettings } from "@/lib/sanity/fetch";
-import { VenueMap } from "@/components/sections/venue-map";
 import type { SanityEvent } from "@/lib/sanity/types";
 import type { Event } from "@/lib/types";
 
@@ -50,9 +49,8 @@ export default async function EventDetail({ params }: Props) {
           <EventDetailHero event={event} targetDate={sanityEvent.date} ticketStatus={sanityEvent.ticketStatus} ticketSlug={sanityEvent.slug} ticketPrice={sanityEvent.ticketPrice} />
           <EventLineup />
           <EventDescription />
-          <VenueInfoCard />
+          <VenueInfoCard lat={settings?.venueLat} lng={settings?.venueLng} address={settings?.venueAddress} />
           <RelatedEvents />
-          <VenueMap lat={settings?.venueLat} lng={settings?.venueLng} />
         </div>
       </main>
       <Footer />
