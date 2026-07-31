@@ -7,6 +7,7 @@ interface Props {
 }
 
 export function GoogleMap({ lat, lng, className }: Props) {
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
   const keyParam = apiKey ? `&key=${apiKey}` : ''
 
   return (
