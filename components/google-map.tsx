@@ -24,7 +24,7 @@ function loadGoogleMapsScript(apiKey: string): Promise<void> {
   scriptLoading = true
   return new Promise((resolve, reject) => {
     const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&loading=async`
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`
     script.async = true
     script.onload = () => { scriptLoaded = true; resolve() }
     script.onerror = () => { scriptLoading = false; reject(new Error('Failed to load Google Maps')) }

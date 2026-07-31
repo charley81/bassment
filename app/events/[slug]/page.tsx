@@ -7,7 +7,8 @@ import { EventLineup } from "@/components/sections/event-lineup";
 import { EventDescription } from "@/components/sections/event-description";
 import { VenueInfoCard } from "@/components/sections/venue-info-card";
 import { RelatedEvents } from "@/components/sections/related-events";
-import { getEventBySlug } from "@/lib/sanity/fetch";
+import { getEventBySlug, getSiteSettings } from "@/lib/sanity/fetch";
+import { VenueMap } from "@/components/sections/venue-map";
 import type { SanityEvent } from "@/lib/sanity/types";
 import type { Event } from "@/lib/types";
 
@@ -32,7 +33,10 @@ interface Props {
 
 export default async function EventDetail({ params }: Props) {
   const { slug } = await params;
-  const sanityEvent = await getEventBySlug(slug)
+  const [sanityEvent, settings] = await Promise.all([
+    getEventBySlug(slug),
+    getSiteSettings(),
+  ])
 
   if (!sanityEvent) notFound()
 
@@ -48,6 +52,10 @@ export default async function EventDetail({ params }: Props) {
           <EventDescription />
           <VenueInfoCard />
           <RelatedEvents />
+          <VenueMap
+            lat={settings?.venueLat}
+            lng={settings?.venueLng}
+          />
         </div>
       </main>
       <Footer />
