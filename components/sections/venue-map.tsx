@@ -22,13 +22,7 @@ export function VenueMap({ fallbackImage, lat, lng }: Props) {
           className="object-cover"
         />
         {/* Google Map overlay (client-only, layers on top) */}
-        {hasCoords && (
-          <GoogleMap
-            lat={lat}
-            lng={lng}
-            className="absolute inset-0 z-10"
-          />
-        )}
+        {hasCoords && <GoogleMap lat={lat} lng={lng} />}
         {/* Hero-style overlay tint */}
         <div className="pointer-events-none absolute inset-0 bg-primary/10 z-20" />
         <span className="absolute bottom-4 left-4 z-30 text-nav text-bass-muted">
