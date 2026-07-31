@@ -459,3 +459,15 @@
 }
 
 
+
+/* ── Map skeleton no-JS fallback ──
+   If React never hydrates, fade the skeleton out so the map still shows */
+@keyframes map-skeleton-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.map-skeleton {
+  animation: map-skeleton-out 0.7s ease 4s forwards;
+}
