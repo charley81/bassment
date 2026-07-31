@@ -44,7 +44,17 @@ export async function POST(request: Request) {
   }
 
   const intent = event.data.object as Stripe.PaymentIntent
-  const email = intent.receipt_email
+
+  let email: string | null | undefined = intent.receipt_email
+  if (!email && intent.payment_method) {
+    try {
+      const stripe = getStripe()
+      const pm = await stripe.paymentMethods.retrieve(intent.payment_method as string)
+      email = pm.billing_details?.email ?? undefined
+    } catch {
+      console.warn('Could not retrieve payment method for email')
+    }
+  }
   const eventSlug = intent.metadata?.eventSlug
   const amount = intent.amount
 

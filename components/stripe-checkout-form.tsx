@@ -62,7 +62,7 @@ interface Props {
 
 export function StripeCheckoutForm({ clientSecret, onSuccess }: Props) {
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
+    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' }, fields: { billingDetails: { email: 'auto' } } } as any}>
       <CheckoutForm onSuccess={onSuccess} />
     </Elements>
   )
