@@ -38,7 +38,11 @@ export function GoogleMap({ lat, lng, className }: Props) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 
   useEffect(() => {
-    if (!apiKey) { setError(true); return }
+    if (!apiKey) {
+      console.warn('Google Maps: No API key found. Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY in .env')
+      setError(true)
+      return
+    }
     if (!ref.current) return
 
     loadGoogleMapsScript(apiKey)
@@ -77,7 +81,10 @@ export function GoogleMap({ lat, lng, className }: Props) {
           },
         })
       })
-      .catch(() => setError(true))
+      .catch((err) => {
+        console.error('Google Maps: Failed to load script', err)
+        setError(true)
+      })
 
     return () => {
       // Cleanup not needed — map binds to the DOM element
