@@ -5,6 +5,7 @@ import { HelpCircleIcon } from '@sanity/icons/HelpCircle'
 import { ImageIcon } from '@sanity/icons/Image'
 import { HomeIcon } from '@sanity/icons/Home'
 import { MasterDetailIcon } from '@sanity/icons/MasterDetail'
+import { CreditCardIcon } from '@sanity/icons/CreditCard'
 import type { StructureBuilder } from 'sanity/structure'
 
 export const structure = (S: StructureBuilder) =>
@@ -20,6 +21,11 @@ export const structure = (S: StructureBuilder) =>
       ),
       S.listItem().title('Artists').icon(UsersIcon).child(
         S.documentTypeList('artist').title('Artists')
+      ),
+      S.listItem().title('Tickets').icon(CreditCardIcon).child(
+        S.documentTypeList('ticket').title('Tickets').defaultOrdering([
+          { field: 'purchasedAt', direction: 'desc' },
+        ])
       ),
       S.divider(),
       S.listItem().title('FAQs').icon(HelpCircleIcon).child(

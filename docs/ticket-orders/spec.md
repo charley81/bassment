@@ -1,6 +1,6 @@
 # Spec: Ticket Order Persistence
 
-**Status:** In Review
+**Status:** Approved
 
 ## What
 

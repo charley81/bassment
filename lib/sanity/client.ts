@@ -15,3 +15,14 @@ export const client = createClient({ ...config, useCdn: true })
 
 /** Fresh reads for transactional paths (payments, emails) — never stale */
 export const clientUncached = createClient({ ...config, useCdn: false })
+
+/** Write client for order persistence — webhook/order paths ONLY, never page
+    code. Throws at call time when unconfigured so a missing token surfaces as
+    a loud 500 (and Stripe webhook retry) instead of silently dropped orders. */
+export function getWriteClient() {
+  const token = process.env.SANITY_API_WRITE_TOKEN
+  if (!token) {
+    throw new Error('SANITY_API_WRITE_TOKEN not configured')
+  }
+  return createClient({ ...config, token, useCdn: false })
+}

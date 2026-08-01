@@ -5,6 +5,7 @@ import { faq } from './schemas/faq'
 import { galleryImage } from './schemas/galleryImage'
 import { venuePage } from './schemas/venuePage'
 import { soundSystemPage } from './schemas/soundSystemPage'
+import { ticket } from './schemas/ticket'
 import { blockContent } from './schemas/blockContent'
 
 export const schemaTypes = [
@@ -15,5 +16,6 @@ export const schemaTypes = [
   galleryImage,
   venuePage,
   soundSystemPage,
+  ticket,
   blockContent,
 ]

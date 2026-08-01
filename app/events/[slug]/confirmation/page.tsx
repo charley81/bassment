@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { getStripe } from '@/lib/stripe'
+import { orderRefFor } from '@/lib/orders'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -59,6 +60,8 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
     verification.status === 'verified' && verification.email
       ? `Your ticket has been purchased — it's on its way to ${verification.email}.`
       : content.body
+  const orderRef =
+    verification.status === 'verified' && payment_intent ? orderRefFor(payment_intent) : null
 
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
@@ -68,6 +71,18 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
           <div className="flex flex-col gap-4">
             <h1 className="text-h2 text-bass-white">{content.heading}</h1>
             <p className="text-body text-bass-grey-light">{body}</p>
+            {orderRef && (
+              <>
+                <p className="text-nav text-bass-white tracking-widest">Order {orderRef}</p>
+                <p className="text-body-sm text-bass-grey-med">
+                  Wrong email or nothing arrived?{' '}
+                  <Link href="/contact" className="text-bass-grey-light underline underline-offset-4 hover:text-bass-white transition-colors">
+                    Contact us
+                  </Link>{' '}
+                  with your order reference.
+                </p>
+              </>
+            )}
           </div>
           <div className="flex gap-4">
             <Link

@@ -1,15 +1,25 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { groq } from 'next-sanity'
 import { getStripe } from '@/lib/stripe'
 import { sendTicketEmail, resolveTicketRecipient } from '@/lib/ticket-email'
+import { getWriteClient, clientUncached } from '@/lib/sanity/client'
+import { orderRefFor } from '@/lib/orders'
+import type { SanityTicket } from '@/lib/sanity/types'
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
-// Track processed Stripe event IDs to prevent duplicate emails.
-// In-memory Set works across warm function invocations on Netlify.
-// For production at scale, migrate to a KV store or database.
-const processedEvents = new Set<string>()
-const MAX_PROCESSED_EVENTS = 10_000
+const EVENT_LOOKUP = groq`*[_type == "event" && slug.current == $slug][0] { _id, title }`
+
+/* Idempotency is durable, not in-memory: the ticket document's _id IS the
+   Stripe PaymentIntent ID. create() conflicts on replays/duplicate endpoints,
+   and emailSentAt on the doc distinguishes "email already sent" (skip) from
+   "order recorded but email failed" (resend). spec: docs/ticket-orders */
+
+function isConflict(err: unknown): boolean {
+  const e = err as { statusCode?: number; message?: string }
+  return e?.statusCode === 409 || /already exists/i.test(e?.message ?? '')
+}
 
 export async function POST(request: Request) {
   const body = await request.text()
@@ -34,11 +44,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
-  // Deduplicate by Stripe event ID — retries have the same ID
-  if (processedEvents.has(event.id)) {
-    return NextResponse.json({ received: true })
-  }
-
   if (event.type !== 'payment_intent.succeeded') {
     return NextResponse.json({ received: true })
   }
@@ -55,7 +60,6 @@ export async function POST(request: Request) {
       console.warn('Could not retrieve payment method for email')
     }
   }
-  // Precedence: metadata.customerEmail → receipt_email → billing details.
   const email = resolveTicketRecipient(intent, billingEmail)
   const eventSlug = intent.metadata?.eventSlug
   const amount = intent.amount
@@ -65,21 +69,54 @@ export async function POST(request: Request) {
     return NextResponse.json({ received: true })
   }
 
-  try {
-    await sendTicketEmail(email, eventSlug, amount)
-    // Only mark processed AFTER success — otherwise a Stripe retry for a
-    // failed send would be swallowed as a duplicate and the email lost.
-    if (processedEvents.size >= MAX_PROCESSED_EVENTS) {
-      const oldest = processedEvents.values().next().value
-      if (oldest) processedEvents.delete(oldest)
-    }
-    processedEvents.add(event.id)
-    console.log(`Receipt sent to ${email} for ${eventSlug}`)
-  } catch (err) {
-    console.error('Failed to send receipt email:', err)
-    // 500 → Stripe retries the event
-    return NextResponse.json({ error: 'Email failed' }, { status: 500 })
-  }
+  const orderRef = orderRefFor(intent.id)
 
-  return NextResponse.json({ received: true })
+  try {
+    const sanity = getWriteClient()
+
+    // 1. Record the order. A conflict means this PaymentIntent was already
+    //    processed (Stripe retry or duplicate webhook endpoint).
+    try {
+      const eventDoc = await clientUncached.fetch<{ _id: string; title?: string } | null>(
+        EVENT_LOOKUP,
+        { slug: eventSlug }
+      )
+      await sanity.create({
+        _id: intent.id,
+        _type: 'ticket',
+        event: eventDoc ? { _type: 'reference', _ref: eventDoc._id, _weak: true } : undefined,
+        eventSlug,
+        eventTitle: eventDoc?.title || eventSlug,
+        email,
+        amount,
+        currency: intent.currency,
+        orderRef,
+        status: 'paid',
+        purchasedAt: new Date(intent.created * 1000).toISOString(),
+      })
+      console.log(`Ticket ${orderRef} recorded for ${email} (${eventSlug})`)
+    } catch (err) {
+      if (!isConflict(err)) throw err
+      const existing = await sanity.getDocument<SanityTicket>(intent.id)
+      if (existing?.emailSentAt) {
+        console.log(`Duplicate delivery for ${orderRef} — email already sent, skipping`)
+        return NextResponse.json({ received: true })
+      }
+      // Order exists but the email never went out (previous attempt failed
+      // between create and send) — fall through and send it now.
+    }
+
+    // 2. Send the ticket email, then mark it sent. If the send fails we 500 →
+    //    Stripe retries → the conflict path above finds emailSentAt unset and
+    //    tries again. No lost tickets, no duplicates, in either failure order.
+    await sendTicketEmail(email, eventSlug, amount, orderRef)
+    await sanity.patch(intent.id).set({ emailSentAt: new Date().toISOString() }).commit()
+    console.log(`Ticket ${orderRef} emailed to ${email} (${eventSlug})`)
+
+    return NextResponse.json({ received: true })
+  } catch (err) {
+    console.error(`Failed to process ticket ${orderRef}:`, err)
+    // 500 → Stripe retries the event
+    return NextResponse.json({ error: 'Ticket processing failed' }, { status: 500 })
+  }
 }

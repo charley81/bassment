@@ -34,7 +34,7 @@ function formatDate(iso: string): string {
   })
 }
 
-export async function sendTicketEmail(email: string, eventSlug: string, pricePaid: number) {
+export async function sendTicketEmail(email: string, eventSlug: string, pricePaid: number, orderRef: string) {
   const event = await client.fetch<{ title?: string; date?: string }>(EVENT_QUERY, { slug: eventSlug })
   const eventName = event?.title || 'Your Event'
   const eventDate = event?.date ? formatDate(event.date) : 'TBA'
@@ -51,13 +51,20 @@ export async function sendTicketEmail(email: string, eventSlug: string, pricePai
         <p style="font-size:14px;color:#999999;margin:0 0 4px">Date</p>
         <p style="font-size:16px;margin:0 0 16px">${eventDate}</p>
         <p style="font-size:14px;color:#999999;margin:0 0 4px">Price</p>
-        <p style="font-size:16px;margin:0">${price}</p>
+        <p style="font-size:16px;margin:0 0 16px">${price}</p>
+        <p style="font-size:14px;color:#999999;margin:0 0 4px">Order</p>
+        <p style="font-size:16px;font-weight:700;letter-spacing:1px;margin:0">${orderRef}</p>
       </div>
 
       <p style="font-size:14px;color:#999999;margin:0 0 4px">Venue</p>
       <p style="font-size:16px;margin:0 0 24px">70 Pine Street, Manhattan</p>
 
       <p style="font-size:14px;color:#666666;margin:0">We'll see you there.<br>— BASSMENT</p>
+      <p style="font-size:12px;color:#555555;margin:24px 0 0;border-top:1px solid #2a2a2a;padding-top:16px">
+        Wrong email or didn't receive this? Contact us at
+        <a href="https://clubbassment.com/contact" style="color:#999999">clubbassment.com/contact</a>
+        with your order reference <strong>${orderRef}</strong>.
+      </p>
     </div>
   `
 
