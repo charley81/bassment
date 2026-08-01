@@ -76,8 +76,12 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
                 <p className="text-nav text-bass-white tracking-widest">Order {orderRef}</p>
                 <p className="text-body-sm text-bass-grey-med">
                   Wrong email or nothing arrived?{' '}
+                  <Link href="/tickets/resend" className="text-bass-grey-light underline underline-offset-4 hover:text-bass-white transition-colors">
+                    Resend your ticket
+                  </Link>{' '}
+                  or{' '}
                   <Link href="/contact" className="text-bass-grey-light underline underline-offset-4 hover:text-bass-white transition-colors">
-                    Contact us
+                    contact us
                   </Link>{' '}
                   with your order reference.
                 </p>

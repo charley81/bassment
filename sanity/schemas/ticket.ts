@@ -43,6 +43,13 @@ export const ticket = defineType({
       description: 'Empty = the order exists but the ticket email has not gone out yet.',
       readOnly: true,
     }),
+    defineField({
+      name: 'lastResentAt',
+      title: 'Last Resent At',
+      type: 'datetime',
+      description: 'Set by the self-serve resend flow; also its durable throttle.',
+      readOnly: true,
+    }),
   ],
   preview: {
     select: { title: 'orderRef', subtitle: 'email', event: 'eventTitle' },
