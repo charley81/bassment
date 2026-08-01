@@ -3,6 +3,11 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { getStripe } from '@/lib/stripe'
 import { orderRefFor } from '@/lib/orders'
+import { AddToCalendar } from '@/components/add-to-calendar'
+import { client } from '@/lib/sanity/client'
+import { groq } from 'next-sanity'
+
+const EVENT_DETAILS = groq`*[_type == "event" && slug.current == $slug][0] { title, date, doorsOpen }`
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -62,6 +67,13 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
       : content.body
   const orderRef =
     verification.status === 'verified' && payment_intent ? orderRefFor(payment_intent) : null
+  // Event details for the Add to Calendar button (verified purchases only).
+  const eventDetails = orderRef
+    ? await client.fetch<{ title?: string; date?: string; doorsOpen?: string } | null>(
+        EVENT_DETAILS,
+        { slug }
+      )
+    : null
 
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
@@ -101,6 +113,15 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
             >
               More Events
             </Link>
+            {orderRef && eventDetails?.title && (eventDetails.doorsOpen || eventDetails.date) && (
+              <AddToCalendar
+                title={eventDetails.title}
+                date={eventDetails.date}
+                doorsOpen={eventDetails.doorsOpen}
+                orderRef={orderRef}
+                slug={slug}
+              />
+            )}
           </div>
         </div>
       </main>
