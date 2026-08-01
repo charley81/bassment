@@ -29,7 +29,7 @@ export function SoundHistory({ label, body, title, image }: Props) {
         </div>
       </div>
       <div className="w-full md:w-lg h-[300px] md:h-[342px] relative shrink-0">
-        <Image src={image} alt="" fill className="object-cover" />
+        <Image src={image} alt="" fill sizes="(max-width: 768px) 100vw, 512px" className="object-cover" />
       </div>
     </section>
   );

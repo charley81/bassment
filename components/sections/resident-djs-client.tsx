@@ -47,6 +47,7 @@ export function ResidentDjsClient({ djs }: Props) {
                   src={artistImage(dj)}
                   alt={dj.name}
                   fill
+                  sizes="(max-width: 768px) 180px, 240px"
                   className="object-cover"
                 />
               </div>

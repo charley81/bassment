@@ -36,7 +36,7 @@ export const heroData = {
   description:
     "Manhattan's only Valve Sound System venue. 96,000 watts of hand-built analog power.",
   cta: 'Get Tickets',
-  image: '/images/hero-bg-home-3ab357.png',
+  image: '/images/hero-bg-home-3ab357.jpg',
 }
 
 export const featuredEvent = {
@@ -47,7 +47,7 @@ export const featuredEvent = {
     'A legendary sound system meets its creators. The Valve Sound System returns to its spiritual Manhattan home for an all-night exploration of the foundation.',
   badge: 'ON SALE NOW',
   cta: 'Get Tickets',
-  image: '/images/dillinja-valve-featured.png',
+  image: '/images/dillinja-valve-featured.jpg',
 }
 
 export const upcomingEvents: Event[] = [
@@ -56,28 +56,28 @@ export const upcomingEvents: Event[] = [
     title: 'DLR b2b Break',
     date: 'Sat 01 Nov',
     support: 'with SP:MC, Hydro',
-    image: '/images/event-dlr.png',
+    image: '/images/event-dlr.jpg',
   },
   {
     id: 'goldie-timeless',
     title: 'Goldie - Timeless Set',
     date: 'Fri 07 Nov',
     support: 'with MC GQ',
-    image: '/images/event-goldie.png',
+    image: '/images/event-goldie.jpg',
   },
   {
     id: 'calibre-deep-cuts',
     title: 'Calibre - Deep Cuts',
     date: 'Sat 15 Nov',
     support: 'All Night Long',
-    image: '/images/event-calibre.png',
+    image: '/images/event-calibre.jpg',
   },
   {
     id: 'sully-tim-reaper',
     title: 'Sully b2b Tim Reaper',
     date: 'Fri 21 Nov',
     support: 'Jungle Special',
-    image: '/images/event-sully.png',
+    image: '/images/event-sully.jpg',
   },
 ]
 
@@ -87,7 +87,7 @@ export const venueHomeData = {
   description:
     'Located four stories beneath 70 Pine Street, BASSMENT is a reinforced concrete chamber designed for physical frequency. No decor, no distractions, just the largest analog sound system in North America.',
   cta: 'Explore the Venue →',
-  image: '/images/venue-space-ab4185.png',
+  image: '/images/venue-space-ab4185.jpg',
 }
 
 export const residentDjs: ResidentDj[] = [
@@ -96,49 +96,49 @@ export const residentDjs: ResidentDj[] = [
     description:
       'The First Lady of Drum & Bass. A master of the techstep and jungle foundations, curating the BASSMENT sound since night one.',
     tags: ['Jungle', 'Amen', 'Techstep'],
-    image: '/images/dj-storm.png',
+    image: '/images/dj-storm.jpg',
   },
   {
     name: 'LEMON D',
     description:
       'Co-founder of Valve Sound System. A pioneer who shaped the sound of drum & bass from its earliest days.',
     tags: ['Valve', 'Techstep', 'Foundation'],
-    image: '/images/dillinja-valve-featured.png',
+    image: '/images/dillinja-valve-featured.jpg',
   },
   {
     name: 'DOC SCOTT',
     description:
       'Founder of 31 Records. A selector whose sets span the full spectrum of drum & bass history.',
     tags: ['31 Records', 'Jungle', 'Drumfunk'],
-    image: '/images/event-doc-scott.png',
+    image: '/images/event-doc-scott.jpg',
   },
   {
     name: 'FLIGHT',
     description:
       'One of the most respected voices in drum & bass. A selector with an encyclopedic knowledge of the music.',
     tags: ['Jungle', 'Amen', 'Deep Cuts'],
-    image: '/images/event-dlr.png',
+    image: '/images/event-dlr.jpg',
   },
   {
     name: 'MANTRA',
     description:
       'Co-founder of Rupture. Championing the deeper, darker side of drum & bass since 2006.',
     tags: ['Rupture', 'Techstep', 'Amen'],
-    image: '/images/event-storm.png',
+    image: '/images/event-storm.jpg',
   },
   {
     name: 'DOUBLE O',
     description:
       'Rupture co-founder. Pushing the boundaries of jungle and drumfunk with every selection.',
     tags: ['Jungle', 'Drumfunk', 'Rupture'],
-    image: '/images/event-om-unit.png',
+    image: '/images/event-om-unit.jpg',
   },
   {
     name: 'ANT TC1',
     description:
       'Founder of Dispatch Recordings. A tastemaker whose imprint defines the cutting edge of drum & bass.',
     tags: ['Dispatch', 'Techstep', 'Deep'],
-    image: '/images/event-dbridge.png',
+    image: '/images/event-dbridge.jpg',
   },
 ]
 
@@ -157,119 +157,119 @@ export const eventsPageData: Event[] = [
     title: 'DLR b2b Break',
     date: 'Sat 01 Nov',
     support: 'with SP:MC, Hydro',
-    image: '/images/event-dlr-events.png',
+    image: '/images/event-dlr-events.jpg',
   },
   {
     id: 'goldie-timeless',
     title: 'Goldie - Timeless Set',
     date: 'Fri 07 Nov',
     support: 'with MC GQ',
-    image: '/images/event-goldie-events.png',
+    image: '/images/event-goldie-events.jpg',
   },
   {
     id: 'calibre-deep-cuts',
     title: 'Calibre - Deep Cuts',
     date: 'Sat 15 Nov',
     support: 'All Night Long',
-    image: '/images/event-calibre-events.png',
+    image: '/images/event-calibre-events.jpg',
   },
   {
     id: 'sully-tim-reaper',
     title: 'Sully b2b Tim Reaper',
     date: 'Fri 21 Nov',
     support: 'Jungle Special',
-    image: '/images/event-sully-events.png',
+    image: '/images/event-sully-events.jpg',
   },
   {
     id: 'alix-perez',
     title: 'Alix Perez',
     date: 'Fri 28 Nov',
     support: '1985 Music Night',
-    image: '/images/event-alix-perez.png',
+    image: '/images/event-alix-perez.jpg',
   },
   {
     id: 'doc-scott',
     title: 'Doc Scott',
     date: 'Sat 06 Dec',
     support: '31 Records Showcase',
-    image: '/images/event-doc-scott.png',
+    image: '/images/event-doc-scott.jpg',
   },
   {
     id: 'om-unit',
     title: 'Om Unit',
     date: 'Fri 12 Dec',
     support: 'with Skeptical',
-    image: '/images/event-om-unit.png',
+    image: '/images/event-om-unit.jpg',
   },
   {
     id: 'digital-spirit',
     title: 'Digital & Spirit Tribute',
     date: 'Fri 05 Sep',
     support: 'Phantom Force',
-    image: '/images/event-digital.png',
+    image: '/images/event-digital.jpg',
   },
   {
     id: 'dj-storm-friends',
     title: 'DJ Storm & Friends',
     date: 'Wed 31 Dec',
     support: "New Year's Eve",
-    image: '/images/event-storm.png',
+    image: '/images/event-storm.jpg',
   },
   {
     id: 'loxy-b2b-ink',
     title: 'Loxy b2b Ink',
     date: 'Sat 25 Apr',
     support: 'Renegade Hardware',
-    image: '/images/event-loxy.png',
+    image: '/images/event-loxy.jpg',
   },
   {
     id: 'special-request',
     title: 'Special Request',
     date: 'Sat 09 May',
     support: 'Spectral Frequency',
-    image: '/images/event-special-request.png',
+    image: '/images/event-special-request.jpg',
   },
   {
     id: 'dbridge',
     title: 'dBridge',
     date: 'Sat 14 Feb',
     support: 'Exit Records Night',
-    image: '/images/event-dbridge.png',
+    image: '/images/event-dbridge.jpg',
   },
   {
     id: 'ivy-lab',
     title: 'Ivy Lab',
     date: 'Sat 28 Feb',
     support: '20/20 LDN Takeover',
-    image: '/images/event-ivy-lab.png',
+    image: '/images/event-ivy-lab.jpg',
   },
   {
     id: 'commix',
     title: 'Commix',
     date: 'Sat 14 Mar',
     support: 'Call to Mind Live',
-    image: '/images/event-commix.png',
+    image: '/images/event-commix.jpg',
   },
   {
     id: 'marcus-intalex',
     title: 'Marcus Intalex',
     date: 'Sat 28 Mar',
     support: 'Foundation Night',
-    image: '/images/event-marcus-intalex.png',
+    image: '/images/event-marcus-intalex.jpg',
   },
   {
     id: 'dom-roland',
     title: 'Dom & Roland',
     date: 'Sat 11 Apr',
     support: 'Dubs from the Dungeon',
-    image: '/images/event-dom-roland.png',
+    image: '/images/event-dom-roland.jpg',
   },
 ]
 
 /* ── Event Detail Page ── */
 export const eventDetailData = {
   backLabel: '← Back to Events',
-  image: '/images/dillinja-valve-detail.png',
+  image: '/images/dillinja-valve-detail.jpg',
   title: 'DILLINJA — VALVE SOUND SYSTEM TAKEOVER',
   setTimes: [
     { label: 'DOORS', time: '10:00 PM' },
@@ -311,21 +311,21 @@ export const eventDetailData = {
       title: 'DLR b2b Break',
       date: 'Sat 01 Nov',
       support: 'with SP:MC, Hydro',
-      image: '/images/detail-related-dlr.png',
+      image: '/images/detail-related-dlr.jpg',
     },
     {
       id: 'goldie',
       title: 'Goldie — Timeless',
       date: 'Fri 07 Nov',
       support: 'with MC GQ',
-      image: '/images/detail-related-goldie.png',
+      image: '/images/detail-related-goldie.jpg',
     },
     {
       id: 'calibre',
       title: 'Calibre — Deep Cuts',
       date: 'Sat 15 Nov',
       support: 'All Night Long',
-      image: '/images/detail-related-calibre.png',
+      image: '/images/detail-related-calibre.jpg',
     },
   ],
 }
@@ -336,7 +336,7 @@ export const soundHeroData = {
   headline: '96,000 WATTS OF HAND-BUILT ANALOG POWER',
   quote:
     '"Built by Dillinja & Lemon D, 2001. There is nothing else like it on earth."',
-  image: '/images/sound-hero.png',
+  image: '/images/sound-hero.jpg',
 }
 
 export const soundHistoryData = {
@@ -346,7 +346,7 @@ export const soundHistoryData = {
     "In the late 90s, the evolution of drum and bass was hitting a physical limit. The sound systems of the time simply couldn't handle the extreme sub-bass frequencies being pioneered in the studio.",
     'Dillinja and Lemon D decided to take matters into their own hands. They spent years researching acoustic engineering, sourcing rare valve components, and hand-building every single cabinet to their exact specifications.',
   ],
-  image: '/images/sound-history.png',
+  image: '/images/sound-history.jpg',
 }
 
 export const soundSpecs: SoundSpec[] = [
@@ -359,7 +359,7 @@ export const soundSpecs: SoundSpec[] = [
 export const soundSubwayData = {
   quote:
     '"The building itself was reinforced to withstand the subway lines passing through Manhattan. We realized BASSMENT wasn\'t just a club; it was a physical resonance chamber for the Valve system."',
-  image: '/images/sound-subway-7609bd.png',
+  image: '/images/sound-subway-7609bd.jpg',
 }
 
 export const soundCtaData = { label: 'Experience It Yourself' }
@@ -369,7 +369,7 @@ export const venueHeroData = {
   headline: '70 PINE STREET, MANHATTAN',
   subtitle:
     "Built above the Cobble Hill Tunnel. A space carved from the city's foundations.",
-  image: '/images/venue-hero-7ee754.png',
+  image: '/images/venue-hero-7ee754.jpg',
 }
 
 export const venueHistoryData = {
@@ -385,12 +385,12 @@ export const venueHistoryData = {
 }
 
 export const venuePhotos: string[] = [
-  '/images/venue-photo-1.png',
-  '/images/venue-photo-2.png',
-  '/images/venue-photo-3.png',
-  '/images/venue-photo-4.png',
-  '/images/venue-photo-5.png',
-  '/images/venue-photo-6.png',
+  '/images/venue-photo-1.jpg',
+  '/images/venue-photo-2.jpg',
+  '/images/venue-photo-3.jpg',
+  '/images/venue-photo-4.jpg',
+  '/images/venue-photo-5.jpg',
+  '/images/venue-photo-6.jpg',
 ]
 
 export const venueStats: VenueStat[] = [
@@ -410,28 +410,28 @@ export const venuePlanData = {
     '• Coat check: $5 cash or Venmo.',
     '• No large bags. No professional cameras without approval.',
   ],
-  mapImage: '/images/venue-map.png',
+  mapImage: '/images/venue-map.jpg',
   mapLabel: '70 PINE STREET, NEW YORK, NY 10005',
   cta: "See What's On →",
 }
 
 /* ── Gallery Page ── */
 export const galleryImages: GalleryImage[] = [
-  { src: '/images/gallery-01.png' },
-  { src: '/images/gallery-02.png' },
-  { src: '/images/gallery-03.png' },
-  { src: '/images/gallery-04.png' },
-  { src: '/images/gallery-05.png' },
-  { src: '/images/gallery-06.png' },
-  { src: '/images/gallery-07.png' },
-  { src: '/images/gallery-08.png' },
-  { src: '/images/gallery-09.png' },
-  { src: '/images/gallery-10.png' },
-  { src: '/images/gallery-11.png' },
-  { src: '/images/gallery-12.png' },
-  { src: '/images/gallery-13.png' },
-  { src: '/images/gallery-14.png' },
-  { src: '/images/gallery-15.png' },
+  { src: '/images/gallery-01.jpg' },
+  { src: '/images/gallery-02.jpg' },
+  { src: '/images/gallery-03.jpg' },
+  { src: '/images/gallery-04.jpg' },
+  { src: '/images/gallery-05.jpg' },
+  { src: '/images/gallery-06.jpg' },
+  { src: '/images/gallery-07.jpg' },
+  { src: '/images/gallery-08.jpg' },
+  { src: '/images/gallery-09.jpg' },
+  { src: '/images/gallery-10.jpg' },
+  { src: '/images/gallery-11.jpg' },
+  { src: '/images/gallery-12.jpg' },
+  { src: '/images/gallery-13.jpg' },
+  { src: '/images/gallery-14.jpg' },
+  { src: '/images/gallery-15.jpg' },
 ]
 
 /* ── FAQ Page ── */
