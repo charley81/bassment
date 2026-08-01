@@ -12,6 +12,7 @@ export function VenueTeaser() {
             src={venueHomeData.image}
             alt="Venue"
             fill
+            sizes="(max-width: 768px) 100vw, 616px"
             className="object-cover"
           />
         </div>

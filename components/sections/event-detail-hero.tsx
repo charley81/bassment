@@ -38,6 +38,7 @@ export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketSta
             src={event.image}
             alt={event.title}
             fill
+            sizes="(max-width: 768px) 100vw, 739px"
             className="object-cover"
             priority
           />

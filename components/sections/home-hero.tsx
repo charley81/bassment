@@ -10,6 +10,7 @@ export function HomeHero() {
         src={heroData.image}
         alt=""
         fill
+        sizes="100vw"
         className="object-cover"
         priority
       />

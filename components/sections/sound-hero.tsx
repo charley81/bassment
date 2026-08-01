@@ -15,6 +15,7 @@ export function SoundHero({ image, eyebrow, headline, quote }: Props) {
         src={image}
         alt=""
         fill
+        sizes="100vw"
         className="object-cover grayscale"
         priority
       />

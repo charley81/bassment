@@ -15,6 +15,7 @@ export function SoundQuote({ quote, image }: Props) {
         src={image}
         alt=""
         fill
+        sizes="(max-width: 1440px) 100vw, 1440px"
         className="object-cover grayscale"
         priority
       />

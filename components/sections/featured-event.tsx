@@ -26,6 +26,7 @@ export async function FeaturedEvent() {
               src={imageUrl}
               alt={event.title}
               fill
+              sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover"
             />
           </div>

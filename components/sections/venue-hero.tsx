@@ -14,6 +14,7 @@ export function VenueHero({ headline, subtitle, image }: Props) {
         src={image}
         alt=""
         fill
+        sizes="100vw"
         className="object-cover grayscale"
         priority
       />
