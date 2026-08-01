@@ -3,7 +3,7 @@
 
 const TIME_ZONE = 'America/New_York'
 
-/** "Fri, 24 Oct" */
+/** "Fri, Oct 24" */
 export function formatEventDateShort(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
     weekday: 'short',
@@ -13,7 +13,7 @@ export function formatEventDateShort(iso: string): string {
   })
 }
 
-/** "Friday, 24 October 2025" */
+/** "Friday, October 24, 2025" */
 export function formatEventDateLong(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
     weekday: 'long',
@@ -24,7 +24,7 @@ export function formatEventDateLong(iso: string): string {
   })
 }
 
-/** "FRI, 24 OCT" */
+/** "FRI, OCT 24" */
 export function formatEventDateUpper(iso: string): string {
   return formatEventDateShort(iso).toUpperCase()
 }
