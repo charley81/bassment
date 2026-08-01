@@ -506,8 +506,10 @@ export const footerData = {
     {
       title: 'BASSMENT',
       links: [
-        { label: 'CALENDAR', href: '#' },
-        { label: 'NEWS', href: '#' },
+        { label: 'EVENTS', href: '/events' },
+        { label: 'VENUE', href: '/venue' },
+        { label: 'SOUND SYSTEM', href: '/sound-system' },
+        { label: 'GALLERY', href: '/gallery' },
       ],
     },
     {
@@ -515,8 +517,9 @@ export const footerData = {
       links: [
         { label: 'FAQ', href: '/faq' },
         { label: 'CONTACT', href: '/contact' },
+        { label: 'TICKET HELP', href: '/tickets/resend' },
         { label: 'ABOUT', href: '/venue' },
-        { label: 'Phone: ', href: '212-567-0500' },
+        { label: '212-567-0500', href: 'tel:+12125670500' },
       ],
     },
   ],
