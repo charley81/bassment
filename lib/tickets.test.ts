@@ -1,8 +1,38 @@
 import { describe, it, expect } from 'vitest'
-import { resendAllowed, normalizeEmail, RESEND_THROTTLE_MINUTES } from './tickets'
+import { resendAllowed, normalizeEmail, canSell, RESEND_THROTTLE_MINUTES } from './tickets'
 
 const NOW = new Date('2026-08-01T12:00:00Z')
 const minutesAgo = (n: number) => new Date(NOW.getTime() - n * 60_000).toISOString()
+
+describe('canSell', () => {
+  it('sells onSale and lowTickets with a price', () => {
+    expect(canSell('onSale', 2500)).toBe(true)
+    expect(canSell('lowTickets', 2500)).toBe(true)
+  })
+
+  it('refuses non-purchasable statuses', () => {
+    expect(canSell('soldOut', 2500)).toBe(false)
+    expect(canSell('atDoor', 2500)).toBe(false)
+    expect(canSell('past', 2500)).toBe(false)
+    expect(canSell(undefined, 2500)).toBe(false)
+  })
+
+  it('refuses missing or non-positive price', () => {
+    expect(canSell('onSale', undefined)).toBe(false)
+    expect(canSell('onSale', 0)).toBe(false)
+    expect(canSell('onSale', -100)).toBe(false)
+  })
+
+  it('sells at any count when capacity is unset (unlimited)', () => {
+    expect(canSell('onSale', 2500, undefined, 99999)).toBe(true)
+  })
+
+  it('sells under capacity and refuses at/over capacity', () => {
+    expect(canSell('onSale', 2500, 200, 199)).toBe(true)
+    expect(canSell('onSale', 2500, 200, 200)).toBe(false)
+    expect(canSell('onSale', 2500, 200, 201)).toBe(false)
+  })
+})
 
 describe('resendAllowed', () => {
   it('allows when tickets were never resent', () => {

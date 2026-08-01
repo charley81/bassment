@@ -5,11 +5,12 @@ import { getStripe } from '@/lib/stripe'
 import { sendTicketEmail, resolveTicketRecipient } from '@/lib/ticket-email'
 import { getWriteClient, clientUncached } from '@/lib/sanity/client'
 import { orderRefFor } from '@/lib/orders'
+import { PURCHASABLE_STATUSES } from '@/lib/tickets'
 import type { SanityTicket } from '@/lib/sanity/types'
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
-const EVENT_LOOKUP = groq`*[_type == "event" && slug.current == $slug][0] { _id, title }`
+const EVENT_LOOKUP = groq`*[_type == "event" && slug.current == $slug][0] { _id, title, capacity, ticketsSold, ticketStatus }`
 
 /* Idempotency is durable, not in-memory: the ticket document's _id IS the
    Stripe PaymentIntent ID. create() conflicts on replays/duplicate endpoints,
@@ -78,11 +79,15 @@ export async function POST(request: Request) {
     // 1. Record the order. A conflict means this PaymentIntent was already
     //    processed (Stripe retry or duplicate webhook endpoint).
     try {
-      const eventDoc = await clientUncached.fetch<{ _id: string; title?: string } | null>(
-        EVENT_LOOKUP,
-        { slug: eventSlug }
-      )
-      await sanity.create({
+      const eventDoc = await clientUncached.fetch<{
+        _id: string
+        title?: string
+        capacity?: number
+        ticketsSold?: number
+        ticketStatus?: string
+      } | null>(EVENT_LOOKUP, { slug: eventSlug })
+
+      const ticketDoc = {
         _id: intent.id,
         _type: 'ticket',
         event: eventDoc ? { _type: 'reference', _ref: eventDoc._id, _weak: true } : undefined,
@@ -94,8 +99,37 @@ export async function POST(request: Request) {
         orderRef,
         status: 'paid',
         purchasedAt: new Date(intent.created * 1000).toISOString(),
-      })
+      }
+
+      if (eventDoc) {
+        // Atomic: ticket record + counter increment in one transaction.
+        // A duplicate delivery conflicts on the ticket _id and aborts BOTH
+        // halves — the counter can never drift from the ticket records.
+        await sanity
+          .transaction()
+          .create(ticketDoc)
+          .patch(eventDoc._id, (p) => p.setIfMissing({ ticketsSold: 0 }).inc({ ticketsSold: 1 }))
+          .commit()
+      } else {
+        await sanity.create(ticketDoc)
+      }
       console.log(`Ticket ${orderRef} recorded for ${email} (${eventSlug})`)
+
+      // Auto sold-out (courtesy flip — /api/payment already gates on the
+      // counter itself, so a failed flip does not reopen sales). Only flips
+      // upward from a purchasable status; manual past/atDoor is left alone.
+      if (
+        eventDoc?.capacity != null &&
+        (eventDoc.ticketsSold ?? 0) + 1 >= eventDoc.capacity &&
+        PURCHASABLE_STATUSES.has(eventDoc.ticketStatus ?? '')
+      ) {
+        try {
+          await sanity.patch(eventDoc._id).set({ ticketStatus: 'soldOut' }).commit()
+          console.log(`Event ${eventSlug} sold out at capacity ${eventDoc.capacity}`)
+        } catch (flipErr) {
+          console.error('Sold-out flip failed (counter gate still blocks):', flipErr)
+        }
+      }
     } catch (err) {
       if (!isConflict(err)) throw err
       const existing = await sanity.getDocument<SanityTicket>(intent.id)

@@ -17,6 +17,8 @@ export const event = defineType({
     defineField({ name: 'ticketUrl', title: 'Ticket URL', type: 'url' }),
     defineField({ name: 'ticketPrice', title: 'Ticket Price (cents)', type: 'number', description: 'e.g. 2500 = $25.00, 5000 = $50.00' }),
     defineField({ name: 'ticketStatus', title: 'Ticket Status', type: 'string', options: { list: ['onSale', 'lowTickets', 'soldOut', 'atDoor', 'past'] }, initialValue: 'onSale', validation: (r) => r.required() }),
+    defineField({ name: 'capacity', title: 'Capacity', type: 'number', description: 'Max tickets to sell. Leave empty for unlimited. When reached, the event flips itself to soldOut.', validation: (r) => r.min(1) }),
+    defineField({ name: 'ticketsSold', title: 'Tickets Sold', type: 'number', description: 'Counter maintained automatically by the purchase webhook. For a refund: set the ticket status to refunded AND decrement this by hand.', initialValue: 0, readOnly: true }),
     defineField({ name: 'featured', title: 'Featured Event', type: 'boolean', initialValue: false }),
     defineField({ name: 'badge', title: 'Badge', type: 'string', description: 'e.g. "ON SALE NOW", "LOW TICKETS"' }),
   ],
