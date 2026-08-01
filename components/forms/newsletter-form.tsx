@@ -12,6 +12,7 @@ import { useState } from "react";
 
 const schema = z.object({
   email: z.string().email("Please enter a valid email address."),
+  botField: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -20,7 +21,7 @@ export function NewsletterForm() {
   const [pending, setPending] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "" },
+    defaultValues: { email: "", botField: "" },
   });
 
   async function onSubmit(values: FormValues) {
@@ -31,7 +32,7 @@ export function NewsletterForm() {
         email: values.email,
       });
 
-      const [netlifyRes] = await Promise.allSettled([
+      const [netlifyRes, actionRes] = await Promise.allSettled([
         fetch('/__forms.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -40,12 +41,14 @@ export function NewsletterForm() {
         subscribeNewsletter(values),
       ]);
 
-      if (netlifyRes.status === 'fulfilled' && netlifyRes.value.ok) {
+      const netlifyOk = netlifyRes.status === 'fulfilled' && netlifyRes.value.ok;
+      const actionOk = actionRes.status === 'fulfilled' && actionRes.value.success;
+
+      if (netlifyOk || actionOk) {
         toast.success('Subscribed! Check your inbox.');
         form.reset();
       } else {
-        toast.success('Subscribed! Check your inbox.');
-        form.reset();
+        toast.error('Something went wrong. Please try again.');
       }
     } catch {
       toast.error('Something went wrong. Please try again.');
@@ -59,7 +62,7 @@ export function NewsletterForm() {
   return (
     <>
       <Form onSubmit={form.handleSubmit(onSubmit)}>
-      <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
+      <input type="text" className="hidden" tabIndex={-1} autoComplete="off" {...form.register('botField')} />
       <div className="flex gap-1 w-full">
         <FormField name="email" error={errors.email?.message} className="flex-1">
           <Input

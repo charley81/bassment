@@ -1,13 +1,49 @@
 import Link from 'next/link'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { getStripe } from '@/lib/stripe'
 
 interface Props {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ payment_intent?: string; redirect_status?: string }>
 }
 
-export default async function ConfirmationPage({ params }: Props) {
+type Verification = 'verified' | 'failed' | 'unknown'
+
+async function verifyPayment(paymentIntentId?: string, redirectStatus?: string): Promise<Verification> {
+  if (!paymentIntentId || !redirectStatus) return 'unknown'
+  if (redirectStatus !== 'succeeded') return 'failed'
+
+  try {
+    const stripe = getStripe()
+    const intent = await stripe.paymentIntents.retrieve(paymentIntentId)
+    return intent.status === 'succeeded' ? 'verified' : 'failed'
+  } catch (err) {
+    console.error('Could not verify payment intent:', err)
+    return 'unknown'
+  }
+}
+
+const CONTENT: Record<Verification, { heading: string; body: string }> = {
+  verified: {
+    heading: "You're In.",
+    body: 'Your ticket has been purchased. A confirmation email is on the way.',
+  },
+  failed: {
+    heading: 'Payment Failed',
+    body: 'Your payment could not be completed. You have not been charged — please try again.',
+  },
+  unknown: {
+    heading: 'Nothing to Confirm',
+    body: "We couldn't find a purchase linked to this page. If you just paid, your confirmation email will arrive shortly.",
+  },
+}
+
+export default async function ConfirmationPage({ params, searchParams }: Props) {
   const { slug } = await params
+  const { payment_intent, redirect_status } = await searchParams
+  const verification = await verifyPayment(payment_intent, redirect_status)
+  const content = CONTENT[verification]
 
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
@@ -15,10 +51,8 @@ export default async function ConfirmationPage({ params }: Props) {
       <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-6 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center gap-8 max-w-480 text-center">
           <div className="flex flex-col gap-4">
-            <h1 className="text-h2 text-bass-white">You&apos;re In.</h1>
-            <p className="text-body text-bass-grey-light">
-              Your ticket has been purchased. A confirmation email is on the way.
-            </p>
+            <h1 className="text-h2 text-bass-white">{content.heading}</h1>
+            <p className="text-body text-bass-grey-light">{content.body}</p>
           </div>
           <div className="flex gap-4">
             <Link

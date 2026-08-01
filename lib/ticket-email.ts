@@ -1,8 +1,10 @@
-'use server'
-
 import { sendEmail } from '@/lib/resend'
 import { client } from '@/lib/sanity/client'
 import { groq } from 'next-sanity'
+
+/* Server-only helper — called by the Stripe webhook, never from the client.
+   Deliberately NOT a server action ('use server' would expose it as a
+   public endpoint anyone could invoke with arbitrary email addresses). */
 
 const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0] { title, date }`
 
@@ -12,6 +14,7 @@ function formatDate(iso: string): string {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'America/New_York',
   })
 }
 
