@@ -1,23 +1,42 @@
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
 import { getStripe } from '@/lib/stripe'
-import { client } from '@/lib/sanity/client'
+import { clientUncached } from '@/lib/sanity/client'
 import { groq } from 'next-sanity'
 
-const PRICE_QUERY = groq`*[_type == "event" && slug.current == $slug][0] { ticketPrice }`
+const PRICE_QUERY = groq`*[_type == "event" && slug.current == $slug][0] { ticketPrice, ticketStatus }`
+
+const bodySchema = z.object({
+  eventSlug: z.string().trim().min(1).max(200),
+})
+
+// Statuses that allow purchasing. Anything else (soldOut, atDoor, past)
+// is rejected server-side so tickets can't be bought via direct API calls.
+const PURCHASABLE_STATUSES = new Set(['onSale', 'lowTickets'])
 
 export async function POST(request: Request) {
   try {
-    const { eventSlug } = await request.json()
-
-    if (!eventSlug) {
-      return NextResponse.json({ error: 'Missing event slug' }, { status: 400 })
+    const parsed = bodySchema.safeParse(await request.json().catch(() => null))
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
     }
+    const { eventSlug } = parsed.data
 
-    // Fetch ticket price from Sanity (server-side, no client input)
-    const event = await client.fetch<{ ticketPrice?: number }>(PRICE_QUERY, { slug: eventSlug })
+    // Fetch price + status from Sanity server-side (uncached — never trust
+    // client input or stale CDN data for transactional reads)
+    const event = await clientUncached.fetch<{ ticketPrice?: number; ticketStatus?: string }>(
+      PRICE_QUERY,
+      { slug: eventSlug }
+    )
 
-    if (!event?.ticketPrice || event.ticketPrice <= 0) {
+    if (!event) {
+      return NextResponse.json({ error: 'Event not found' }, { status: 404 })
+    }
+    if (!event.ticketPrice || event.ticketPrice <= 0) {
       return NextResponse.json({ error: 'Tickets not available for this event' }, { status: 400 })
+    }
+    if (!PURCHASABLE_STATUSES.has(event.ticketStatus ?? '')) {
+      return NextResponse.json({ error: 'Tickets are not on sale for this event' }, { status: 400 })
     }
 
     const stripe = getStripe()

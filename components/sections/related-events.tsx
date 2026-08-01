@@ -1,19 +1,8 @@
 /* BASSMENT — Related Events Section */
 import { EventCard } from "@/components/shared/event-card";
 import { getUpcomingEvents } from "@/lib/sanity/fetch";
-import type { SanityEvent } from "@/lib/sanity/types";
-import type { Event } from "@/lib/types";
+import { mapEvent } from "@/lib/mappers";
 
-function mapEvent(e: SanityEvent): Event {
-  const img = e.image as unknown as { asset?: { url?: string } } | undefined
-  return {
-    id: e.slug || e._id,
-    title: e.title,
-    date: e.date ? new Date(e.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }) : 'TBA',
-    support: e.supportText || '',
-    image: img?.asset?.url || '/images/placeholder.png',
-  }
-}
 
 export async function RelatedEvents() {
   const all = await getUpcomingEvents()

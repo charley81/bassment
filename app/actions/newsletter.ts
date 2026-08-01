@@ -1,30 +1,39 @@
 "use server";
 
-import { Resend } from "resend";
+import { z } from "zod";
+import { getResend, RESEND_FROM } from "@/lib/resend";
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const RESEND_FROM = process.env.RESEND_FROM_EMAIL || "BASSMENT <onboarding@resend.dev>";
 const CONTACT_TO = process.env.RESEND_CONTACT_EMAIL || "hello@bassment.com";
+
+const schema = z.object({
+  email: z.string().trim().email().max(200),
+  botField: z.string().max(0).optional(), // honeypot — must stay empty
+});
 
 interface NewsletterValues {
   email: string;
+  botField?: string;
 }
 
 export async function subscribeNewsletter(
   values: NewsletterValues
 ): Promise<{ success: boolean; error?: string }> {
-  if (!RESEND_API_KEY) {
-    console.warn("RESEND_API_KEY not configured. Subscription not saved:", values.email);
-    return { success: false, error: "Email service not configured." };
+  // Honeypot filled → bot. Pretend success so it doesn't adapt.
+  if (values.botField) {
+    return { success: true };
+  }
+
+  const parsed = schema.safeParse(values);
+  if (!parsed.success) {
+    return { success: false, error: "Please enter a valid email address." };
   }
 
   try {
-    const resend = new Resend(RESEND_API_KEY);
-    await resend.emails.send({
+    await getResend().emails.send({
       from: RESEND_FROM,
       to: CONTACT_TO,
       subject: "New Newsletter Subscription",
-      text: `New subscriber: ${values.email}`,
+      text: `New subscriber: ${parsed.data.email}`,
     });
     return { success: true };
   } catch (err) {

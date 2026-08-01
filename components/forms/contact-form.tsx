@@ -14,6 +14,7 @@ const schema = z.object({
   name: z.string().min(1, 'Name is required.'),
   email: z.string().email('Please enter a valid email address.'),
   message: z.string().min(10, 'Message must be at least 10 characters.'),
+  botField: z.string().optional(),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -22,7 +23,7 @@ export function ContactForm() {
   const [pending, setPending] = useState(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', email: '', message: '' },
+    defaultValues: { name: '', email: '', message: '', botField: '' },
   })
 
   async function onSubmit(values: FormValues) {
@@ -36,7 +37,7 @@ export function ContactForm() {
         message: values.message,
       })
 
-      const [netlifyRes] = await Promise.allSettled([
+      const [netlifyRes, actionRes] = await Promise.allSettled([
         fetch('/__forms.html', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -45,12 +46,14 @@ export function ContactForm() {
         sendContactMessage(values),
       ])
 
-      if (netlifyRes.status === 'fulfilled' && netlifyRes.value.ok) {
+      const netlifyOk = netlifyRes.status === 'fulfilled' && netlifyRes.value.ok
+      const actionOk = actionRes.status === 'fulfilled' && actionRes.value.success
+
+      if (netlifyOk || actionOk) {
         toast.success("Message sent! We'll get back to you soon.")
         form.reset()
       } else {
-        toast.success("Message sent! We'll get back to you soon.")
-        form.reset()
+        toast.error('Something went wrong. Please try again.')
       }
     } catch {
       toast.error('Something went wrong. Please try again.')
@@ -67,7 +70,7 @@ export function ContactForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-8"
       >
-      <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
+      <input type="text" className="hidden" tabIndex={-1} autoComplete="off" {...form.register('botField')} />
       <FormField name="name" error={errors.name?.message}>
         <FormLabel>Full Name</FormLabel>
         <Input

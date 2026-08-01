@@ -9,13 +9,9 @@ import { VenueStats } from "@/components/sections/venue-stats";
 import { VenuePlan } from "@/components/sections/venue-plan";
 import { VenueMap } from "@/components/sections/venue-map";
 import { getVenuePage, getSiteSettings } from "@/lib/sanity/fetch";
+import { sanityImageUrl } from "@/lib/sanity/image";
 
 export const revalidate = 86400 // 1 day
-
-function imageUrl(img: unknown): string {
-  const i = img as { asset?: { url?: string } } | undefined
-  return i?.asset?.url || '/images/placeholder.png'
-}
 
 export default async function Venue() {
   const [venue, settings] = await Promise.all([
@@ -29,7 +25,7 @@ export default async function Venue() {
       <VenueHero
         headline={venue?.heroHeadline || ''}
         subtitle={venue?.heroSubtitle}
-        image={venue ? imageUrl(venue.heroImage) : ''}
+        image={venue ? sanityImageUrl(venue.heroImage) : ''}
       />
       <VenueHistory
         label={venue?.historyLabel}

@@ -1,27 +1,10 @@
 /* BASSMENT — Featured Event Section */
 import Image from 'next/image'
-import Link from 'next/link'
 import { getFeaturedEvent, getNextEvent } from '@/lib/sanity/fetch'
 import { TicketCta } from '@/components/ticket-cta'
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-  }).toUpperCase()
-}
-
-function toPlainText(blocks: unknown): string {
-  if (typeof blocks === 'string') return blocks
-  if (!Array.isArray(blocks)) return ''
-  return blocks
-    .filter((b: { _type?: string }) => b._type === 'block')
-    .flatMap((b: { children?: { text?: string }[] }) =>
-      b.children?.map((c) => c.text ?? '').join('') ?? []
-    )
-    .join(' ')
-}
+import { sanityImageUrl } from '@/lib/sanity/image'
+import { formatEventDateUpper } from '@/lib/dates'
+import { toPlainText } from '@/lib/portable-text'
 
 export async function FeaturedEvent() {
   let event = await getFeaturedEvent()
@@ -30,8 +13,7 @@ export async function FeaturedEvent() {
 
   if (!event) return null
 
-  const img = event.image as unknown as { asset?: { url?: string } } | undefined
-  const imageUrl = img?.asset?.url || '/images/placeholder.png'
+  const imageUrl = sanityImageUrl(event.image)
   const description = event.description ? toPlainText(event.description) : ''
 
   return (
@@ -51,7 +33,7 @@ export async function FeaturedEvent() {
             <div className="flex flex-col gap-6 md:gap-8">
               <div className="flex flex-col gap-1 md:gap-2">
                 <p className="text-nav text-bass-grey-light">
-                  {event.date ? formatDate(event.date) : 'TBA'}
+                  {event.date ? formatEventDateUpper(event.date) : 'TBA'}
                 </p>
                 <h3 className="text-subtitle text-bass-white">
                   {event.title}

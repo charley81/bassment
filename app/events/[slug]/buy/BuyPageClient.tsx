@@ -47,7 +47,11 @@ export function BuyPageClient({ eventSlug, eventTitle, ticketPrice }: Props) {
       ) : clientSecret ? (
         <StripeCheckoutForm
           clientSecret={clientSecret}
-          onSuccess={() => router.push(`/events/${eventSlug}/confirmation`)}
+          onSuccess={(result) =>
+            router.push(
+              `/events/${eventSlug}/confirmation?payment_intent=${result.id}&redirect_status=${result.status}`
+            )
+          }
         />
       ) : (
         <p className="text-body text-bass-grey-med text-center">Loading…</p>

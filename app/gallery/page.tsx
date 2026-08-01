@@ -3,14 +3,9 @@ import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getGallery } from "@/lib/sanity/fetch";
-import type { SanityGalleryImage } from "@/lib/sanity/types";
+import { sanityImageUrl } from "@/lib/sanity/image";
 
 export const revalidate = 3600
-
-function imageUrl(img: SanityGalleryImage): string {
-  const i = img.image as unknown as { asset?: { url?: string } } | undefined
-  return i?.asset?.url || '/images/placeholder.png'
-}
 
 export default async function Gallery() {
   const images = await getGallery()
@@ -28,7 +23,7 @@ export default async function Gallery() {
             {items.length > 0 ? (
               items.map((item, i) => (
                 <div key={item._id} className={`relative rounded-lg overflow-hidden mb-4 break-inside-avoid ${item.size === 'tall' ? 'h-[500px]' : 'h-300'}`}>
-                  <Image src={imageUrl(item)} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image src={sanityImageUrl(item.image)} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
               ))
             ) : (

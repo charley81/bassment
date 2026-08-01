@@ -20,10 +20,10 @@ function calcRemaining(target: Date): { days: number; hours: number; minutes: nu
 }
 
 export function Countdown({ targetDate }: Props) {
-  const target = new Date(targetDate)
-  const [remaining, setRemaining] = useState(() => calcRemaining(target))
+  const [remaining, setRemaining] = useState(() => calcRemaining(new Date(targetDate)))
 
   useEffect(() => {
+    const target = new Date(targetDate)
     const id = setInterval(() => {
       setRemaining(calcRemaining(target))
     }, 1000)

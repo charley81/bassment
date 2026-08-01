@@ -1,14 +1,6 @@
 /* BASSMENT — Sound System History Section */
+import { toParagraphs } from "@/lib/portable-text";
 import Image from "next/image";
-
-function blocksToText(blocks: unknown): string[] {
-  if (!Array.isArray(blocks)) return []
-  return blocks
-    .filter((b: { _type?: string }) => b._type === 'block')
-    .flatMap((b: { children?: { text?: string }[] }) =>
-      b.children?.map((c) => c.text ?? '').join('') ?? []
-    )
-}
 
 interface Props {
   label?: string;
@@ -18,7 +10,7 @@ interface Props {
 }
 
 export function SoundHistory({ label, body, title, image }: Props) {
-  const paragraphs = body ? blocksToText(body) : []
+  const paragraphs = body ? toParagraphs(body) : []
   if (!label && paragraphs.length === 0 && !title) return null
 
   return (

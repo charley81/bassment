@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
-import { sendTicketEmail } from '@/app/actions/send-ticket-email'
+import { sendTicketEmail } from '@/lib/ticket-email'
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
@@ -9,6 +9,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 // In-memory Set works across warm function invocations on Netlify.
 // For production at scale, migrate to a KV store or database.
 const processedEvents = new Set<string>()
+const MAX_PROCESSED_EVENTS = 10_000
 
 export async function POST(request: Request) {
   const body = await request.text()
@@ -37,7 +38,6 @@ export async function POST(request: Request) {
   if (processedEvents.has(event.id)) {
     return NextResponse.json({ received: true })
   }
-  processedEvents.add(event.id)
 
   if (event.type !== 'payment_intent.succeeded') {
     return NextResponse.json({ received: true })
@@ -65,9 +65,17 @@ export async function POST(request: Request) {
 
   try {
     await sendTicketEmail(email, eventSlug, amount)
+    // Only mark processed AFTER success — otherwise a Stripe retry for a
+    // failed send would be swallowed as a duplicate and the email lost.
+    if (processedEvents.size >= MAX_PROCESSED_EVENTS) {
+      const oldest = processedEvents.values().next().value
+      if (oldest) processedEvents.delete(oldest)
+    }
+    processedEvents.add(event.id)
     console.log(`Receipt sent to ${email} for ${eventSlug}`)
   } catch (err) {
     console.error('Failed to send receipt email:', err)
+    // 500 → Stripe retries the event
     return NextResponse.json({ error: 'Email failed' }, { status: 500 })
   }
 

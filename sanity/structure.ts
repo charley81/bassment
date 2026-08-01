@@ -1,4 +1,3 @@
-import { structureTool } from 'sanity/structure'
 import { CogIcon } from '@sanity/icons/Cog'
 import { CalendarIcon } from '@sanity/icons/Calendar'
 import { UsersIcon } from '@sanity/icons/Users'

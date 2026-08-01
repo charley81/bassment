@@ -1,5 +1,6 @@
 'use client'
 
+import { toPlainText } from "@/lib/portable-text";
 import { useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
@@ -8,17 +9,6 @@ import type { SanityArtist } from '@/lib/sanity/types'
 function artistImage(artist: SanityArtist): string {
   const img = artist.image as unknown as { asset?: { url?: string } } | undefined
   return img?.asset?.url || '/images/placeholder.png'
-}
-
-function toPlainText(blocks: unknown): string {
-  if (typeof blocks === 'string') return blocks
-  if (!Array.isArray(blocks)) return ''
-  return blocks
-    .filter((b: { _type?: string }) => b._type === 'block')
-    .flatMap((b: { children?: { text?: string }[] }) =>
-      b.children?.map((c) => c.text ?? '').join('') ?? []
-    )
-    .join(' ')
 }
 
 interface Props {
