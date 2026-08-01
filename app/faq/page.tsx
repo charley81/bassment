@@ -8,16 +8,9 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { getFaqs } from '@/lib/sanity/fetch'
-import type { PortableTextBlock } from 'next-sanity'
+import { toPlainText } from '@/lib/portable-text'
 
 export const revalidate = 3600 // ISR: revalidate every hour
-
-function portableTextToPlain(blocks: PortableTextBlock[]): string {
-  return blocks
-    .filter((b) => b._type === 'block')
-    .flatMap((b) => b.children?.map((c) => c.text) ?? [])
-    .join(' ')
-}
 
 export default async function FAQ() {
   const faqs = await getFaqs()
@@ -31,9 +24,7 @@ export default async function FAQ() {
           {faqs && faqs.length > 0 ? (
             <Accordion className="flex flex-col">
               {faqs.map((faq) => {
-                const answerText = Array.isArray(faq.answer)
-                  ? portableTextToPlain(faq.answer as PortableTextBlock[])
-                  : (faq.answer as string)
+                const answerText = toPlainText(faq.answer)
                 return (
                   <AccordionItem
                     key={faq._id}

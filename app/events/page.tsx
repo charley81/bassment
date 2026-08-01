@@ -3,21 +3,10 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { EventTabs } from "@/components/sections/event-tabs";
 import { getUpcomingEvents, getPastEvents } from "@/lib/sanity/fetch";
-import type { SanityEvent } from "@/lib/sanity/types";
-import type { Event } from "@/lib/types";
+import { mapEvent } from "@/lib/mappers";
 
 export const revalidate = 3600
 
-function mapEvent(e: SanityEvent): Event {
-  const img = e.image as unknown as { asset?: { url?: string } } | undefined
-  return {
-    id: e.slug || e._id,
-    title: e.title,
-    date: e.date ? new Date(e.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }) : 'TBA',
-    support: e.supportText || '',
-    image: img?.asset?.url || '/images/placeholder.png',
-  }
-}
 
 export default async function Events() {
   const [upcomingRaw, pastRaw] = await Promise.all([

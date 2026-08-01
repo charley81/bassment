@@ -1,13 +1,9 @@
 /* BASSMENT — Venue Photo Grid Section */
+import { sanityImageUrl, type SanityImageProjection } from "@/lib/sanity/image";
 import Image from "next/image";
 
-function imageUrl(img: unknown): string {
-  const i = img as { asset?: { url?: string } } | undefined
-  return i?.asset?.url || '/images/placeholder.png'
-}
-
 interface Props {
-  images?: unknown[] | null;
+  images?: SanityImageProjection[] | null;
 }
 
 export function VenuePhotoGrid({ images }: Props) {
@@ -16,7 +12,7 @@ export function VenuePhotoGrid({ images }: Props) {
 
   const rows: string[][] = []
   for (let i = 0; i < items.length; i += 3) {
-    rows.push(items.slice(i, i + 3).map(imageUrl))
+    rows.push(items.slice(i, i + 3).map((img) => sanityImageUrl(img)))
   }
 
   return (

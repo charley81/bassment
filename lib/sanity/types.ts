@@ -1,4 +1,5 @@
-import type { Image as SanityImage } from 'sanity'
+import type { SanityImageProjection } from './image'
+import type { PortableTextBlockLike } from '@/lib/portable-text'
 
 /* ── Site Settings ── */
 export interface SanitySiteSettings {
@@ -22,8 +23,8 @@ export interface SanityEvent {
   doorsOpen?: string
   supportText?: string
   lineup?: SanityArtist[]
-  description?: unknown // block content
-  image: SanityImage
+  description?: PortableTextBlockLike[]
+  image: SanityImageProjection
   ticketUrl?: string
   ticketPrice?: number
   ticketStatus: 'onSale' | 'lowTickets' | 'soldOut' | 'atDoor' | 'past'
@@ -37,9 +38,9 @@ export interface SanityArtist {
   name: string
   slug: string
   role: 'resident' | 'guest'
-  description?: unknown // block content
+  description?: PortableTextBlockLike[]
   tags?: string[]
-  image: SanityImage
+  image: SanityImageProjection
   instagram?: string
   soundcloud?: string
 }
@@ -48,14 +49,14 @@ export interface SanityArtist {
 export interface SanityFAQ {
   _id: string
   question: string
-  answer: unknown // block content
+  answer?: PortableTextBlockLike[]
   order: number
 }
 
 /* ── Gallery ── */
 export interface SanityGalleryImage {
   _id: string
-  image: SanityImage
+  image: SanityImageProjection
   size: 'tall' | 'short'
   order: number
 }
@@ -65,28 +66,28 @@ export interface SanityVenuePage {
   _id: 'venuePage'
   heroHeadline: string
   heroSubtitle?: string
-  heroImage: SanityImage
+  heroImage: SanityImageProjection
   historyLabel?: string
-  historyBody?: unknown // block content
+  historyBody?: PortableTextBlockLike[]
   stats?: { value: string; label: string }[]
-  photoGrid?: SanityImage[]
-  mapFallbackImage?: SanityImage
+  photoGrid?: SanityImageProjection[]
+  mapFallbackImage?: SanityImageProjection
   ctaLabel?: string
 }
 
 /* ── Sound System Page (singleton) ── */
 export interface SanitySoundSystemPage {
   _id: 'soundSystemPage'
-  heroImage: SanityImage
+  heroImage: SanityImageProjection
   heroEyebrow?: string
   heroHeadline: string
   heroQuote?: string
   heroDescription?: string
   historyLabel?: string
-  historyBody?: unknown // block content
-  historyImage?: SanityImage
+  historyBody?: PortableTextBlockLike[]
+  historyImage?: SanityImageProjection
   specs?: { value: string; label: string }[]
   subwayQuote?: string
-  subwayImage?: SanityImage
+  subwayImage?: SanityImageProjection
   ctaLabel?: string
 }
