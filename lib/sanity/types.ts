@@ -91,3 +91,17 @@ export interface SanitySoundSystemPage {
   subwayImage?: SanityImageProjection
   ctaLabel?: string
 }
+
+/* ── Ticket (order record — created by the Stripe webhook, _id = PaymentIntent ID) ── */
+export interface SanityTicket {
+  _id: string
+  eventSlug: string
+  eventTitle: string
+  email: string
+  amount: number
+  currency: string
+  orderRef: string
+  status: 'paid' | 'refunded'
+  purchasedAt: string
+  emailSentAt?: string
+}
