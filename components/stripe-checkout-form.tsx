@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useMemo, type FormEvent } from 'react'
 import {
   Elements,
   PaymentElement,
@@ -8,7 +8,7 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import type { StripeElementsOptions } from '@stripe/stripe-js'
+import type { StripeElementsOptions, StripePaymentElementOptions } from '@stripe/stripe-js'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
@@ -31,6 +31,23 @@ function CheckoutForm({ clientSecret, price, onSuccess }: CheckoutFormProps) {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  // Email committed on blur feeds the Payment Element's billing prefill and
+  // lets Stripe Link recognize returning buyers (verified saved emails).
+  // Committed on blur only: changing PaymentElement options REMOUNTS the
+  // element, so per-keystroke updates would drop card-field focus.
+  const [prefillEmail, setPrefillEmail] = useState('')
+
+  function commitEmailPrefill() {
+    const trimmed = email.trim()
+    if (EMAIL_RE.test(trimmed) && trimmed !== prefillEmail) {
+      setPrefillEmail(trimmed)
+    }
+  }
+
+  const paymentOptions = useMemo<StripePaymentElementOptions>(
+    () => ({ defaultValues: { billingDetails: { email: prefillEmail || undefined } } }),
+    [prefillEmail]
+  )
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -92,12 +109,13 @@ function CheckoutForm({ clientSecret, price, onSuccess }: CheckoutFormProps) {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onBlur={commitEmailPrefill}
           placeholder="your@email.com"
           className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
         />
       </div>
 
-      <PaymentElement />
+      <PaymentElement options={paymentOptions} />
 
       {error && <p className="text-sm text-primary">{error}</p>}
       <button
