@@ -17,9 +17,18 @@ export interface PaymentResult {
   status: string
 }
 
-function CheckoutForm({ onSuccess }: { onSuccess: (result: PaymentResult) => void }) {
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+interface CheckoutFormProps {
+  clientSecret: string
+  price: string
+  onSuccess: (result: PaymentResult) => void
+}
+
+function CheckoutForm({ clientSecret, price, onSuccess }: CheckoutFormProps) {
   const stripe = useStripe()
   const elements = useElements()
+  const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -27,8 +36,29 @@ function CheckoutForm({ onSuccess }: { onSuccess: (result: PaymentResult) => voi
     e.preventDefault()
     if (!stripe || !elements) return
 
+    const trimmedEmail = email.trim()
+    if (!EMAIL_RE.test(trimmedEmail)) {
+      setError('Enter a valid email so we can send your ticket.')
+      return
+    }
+
     setLoading(true)
     setError('')
+
+    // Attach the email to the PaymentIntent BEFORE confirming — the webhook
+    // sends the ticket to metadata.customerEmail once payment succeeds.
+    try {
+      const res = await fetch('/api/payment/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientSecret, email: trimmedEmail }),
+      })
+      if (!res.ok) throw new Error()
+    } catch {
+      setError('Could not save your email — please try again.')
+      setLoading(false)
+      return
+    }
 
     const { error: submitError, paymentIntent } = await stripe.confirmPayment({
       elements,
@@ -51,14 +81,31 @@ function CheckoutForm({ onSuccess }: { onSuccess: (result: PaymentResult) => voi
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <label htmlFor="checkout-email" className="text-label-medium text-bass-grey-light">
+          Where should we send your ticket?
+        </label>
+        <input
+          id="checkout-email"
+          type="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="h-14 px-5 rounded-lg bg-bass-dark border border-bass-border text-nav text-bass-grey-med placeholder:text-bass-grey-med focus-visible:border-primary focus-visible:ring-0"
+        />
+      </div>
+
       <PaymentElement />
+
       {error && <p className="text-sm text-primary">{error}</p>}
       <button
         type="submit"
         disabled={!stripe || loading}
         className="h-14 rounded-none bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
       >
-        {loading ? 'Processing…' : 'Pay'}
+        {loading ? 'Processing…' : `Pay ${price}`}
       </button>
     </form>
   )
@@ -66,21 +113,19 @@ function CheckoutForm({ onSuccess }: { onSuccess: (result: PaymentResult) => voi
 
 interface Props {
   clientSecret: string
+  price: string
   onSuccess: (result: PaymentResult) => void
 }
 
 const elementsOptions = (clientSecret: string): StripeElementsOptions => ({
   clientSecret,
   appearance: { theme: 'night' },
-  // @ts-expect-error — `fields` is supported by Stripe.js at runtime but
-  // missing from the installed @stripe/stripe-js typings
-  fields: { billingDetails: { email: 'auto' } },
 })
 
-export function StripeCheckoutForm({ clientSecret, onSuccess }: Props) {
+export function StripeCheckoutForm({ clientSecret, price, onSuccess }: Props) {
   return (
     <Elements stripe={stripePromise} options={elementsOptions(clientSecret)}>
-      <CheckoutForm onSuccess={onSuccess} />
+      <CheckoutForm clientSecret={clientSecret} price={price} onSuccess={onSuccess} />
     </Elements>
   )
 }

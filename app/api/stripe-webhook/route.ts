@@ -45,7 +45,11 @@ export async function POST(request: Request) {
 
   const intent = event.data.object as Stripe.PaymentIntent
 
-  let email: string | null | undefined = intent.receipt_email
+  // Email lives in metadata.customerEmail (attached at checkout). Deliberately
+  // not receipt_email — that would make Stripe send its own generic receipt
+  // alongside our branded ticket email. receipt_email/billing details remain
+  // as fallbacks for purchases made before this flow existed.
+  let email: string | null | undefined = intent.metadata?.customerEmail || intent.receipt_email
   if (!email && intent.payment_method) {
     try {
       const stripe = getStripe()
