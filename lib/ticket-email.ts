@@ -61,7 +61,8 @@ export async function sendTicketEmail(email: string, eventSlug: string, pricePai
 
       <p style="font-size:14px;color:#666666;margin:0">We'll see you there.<br>— BASSMENT</p>
       <p style="font-size:12px;color:#555555;margin:24px 0 0;border-top:1px solid #2a2a2a;padding-top:16px">
-        Wrong email or didn't receive this? Contact us at
+        Didn't get your ticket? <a href="https://clubbassment.com/tickets/resend" style="color:#999999">Resend it</a>.
+        Wrong email? Contact us at
         <a href="https://clubbassment.com/contact" style="color:#999999">clubbassment.com/contact</a>
         with your order reference <strong>${orderRef}</strong>.
       </p>

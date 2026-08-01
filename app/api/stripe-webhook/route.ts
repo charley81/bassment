@@ -60,7 +60,8 @@ export async function POST(request: Request) {
       console.warn('Could not retrieve payment method for email')
     }
   }
-  const email = resolveTicketRecipient(intent, billingEmail)
+  // Stored lowercase so the self-serve resend lookup is case-insensitive.
+  const email = resolveTicketRecipient(intent, billingEmail)?.toLowerCase() ?? null
   const eventSlug = intent.metadata?.eventSlug
   const amount = intent.amount
 
