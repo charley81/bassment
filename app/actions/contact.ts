@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { getResend, RESEND_FROM } from "@/lib/resend";
+import { getResend, getFromAddress } from "@/lib/resend";
 
-const CONTACT_TO = process.env.RESEND_CONTACT_EMAIL || "hello@bassment.com";
+const CONTACT_TO = process.env.RESEND_CONTACT_EMAIL || "hello@clubbassment.com";
 
 // Server-side validation — client-side zod is UX, this is the real gate.
 const schema = z.object({
@@ -41,7 +41,7 @@ export async function sendContactMessage(
 
   try {
     await getResend().emails.send({
-      from: RESEND_FROM,
+      from: getFromAddress(),
       to: CONTACT_TO,
       subject: `Contact: ${parsed.data.name}`,
       text: `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\n\nMessage:\n${parsed.data.message}`,

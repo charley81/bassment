@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { getResend, RESEND_FROM } from "@/lib/resend";
+import { getResend, getFromAddress } from "@/lib/resend";
 
 const CONTACT_TO = process.env.RESEND_CONTACT_EMAIL || "hello@bassment.com";
 
@@ -30,7 +30,7 @@ export async function subscribeNewsletter(
 
   try {
     await getResend().emails.send({
-      from: RESEND_FROM,
+      from: getFromAddress(),
       to: CONTACT_TO,
       subject: "New Newsletter Subscription",
       text: `New subscriber: ${parsed.data.email}`,
