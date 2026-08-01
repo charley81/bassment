@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion'
 
 interface Props {
   target: number
@@ -13,13 +14,10 @@ export function CountUp({ target, suffix = '', prefix = '', duration = 1500 }: P
   const ref = useRef<HTMLSpanElement>(null)
   const [count, setCount] = useState(0)
   const started = useRef(false)
+  const prefersReduced = usePrefersReducedMotion()
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) {
-      setCount(target)
-      return
-    }
+    if (prefersReduced) return
 
     const el = ref.current
     if (!el || started.current) return
@@ -46,11 +44,11 @@ export function CountUp({ target, suffix = '', prefix = '', duration = 1500 }: P
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [target, duration])
+  }, [target, duration, prefersReduced])
 
   return (
     <span ref={ref}>
-      {prefix}{count}{suffix}
+      {prefix}{prefersReduced ? target : count}{suffix}
     </span>
   )
 }
