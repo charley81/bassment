@@ -10,17 +10,25 @@ interface Props {
 
 type Verification = 'verified' | 'failed' | 'unknown'
 
-async function verifyPayment(paymentIntentId?: string, redirectStatus?: string): Promise<Verification> {
-  if (!paymentIntentId || !redirectStatus) return 'unknown'
-  if (redirectStatus !== 'succeeded') return 'failed'
+interface VerificationResult {
+  status: Verification
+  email?: string
+}
+
+async function verifyPayment(paymentIntentId?: string, redirectStatus?: string): Promise<VerificationResult> {
+  if (!paymentIntentId || !redirectStatus) return { status: 'unknown' }
+  if (redirectStatus !== 'succeeded') return { status: 'failed' }
 
   try {
     const stripe = getStripe()
     const intent = await stripe.paymentIntents.retrieve(paymentIntentId)
-    return intent.status === 'succeeded' ? 'verified' : 'failed'
+    const email = intent.metadata?.customerEmail || intent.receipt_email || undefined
+    return intent.status === 'succeeded'
+      ? { status: 'verified', email }
+      : { status: 'failed' }
   } catch (err) {
     console.error('Could not verify payment intent:', err)
-    return 'unknown'
+    return { status: 'unknown' }
   }
 }
 
@@ -43,7 +51,14 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
   const { slug } = await params
   const { payment_intent, redirect_status } = await searchParams
   const verification = await verifyPayment(payment_intent, redirect_status)
-  const content = CONTENT[verification]
+  const content = CONTENT[verification.status]
+  // Verified purchases name the exact address the ticket was sent to, so
+  // buyers can catch a typo immediately instead of waiting for an email
+  // that is never coming.
+  const body =
+    verification.status === 'verified' && verification.email
+      ? `Your ticket has been purchased — it's on its way to ${verification.email}.`
+      : content.body
 
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
@@ -52,7 +67,7 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
         <div className="flex flex-col items-center gap-8 max-w-480 text-center">
           <div className="flex flex-col gap-4">
             <h1 className="text-h2 text-bass-white">{content.heading}</h1>
-            <p className="text-body text-bass-grey-light">{content.body}</p>
+            <p className="text-body text-bass-grey-light">{body}</p>
           </div>
           <div className="flex gap-4">
             <Link
