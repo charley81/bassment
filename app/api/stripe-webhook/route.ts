@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
-import { sendTicketEmail } from '@/lib/ticket-email'
+import { sendTicketEmail, resolveTicketRecipient } from '@/lib/ticket-email'
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
@@ -45,20 +45,18 @@ export async function POST(request: Request) {
 
   const intent = event.data.object as Stripe.PaymentIntent
 
-  // Email lives in metadata.customerEmail (attached at checkout). Deliberately
-  // not receipt_email — that would make Stripe send its own generic receipt
-  // alongside our branded ticket email. receipt_email/billing details remain
-  // as fallbacks for purchases made before this flow existed.
-  let email: string | null | undefined = intent.metadata?.customerEmail || intent.receipt_email
-  if (!email && intent.payment_method) {
+  let billingEmail: string | null | undefined
+  if (!intent.metadata?.customerEmail && !intent.receipt_email && intent.payment_method) {
     try {
       const stripe = getStripe()
       const pm = await stripe.paymentMethods.retrieve(intent.payment_method as string)
-      email = pm.billing_details?.email ?? undefined
+      billingEmail = pm.billing_details?.email
     } catch {
       console.warn('Could not retrieve payment method for email')
     }
   }
+  // Precedence: metadata.customerEmail → receipt_email → billing details.
+  const email = resolveTicketRecipient(intent, billingEmail)
   const eventSlug = intent.metadata?.eventSlug
   const amount = intent.amount
 

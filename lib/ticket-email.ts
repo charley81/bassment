@@ -8,6 +8,22 @@ import { groq } from 'next-sanity'
 
 const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0] { title, date }`
 
+/* Who gets the ticket email. Pure decision, extracted from the webhook route
+   for testability. Precedence: metadata.customerEmail (attached at checkout)
+   → receipt_email (legacy purchases / future Stripe receipts) → billing
+   details email (wallet payments) → null (nothing to deliver to). */
+export interface TicketIntentLike {
+  metadata?: Record<string, string | undefined> | null
+  receipt_email?: string | null
+}
+
+export function resolveTicketRecipient(
+  intent: TicketIntentLike,
+  billingEmail?: string | null
+): string | null {
+  return intent.metadata?.customerEmail || intent.receipt_email || billingEmail || null
+}
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
     weekday: 'long',
