@@ -18,30 +18,3 @@ export interface Event {
   support: string
   image: string
 }
-
-export interface FaqItem {
-  question: string
-  answer: string
-}
-
-export interface VenueStat {
-  value: string
-  label: string
-}
-
-export interface GalleryImage {
-  src: string
-  size?: 'tall' | 'short'
-}
-
-export interface SoundSpec {
-  value: string
-  label: string
-}
-
-export interface ResidentDj {
-  name: string
-  description: string
-  tags: string[]
-  image: string
-}
