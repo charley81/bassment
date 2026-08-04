@@ -27,7 +27,7 @@ export function AddToCalendar({ title, date, doorsOpen, orderRef, slug }: Props)
     <button
       type="button"
       onClick={download}
-      className="inline-flex h-14 items-center justify-center rounded-none px-8 bg-bass-grey-dark border border-bass-grey-med text-btn text-bass-white hover:border-primary transition-colors"
+      className="inline-flex h-14 items-center justify-center rounded-lg px-8 bg-bass-grey-dark border border-bass-grey-med text-btn text-bass-white hover:border-primary transition-colors"
     >
       Add to Calendar
     </button>

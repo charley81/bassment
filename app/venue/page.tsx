@@ -40,7 +40,7 @@ export default async function Venue() {
         address={settings?.venueAddress}
       />
       <section className="h-[150px] md:h-[216px] flex items-center justify-center">
-        <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-10">
+        <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-lg bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-10">
           {venue?.ctaLabel || "See What's On →"}
         </Link>
       </section>

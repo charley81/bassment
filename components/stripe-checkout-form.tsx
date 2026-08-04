@@ -121,7 +121,7 @@ function CheckoutForm({ clientSecret, price, onSuccess }: CheckoutFormProps) {
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="h-14 rounded-none bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
+        className="h-14 rounded-lg bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
       >
         {loading ? 'Processing…' : `Pay ${price}`}
       </button>

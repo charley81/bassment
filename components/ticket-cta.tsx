@@ -17,7 +17,7 @@ const STATUS_LABELS: Record<string, string> = {
 export function TicketCta({ status, slug, ticketPrice, className = '' }: Props) {
   if (status === 'past') return null
 
-  const baseClass = 'inline-flex h-14 items-center justify-center rounded-none text-btn w-fit transition-colors px-8'
+  const baseClass = 'inline-flex h-14 items-center justify-center rounded-lg text-btn w-fit transition-colors px-8'
   const label = STATUS_LABELS[status || 'onSale'] || 'Get Tickets'
   const price = typeof ticketPrice === 'number' && ticketPrice > 0
     ? ` — $${(ticketPrice / 100).toFixed(2)}`

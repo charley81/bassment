@@ -48,8 +48,9 @@ export function ResidentDjsClient({ djs }: Props) {
                   alt={dj.name}
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
-                  className="object-cover"
+                  className="object-cover grayscale"
                 />
+                <div className="absolute inset-0 bg-primary/10 z-1" />
               </div>
               <h3 className="text-subtitle-center text-bass-white">{dj.name}</h3>
               <p className="text-body text-center text-bass-grey-light">

@@ -28,8 +28,9 @@ export function SoundHistory({ label, body, title, image }: Props) {
           ))}
         </div>
       </div>
-      <div className="w-full md:w-lg h-[300px] md:h-[342px] relative shrink-0">
-        <Image src={image} alt="" fill sizes="(max-width: 768px) 100vw, 512px" className="object-cover" />
+      <div className="w-full md:w-lg h-[300px] md:h-[342px] relative shrink-0 rounded-lg overflow-hidden">
+        <Image src={image} alt="" fill sizes="(max-width: 768px) 100vw, 512px" className="object-cover grayscale" />
+        <div className="absolute inset-0 bg-primary/10 z-1" />
       </div>
     </section>
   );
