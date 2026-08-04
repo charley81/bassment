@@ -13,8 +13,9 @@ export function VenueTeaser() {
             alt="Venue"
             fill
             sizes="(max-width: 768px) 100vw, 616px"
-            className="object-cover"
+            className="object-cover grayscale"
           />
+          <div className="absolute inset-0 bg-primary/10 z-1" />
         </div>
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col gap-1 md:gap-2">

@@ -11,7 +11,7 @@ export function HomeHero() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover"
+        className="object-cover grayscale"
         priority
       />
       <div className="absolute inset-0 bg-primary/10 z-1" />
@@ -30,7 +30,7 @@ export function HomeHero() {
           </p>
           <Link
             href="/events"
-            className="inline-flex h-14 items-center justify-center rounded-none px-10 bg-bass-white text-btn text-bass-dark! w-fit transition-colors hover:bg-bass-grey-light!"
+            className="inline-flex h-14 items-center justify-center rounded-lg px-10 bg-bass-white text-btn text-bass-dark! w-fit transition-colors hover:bg-bass-grey-light!"
           >
             {heroData.cta}
           </Link>

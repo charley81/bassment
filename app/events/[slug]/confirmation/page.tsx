@@ -103,13 +103,13 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
           <div className="flex gap-4">
             <Link
               href={`/events/${slug}`}
-              className="inline-flex h-14 items-center justify-center rounded-none px-8 bg-bass-grey-dark border border-bass-grey-med text-btn text-bass-white hover:border-primary transition-colors"
+              className="inline-flex h-14 items-center justify-center rounded-lg px-8 bg-bass-grey-dark border border-bass-grey-med text-btn text-bass-white hover:border-primary transition-colors"
             >
               Back to Event
             </Link>
             <Link
               href="/events"
-              className="inline-flex h-14 items-center justify-center rounded-none px-8 bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors"
+              className="inline-flex h-14 items-center justify-center rounded-lg px-8 bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors"
             >
               More Events
             </Link>

@@ -33,15 +33,16 @@ export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketSta
       </Link>
 
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-        <div className="w-full md:w-[739px] h-[500px] md:h-[990px] relative shrink-0">
+        <div className="w-full md:w-[739px] h-[500px] md:h-[990px] relative shrink-0 rounded-lg overflow-hidden">
           <Image
             src={event.image}
             alt={event.title}
             fill
             sizes="(max-width: 768px) 100vw, 739px"
-            className="object-cover"
+            className="object-cover grayscale"
             priority
           />
+          <div className="absolute inset-0 bg-primary/10 z-1" />
         </div>
         <div className="flex flex-col gap-6 md:gap-8 flex-1">
           <div className="flex flex-col gap-6 md:gap-8">

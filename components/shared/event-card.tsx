@@ -30,9 +30,12 @@ export function EventCard({
         src={event.image}
         alt={event.title}
         fill
-        className="object-cover"
+        className="object-cover grayscale"
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
       />
+
+      {/* Primary tint overlay */}
+      <div className="absolute inset-0 bg-primary/10 z-1" />
 
       {/* Gradient overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-[180px] z-1 bg-gradient-to-b from-transparent to-black/85" />

@@ -23,7 +23,8 @@ export default async function Gallery() {
             {items.length > 0 ? (
               items.map((item, i) => (
                 <div key={item._id} className={`relative rounded-lg overflow-hidden mb-4 break-inside-avoid ${item.size === 'tall' ? 'h-[500px]' : 'h-300'}`}>
-                  <Image src={sanityImageUrl(item.image)} alt={`Gallery ${i + 1}`} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image src={sanityImageUrl(item.image)} alt={`Gallery ${i + 1}`} fill className="object-cover grayscale" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <div className="absolute inset-0 bg-primary/10 z-1" />
                 </div>
               ))
             ) : (

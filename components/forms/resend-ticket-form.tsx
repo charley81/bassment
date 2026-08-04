@@ -63,7 +63,7 @@ export function ResendTicketForm() {
       <button
         type="submit"
         disabled={pending}
-        className="h-14 rounded-md bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
+        className="h-14 rounded-lg bg-primary text-btn text-bass-white hover:bg-primary/80 transition-colors disabled:opacity-50"
       >
         {pending ? 'SENDING...' : 'RESEND MY TICKET'}
       </button>

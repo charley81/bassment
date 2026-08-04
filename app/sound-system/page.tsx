@@ -35,7 +35,7 @@ export default async function SoundSystem() {
         image={page ? sanityImageUrl(page.subwayImage) : ''}
       />
       <section className="py-20 md:py-[160px] flex justify-center">
-        <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-none bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
+        <Link href="/events" className="inline-flex h-14 items-center justify-center rounded-lg bg-primary text-btn text-bass-white w-fit transition-colors hover:bg-primary/80 px-8">
           {page?.ctaLabel || 'Experience It Yourself'}
         </Link>
       </section>

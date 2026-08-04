@@ -20,15 +20,16 @@ export async function FeaturedEvent() {
     <section className="py-20 md:py-120 px-6 md:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
-        <div className="flex flex-col md:flex-row rounded overflow-hidden">
+        <div className="flex flex-col md:flex-row rounded-lg overflow-hidden">
           <div className="w-full md:w-3xl h-[400px] md:h-[1028px] relative shrink-0">
             <Image
               src={imageUrl}
               alt={event.title}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
+              className="object-cover grayscale"
             />
+            <div className="absolute inset-0 bg-primary/10 z-1" />
           </div>
           <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 p-6 md:p-12">
             <div className="flex flex-col gap-6 md:gap-8">

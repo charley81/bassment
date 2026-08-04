@@ -33,9 +33,10 @@ export function VenuePhotoGrid({ images }: Props) {
                   src={src}
                   alt={`Venue photo ${ri * 3 + i + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover grayscale"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
+                <div className="absolute inset-0 bg-primary/10 z-1" />
               </div>
             ))}
           </div>
