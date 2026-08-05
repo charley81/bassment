@@ -1,7 +1,8 @@
 /*
  * BASSMENT — Event Card
- * Source: Figma node "event-card" #85:67
- * Responsive: fills grid column width, fixed heights
+ * White card: image on top (native colors, no tint), white bottom fade,
+ * dark info strip with primary-red accents. No show title — the flyer
+ * artwork carries it.
  */
 import Image from "next/image";
 import Link from "next/link";
@@ -20,35 +21,35 @@ export function EventCard({
     <Link
       href={`/events/${event.id}`}
       className={`
-        group relative flex flex-col overflow-hidden rounded-lg
-        h-[300px] md:h-[380px]
+        group relative flex flex-col overflow-hidden rounded-lg bg-white
+        h-[300px] md:h-[380px] transition-colors
+        hover:bg-bass-grey-light
         ${faded ? "opacity-50" : ""}
       `}
     >
-      {/* Event image */}
-      <Image
-        src={event.image}
-        alt={event.title}
-        fill
-        className="object-cover grayscale"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-      />
+      {/* Event image — flyer artwork keeps its native color */}
+      <div className="relative flex-1 min-h-0">
+        <Image
+          src={event.image}
+          alt={event.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
 
-      {/* Primary tint overlay */}
-      <div className="absolute inset-0 bg-primary/10 z-1" />
+        {/* Bottom fade into the white body (no red tint) */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white z-1" />
+      </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-[180px] z-1 bg-gradient-to-b from-transparent to-black/85" />
-
-      {/* Text overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-2">
-        <span className="text-heading text-bass-white leading-tight">
-          {event.title}
-        </span>
-        <div className="flex justify-between">
-          <span className="text-nav text-bass-grey-light">{event.date}</span>
-          <span className="text-nav text-bass-grey-light">{event.support}</span>
+      {/* Info strip — dark text, red accents, no title */}
+      <div className="relative z-2 px-4 md:px-5 pt-3 pb-4 md:pb-5 flex flex-col gap-2.5">
+        <div className="flex justify-between items-baseline gap-3">
+          <span className="text-nav font-bold text-primary">{event.date}</span>
+          <span className="text-nav text-right text-bass-dark">
+            {event.support}
+          </span>
         </div>
+        <div className="h-[3px] w-10 bg-primary" />
       </div>
     </Link>
   );
