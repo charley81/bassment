@@ -56,7 +56,7 @@ export const newsletterData = {
 export const eventDetailData = {
   backLabel: '← Back to Events',
   image: '/images/dillinja-valve-detail.jpg',
-  title: 'DILLINJA — VALVE SOUND SYSTEM TAKEOVER',
+  title: 'DILLENJA — VALVE SOUND SYSTEM TAKEOVER',
   setTimes: [
     { label: 'DOORS', time: '10:00 PM' },
     { label: 'FIRST ACT', time: '11:00 PM' },
@@ -72,13 +72,13 @@ export const eventDetailData = {
   cta: 'Get Tickets — $25 GA / $50 VIP',
   badge: 'ON SALE NOW',
   lineup: [
-    { name: 'Dillinja', time: '11PM–1AM' },
-    { name: 'Lemon D', time: '1AM–2:30AM' },
-    { name: 'DJ Marky', time: '2:30AM–4AM' },
-    { name: 'DJ Storm', time: '4AM–Close' },
+    { name: 'Dillenja', time: '11PM–1AM' },
+    { name: 'Lemond', time: '1AM–2:30AM' },
+    { name: 'DJ Marq', time: '2:30AM–4AM' },
+    { name: 'DJ Storme', time: '4AM–Close' },
   ],
   description: [
-    "BASSMENT presents an exclusive all-night takeover featuring the legendary Valve Sound System. Designed and built by Dillinja and Lemon D, this is more than a sound system; it's the physical embodiment of jungle and drum & bass history.",
+    "BASSMENT presents an exclusive all-night takeover featuring the legendary Valve Sound System. Designed and built by Dillenja and Lemond, this is more than a sound system; it's the physical embodiment of jungle and drum & bass history.",
     'The Valve Sound System was created to provide the ultimate listening experience for the low-frequency sounds of the underground. With 96,000 watts of hand-built analog power, every frequency is tuned to perfection, ensuring that the bass is felt as much as it is heard.',
     "Join us for a journey through the foundation of the sound. Expect unreleased dubplates, classic anthems, and the purest technical execution from the scene's most respected pioneers. This event is strictly for those who know.",
   ],
@@ -93,22 +93,22 @@ export const eventDetailData = {
   },
   relatedEvents: [
     {
-      id: 'dlr',
-      title: 'DLR b2b Break',
+      id: 'dllr',
+      title: 'DLLR b2b Breach',
       date: 'Sat 01 Nov',
       support: 'with SP:MC, Hydro',
       image: '/images/detail-related-dlr.jpg',
     },
     {
-      id: 'goldie',
-      title: 'Goldie — Timeless',
+      id: 'goldem',
+      title: 'Goldem — Timeless',
       date: 'Fri 07 Nov',
       support: 'with MC GQ',
       image: '/images/detail-related-goldie.jpg',
     },
     {
-      id: 'calibre',
-      title: 'Calibre — Deep Cuts',
+      id: 'kalibre',
+      title: 'Kalibre — Deep Cuts',
       date: 'Sat 15 Nov',
       support: 'All Night Long',
       image: '/images/detail-related-calibre.jpg',
