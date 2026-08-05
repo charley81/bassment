@@ -37,6 +37,12 @@ describe('POST /api/revalidate', () => {
     expect(mocks.revalidatePathMock).toHaveBeenCalledWith('/', 'layout')
   })
 
+  it('accepts a query secret with an empty body (bodyless webhooks)', async () => {
+    const res = await POST(req('https://clubbassment.com/api/revalidate?secret=test-secret'))
+    expect(res.status).toBe(200)
+    expect(mocks.revalidatePathMock).toHaveBeenCalledWith('/', 'layout')
+  })
+
   it('accepts a valid secret in the JSON body', async () => {
     const res = await POST(req('https://clubbassment.com/api/revalidate', { secret: 'test-secret' }))
     expect(res.status).toBe(200)

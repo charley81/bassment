@@ -42,6 +42,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# generated flyer outputs (sources live in scripts/, render on demand)
+/flyers/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

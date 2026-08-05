@@ -3,7 +3,14 @@ import { type NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
+    // The body is the Sanity webhook payload — optional when the secret
+    // rides in the URL query, so tolerate a missing/empty body.
+    let body: Record<string, unknown> = {}
+    try {
+      body = await request.json()
+    } catch {
+      // no-op: bodyless callers authenticate via ?secret=
+    }
 
     // Fail closed: without a configured secret there is NO way to
     // authenticate callers, so refuse rather than allow open revalidation.
