@@ -2,10 +2,7 @@
  * contact, 404). Page content (events, FAQs, gallery, venue, sound system)
  * lives in Sanity — see lib/sanity/. */
 
-import type {
-  NavItem,
-  SocialLink,
-} from '@/lib/types'
+import type { NavItem, SocialLink } from '@/lib/types'
 
 /* ── Shared: Navigation + Social ── */
 export const navItems: NavItem[] = [
@@ -55,7 +52,6 @@ export const newsletterData = {
 /* ── Event Detail Page ── */
 export const eventDetailData = {
   backLabel: '← Back to Events',
-  image: '/images/dillinja-valve-detail.jpg',
   title: 'DILLENJA — VALVE SOUND SYSTEM TAKEOVER',
   setTimes: [
     { label: 'DOORS', time: '10:00 PM' },
@@ -91,35 +87,9 @@ export const eventDetailData = {
     ],
     faqLink: 'View full FAQ →',
   },
-  relatedEvents: [
-    {
-      id: 'dllr',
-      title: 'DLLR b2b Breach',
-      date: 'Sat 01 Nov',
-      support: 'with SP:MC, Hydro',
-      image: '/images/detail-related-dlr.jpg',
-    },
-    {
-      id: 'goldem',
-      title: 'Goldem — Timeless',
-      date: 'Fri 07 Nov',
-      support: 'with MC GQ',
-      image: '/images/detail-related-goldie.jpg',
-    },
-    {
-      id: 'kalibre',
-      title: 'Kalibre — Deep Cuts',
-      date: 'Sat 15 Nov',
-      support: 'All Night Long',
-      image: '/images/detail-related-calibre.jpg',
-    },
-  ],
 }
 
-/* ── Sound System Page ── */
-
 /* ── Venue Page ── */
-
 export const venuePlanData = {
   title: 'PLAN YOUR VISIT',
   items: [
@@ -130,14 +100,9 @@ export const venuePlanData = {
     '• Coat check: $5 cash or Venmo.',
     '• No large bags. No professional cameras without approval.',
   ],
-  mapImage: '/images/venue-map.jpg',
   mapLabel: '70 PINE STREET, NEW YORK, NY 10005',
   cta: "See What's On →",
 }
-
-/* ── Gallery Page ── */
-
-/* ── FAQ Page ── */
 
 /* ── 404 Page ── */
 export const notFoundData = {
