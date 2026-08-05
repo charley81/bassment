@@ -1,7 +1,7 @@
 /*
  * BASSMENT — Event Card
- * Source: Figma node "event-card" #85:67
- * Responsive: fills grid column width, fixed heights
+ * Just the event artwork: full poster in its native aspect ratio,
+ * rounded, with a subtle shadow for separation on the dark background.
  */
 import Image from "next/image";
 import Link from "next/link";
@@ -20,35 +20,20 @@ export function EventCard({
     <Link
       href={`/events/${event.id}`}
       className={`
-        group relative flex flex-col overflow-hidden rounded-lg
-        h-[300px] md:h-[380px]
+        group relative block overflow-hidden rounded-lg
+        shadow-[0_4px_14px_rgba(9,1,2,0.35)]
         ${faded ? "opacity-50" : ""}
       `}
     >
-      {/* Event image */}
-      <Image
-        src={event.image}
-        alt={event.title}
-        fill
-        className="object-cover grayscale"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-      />
-
-      {/* Primary tint overlay */}
-      <div className="absolute inset-0 bg-primary/10 z-1" />
-
-      {/* Gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-[180px] z-1 bg-gradient-to-b from-transparent to-black/85" />
-
-      {/* Text overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 pb-5 flex flex-col gap-1.5 z-2">
-        <span className="text-heading text-bass-white leading-tight">
-          {event.title}
-        </span>
-        <div className="flex justify-between">
-          <span className="text-nav text-bass-grey-light">{event.date}</span>
-          <span className="text-nav text-bass-grey-light">{event.support}</span>
-        </div>
+      {/* Full artwork, aspect-matched to the 768x1376 posters */}
+      <div className="relative w-full aspect-[768/1376]">
+        <Image
+          src={event.image}
+          alt={event.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        />
       </div>
     </Link>
   );
