@@ -25,12 +25,11 @@ export function EventCard({
         shadow-[0_4px_14px_rgba(9,1,2,0.35)]
         transition-shadow duration-300
         hover:shadow-[0_10px_28px_rgba(9,1,2,0.55)]
-        h-[300px] md:h-[380px]
         ${faded ? "opacity-50" : ""}
       `}
     >
-      {/* Event image — artwork keeps its native color */}
-      <div className="relative flex-1 min-h-0">
+      {/* Event image — aspect-matched to the 768x1376 artwork so the whole poster shows */}
+      <div className="relative w-full aspect-[768/1376]">
         <Image
           src={event.image}
           alt={event.title}
