@@ -12,7 +12,12 @@ export async function POST(request: NextRequest) {
       console.error('SANITY_WEBHOOK_SECRET not configured')
       return NextResponse.json({ message: 'Revalidation not configured' }, { status: 500 })
     }
-    if (body.secret !== webhookSecret) {
+    // Accept the secret from the URL query (standard Sanity webhook
+    // pattern — the secret rides in the configured webhook URL) or from
+    // the JSON body (legacy callers).
+    const secret =
+      request.nextUrl.searchParams.get('secret') ?? body.secret
+    if (secret !== webhookSecret) {
       return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
     }
 
