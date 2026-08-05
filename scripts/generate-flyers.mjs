@@ -126,7 +126,6 @@ function renderFlyer({ title, supportText, date, doorsOpen, slug, featured }, se
   <text x="80" y="160" font-size="18" letter-spacing="6" fill="#D31F28">MANHATTAN — UNDERGROUND SOUND SYSTEM</text>
   <text x="1120" y="110" text-anchor="end" font-size="18" letter-spacing="4" fill="#7A6B6C">EST. 2025</text>
   <text x="1120" y="160" text-anchor="end" font-size="18" letter-spacing="4" fill="#7A6B6C">40.7075°N 74.0087°W</text>
-  <rect x="80" y="200" width="1040" height="6" fill="#D31F28"/>
 
   <!-- Eyebrow -->
   <text x="80" y="300" font-size="20" letter-spacing="10" fill="#EDEDED">${featured ? 'BASSMENT PRESENTS — FEATURED' : 'BASSMENT PRESENTS'}</text>

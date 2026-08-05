@@ -37,8 +37,8 @@ export function EventCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
 
-        {/* Bottom fade into the white body (no red tint) */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white z-1" />
+        {/* Bottom fade into the white body (no red tint) — hugs just above the date text */}
+        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-transparent to-white z-1" />
       </div>
 
       {/* Info strip — dark text, red accents, no title */}
