@@ -78,8 +78,11 @@ pnpm install
 pnpm dev               # http://localhost:3000
 ```
 
-Sanity Studio is at `/studio`. CMS webhook → `/api/revalidate` refreshes ISR
-pages on content publish.
+Sanity Studio is at `/studio`. A CMS webhook posts to `/api/revalidate` on
+content publish, which refreshes ISR pages. On Netlify this on-demand
+revalidation requires a **`NETLIFY_PURGE_API_TOKEN`** env var (site-scoped
+or personal access token) — without it the origin re-renders but the CDN
+keeps serving stale pages until the ISR timer expires.
 
 ## Scripts
 

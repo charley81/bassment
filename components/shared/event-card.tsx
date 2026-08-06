@@ -9,21 +9,13 @@ import type { Event } from "@/lib/types";
 
 interface EventCardProps {
   event: Event;
-  faded?: boolean;
 }
 
-export function EventCard({
-  event,
-  faded = false,
-}: EventCardProps) {
+export function EventCard({ event }: EventCardProps) {
   return (
     <Link
       href={`/events/${event.id}`}
-      className={`
-        group relative block overflow-hidden rounded-lg
-        shadow-[0_4px_14px_rgba(9,1,2,0.35)]
-        ${faded ? "opacity-50" : ""}
-      `}
+      className="group relative block overflow-hidden rounded-lg shadow-[0_4px_14px_rgba(9,1,2,0.35)]"
     >
       {/* Full artwork, aspect-matched to the 768x1376 posters */}
       <div className="relative w-full aspect-[768/1376]">

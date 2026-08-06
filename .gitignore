@@ -42,8 +42,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-# generated flyer outputs (sources live in scripts/, render on demand)
-/flyers/
+# local event artwork sources (hosted in Sanity)
+/public/images/event-flyers/
 
 # typescript
 *.tsbuildinfo
