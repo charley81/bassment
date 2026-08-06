@@ -8,6 +8,7 @@ import { VenuePhotoGrid } from "@/components/sections/venue-photo-grid";
 import { VenueStats } from "@/components/sections/venue-stats";
 import { VenuePlan } from "@/components/sections/venue-plan";
 import { VenueMap } from "@/components/sections/venue-map";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { getVenuePage, getSiteSettings } from "@/lib/sanity/fetch";
 import { sanityImageUrl } from "@/lib/sanity/image";
 
@@ -31,7 +32,7 @@ export default async function Venue() {
         label={venue?.historyLabel}
         body={venue?.historyBody}
       />
-      <VenuePhotoGrid images={venue?.photoGrid} />
+      <ScrollReveal><VenuePhotoGrid images={venue?.photoGrid} /></ScrollReveal>
       <VenueStats stats={venue?.stats} />
       <VenuePlan />
       <VenueMap

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { Reveal } from "@/components/animations/reveal";
 import { getGallery } from "@/lib/sanity/fetch";
 import { sanityImageUrl } from "@/lib/sanity/image";
 
@@ -22,10 +23,12 @@ export default async function Gallery() {
           <div className="columns-1 md:columns-2 gap-4">
             {items.length > 0 ? (
               items.map((item, i) => (
-                <div key={item._id} className={`relative rounded-lg overflow-hidden mb-4 break-inside-avoid ${item.size === 'tall' ? 'h-[500px]' : 'h-300'}`}>
-                  <Image src={sanityImageUrl(item.image)} alt={`Gallery ${i + 1}`} fill className="object-cover grayscale" sizes="(max-width: 768px) 100vw, 50vw" />
+                <Reveal key={item._id} delay={i * 0.08} className={`mb-4 break-inside-avoid`}>
+                  <div className={`relative rounded-lg overflow-hidden group ${item.size === 'tall' ? 'h-[500px]' : 'h-300'}`}>
+                    <Image src={sanityImageUrl(item.image)} alt={`Gallery ${i + 1}`} fill className="object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
                     <div className="absolute inset-0 bg-primary/10 z-1" />
-                </div>
+                  </div>
+                </Reveal>
               ))
             ) : (
               <p className="text-body text-bass-grey-med py-12 col-span-full text-center">

@@ -6,6 +6,7 @@ import { SoundHero } from "@/components/sections/sound-hero";
 import { SoundHistory } from "@/components/sections/sound-history";
 import { SoundSpecs } from "@/components/sections/sound-specs";
 import { SoundQuote } from "@/components/sections/sound-quote";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { getSoundSystemPage } from "@/lib/sanity/fetch";
 import { sanityImageUrl } from "@/lib/sanity/image";
 
@@ -23,13 +24,15 @@ export default async function SoundSystem() {
         headline={page?.heroHeadline || ''}
         quote={page?.heroQuote}
       />
-      <SoundHistory
-        label={page?.historyLabel}
-        body={page?.historyBody}
-        title={page?.heroHeadline}
-        image={page ? sanityImageUrl(page.historyImage) : ''}
-      />
-      <SoundSpecs specs={page?.specs} />
+      <ScrollReveal>
+        <SoundHistory
+          label={page?.historyLabel}
+          body={page?.historyBody}
+          title={page?.heroHeadline}
+          image={page ? sanityImageUrl(page.historyImage) : ''}
+        />
+      </ScrollReveal>
+      <ScrollReveal><SoundSpecs specs={page?.specs} /></ScrollReveal>
       <SoundQuote
         quote={page?.subwayQuote}
         image={page ? sanityImageUrl(page.subwayImage) : ''}

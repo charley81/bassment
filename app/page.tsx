@@ -7,7 +7,11 @@ import { UpcomingEvents } from "@/components/sections/upcoming-events";
 import { VenueTeaser } from "@/components/sections/venue-teaser";
 import { ResidentDjs } from "@/components/sections/resident-djs";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
+import { Marquee } from "@/components/animations/marquee";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
+import { heroData } from "@/lib/data";
+
+const marqueeItems = heroData.eyebrow.split(" | ");
 
 export const revalidate = 3600
 
@@ -16,11 +20,13 @@ export default function Home() {
     <div className="flex flex-col min-h-full">
       <Header />
       <HomeHero />
+      <Marquee items={marqueeItems} />
       <ScrollReveal><FeaturedEvent /></ScrollReveal>
       <ScrollReveal><UpcomingEvents /></ScrollReveal>
       <ScrollReveal><VenueTeaser /></ScrollReveal>
       <ResidentDjs />
       <ScrollReveal><NewsletterSignup /></ScrollReveal>
+      <Marquee items={marqueeItems} />
       <Footer />
     </div>
   );

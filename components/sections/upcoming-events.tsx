@@ -1,6 +1,7 @@
 /* BASSMENT — Upcoming Events Grid Section */
 import Link from "next/link";
 import { EventCard } from "@/components/shared/event-card";
+import { Reveal } from "@/components/animations/reveal";
 import { getUpcomingEvents } from "@/lib/sanity/fetch";
 import { mapEvent } from "@/lib/mappers";
 
@@ -22,8 +23,10 @@ export async function UpcomingEvents() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
           {events.length > 0 ? (
-            events.map((e) => (
-              <EventCard key={e.id} event={e} />
+            events.map((e, i) => (
+              <Reveal key={e.id} delay={i * 0.08}>
+                <EventCard event={e} />
+              </Reveal>
             ))
           ) : (
             <p className="text-body text-bass-grey-med py-12 col-span-full text-center">

@@ -1,5 +1,6 @@
 /* BASSMENT — Sound System Hero Section */
 import Image from "next/image";
+import { Reveal } from "@/components/animations/reveal";
 
 interface Props {
   image: string;
@@ -22,13 +23,19 @@ export function SoundHero({ image, eyebrow, headline, quote }: Props) {
       <div className="absolute inset-0 bg-primary/10 z-1" />
       <div className="relative z-2 flex flex-col gap-6 md:gap-8 max-w-800">
         {eyebrow && (
-          <p className="text-label-sm text-bass-grey-light">{eyebrow}</p>
+          <Reveal mode="load" delay={0.05} y={16}>
+            <p className="text-label-sm text-bass-grey-light">{eyebrow}</p>
+          </Reveal>
         )}
         {headline && (
-          <h1 className="text-h2 text-bass-white">{headline}</h1>
+          <Reveal mode="load" delay={0.2} y={32}>
+            <h1 className="text-h2 text-bass-white">{headline}</h1>
+          </Reveal>
         )}
         {quote && (
-          <p className="text-quote text-bass-grey-light max-w-600">{quote}</p>
+          <Reveal mode="load" delay={0.35} y={24}>
+            <p className="text-quote text-bass-grey-light max-w-600">{quote}</p>
+          </Reveal>
         )}
       </div>
     </section>

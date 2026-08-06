@@ -23,7 +23,7 @@ export function EventCard({ event }: EventCardProps) {
           src={event.image}
           alt={event.title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </div>
