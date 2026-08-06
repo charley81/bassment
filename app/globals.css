@@ -477,3 +477,19 @@
 .map-skeleton {
   animation: map-skeleton-out 0.7s ease 4s forwards;
 }
+
+/* ── Marquee ticker ──
+   Continuous horizontal scroll, pure CSS transform loop (no JS per frame) */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

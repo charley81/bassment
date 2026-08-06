@@ -1,5 +1,6 @@
 /* BASSMENT — Venue Photo Grid Section */
 import { sanityImageUrl, type SanityImageProjection } from "@/lib/sanity/image";
+import { Reveal } from "@/components/animations/reveal";
 import Image from "next/image";
 
 interface Props {
@@ -25,19 +26,18 @@ export function VenuePhotoGrid({ images }: Props) {
             className="flex flex-col md:flex-row gap-4 h-auto md:h-[420px]"
           >
             {row.map((src, i) => (
-              <div
-                key={i}
-                className="relative w-full h-[250px] md:h-full md:flex-1 rounded-lg overflow-hidden"
-              >
-                <Image
-                  src={src}
-                  alt={`Venue photo ${ri * 3 + i + 1}`}
-                  fill
-                  className="object-cover grayscale"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-primary/10 z-1" />
-              </div>
+              <Reveal key={i} delay={i * 0.08} className="w-full md:flex-1">
+                <div className="relative w-full h-[250px] md:h-full rounded-lg overflow-hidden group">
+                  <Image
+                    src={src}
+                    alt={`Venue photo ${ri * 3 + i + 1}`}
+                    fill
+                    className="object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-primary/10 z-1" />
+                </div>
+              </Reveal>
             ))}
           </div>
         ))}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { EventCard } from '@/components/shared/event-card'
+import { Reveal } from '@/components/animations/reveal'
 import type { Event } from '@/lib/types'
 
 interface Props {
@@ -37,8 +38,10 @@ export function EventTabs({ upcoming, past }: Props) {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
         {events.length > 0 ? (
-          events.map((e) => (
-            <EventCard key={e.id} event={e} />
+          events.map((e, i) => (
+            <Reveal key={e.id} delay={i * 0.08}>
+              <EventCard event={e} />
+            </Reveal>
           ))
         ) : (
           <p className="text-body text-bass-grey-med py-12 col-span-full text-center">
