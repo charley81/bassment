@@ -17,10 +17,10 @@ export async function FeaturedEvent() {
   const description = event.description ? toPlainText(event.description) : ''
 
   return (
-    <section className="py-20 md:py-120 px-6 md:px-20">
+    <section className="py-20 md:py-120 px-2 lg:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
-        <div className="flex flex-col md:flex-row rounded-lg overflow-hidden">
+        <div className="flex flex-col lg:flex-row rounded-lg overflow-hidden">
           <div className="w-full md:w-3xl aspect-[768/1376] relative shrink-0">
             <Image
               src={imageUrl}

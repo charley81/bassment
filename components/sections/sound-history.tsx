@@ -14,7 +14,7 @@ export function SoundHistory({ label, body, title, image }: Props) {
   if (!label && paragraphs.length === 0 && !title) return null
 
   return (
-    <section className="py-20 md:py-[160px] px-6 md:px-20 flex flex-col md:flex-row justify-center gap-8 md:gap-12 max-w-1440 mx-auto">
+    <section className="py-20 md:py-[160px] px-2 lg:px-20 flex flex-col lg:flex-row justify-center gap-8 md:gap-12 max-w-1440 mx-auto">
       <div className="flex flex-col gap-6 md:gap-8 flex-1">
         {label && (
           <p className="text-label text-bass-white">{label}</p>
@@ -28,9 +28,11 @@ export function SoundHistory({ label, body, title, image }: Props) {
           ))}
         </div>
       </div>
-      <div className="w-full md:w-lg h-[300px] md:h-[342px] relative shrink-0 rounded-lg overflow-hidden">
-        <Image src={image} alt="" fill sizes="(max-width: 768px) 100vw, 512px" className="object-cover grayscale" />
-        <div className="absolute inset-0 bg-primary/10 z-1" />
+      <div className="w-full lg:w-lg shrink-0 p-4">
+        <div className="relative h-[300px] md:h-[342px] rounded-lg overflow-hidden">
+          <Image src={image} alt="" fill sizes="(max-width: 768px) 100vw, 512px" className="object-cover grayscale" />
+          <div className="absolute inset-0 bg-primary/10 z-1" />
+        </div>
       </div>
     </section>
   );

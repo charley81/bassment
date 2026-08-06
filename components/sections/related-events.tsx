@@ -13,7 +13,7 @@ export async function RelatedEvents() {
   return (
     <div className="flex flex-col gap-6 md:gap-8 pt-16 md:pt-20">
       <h3 className="text-more-events text-bass-text">MORE EVENTS</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {events.map((e) => (
           <EventCard key={e.id} event={e} />
         ))}

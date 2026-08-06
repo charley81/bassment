@@ -22,7 +22,7 @@ export default async function BuyPage({ params }: Props) {
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
       <Header />
-      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-6 flex flex-col items-center">
+      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-2 lg:px-20 flex flex-col items-center">
         <BuyPageClient
           eventSlug={slug}
           eventTitle={event.title}
