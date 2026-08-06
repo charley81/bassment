@@ -31,7 +31,7 @@ export function SoundSpecs({ specs }: Props) {
                   key={s.label}
                   className="flex flex-col items-center gap-3 flex-1"
                 >
-                  <span className="text-h6 text-bass-grey-light">
+                  <span className="text-h6 text-bass-grey-light whitespace-nowrap">
                     {parsed ? <CountUp target={parsed.num} suffix={parsed.suffix} /> : s.value}
                   </span>
                   <span className="text-label-medium text-bass-grey-med">{s.label}</span>

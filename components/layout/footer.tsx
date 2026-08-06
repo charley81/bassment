@@ -4,7 +4,7 @@ import { socialLinks, footerData } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="py-60 md:py-100 px-6 md:px-20 pb-10">
+    <footer className="bg-bass-grey-dark py-60 md:py-100 px-6 md:px-20 pb-10">
       <div className="max-w-[1728px] mx-auto flex flex-col gap-16 md:gap-20">
         <div className="flex flex-col md:flex-row md:justify-between gap-12 md:gap-0">
           <div className="flex flex-col gap-12 w-full md:w-400">
@@ -47,7 +47,6 @@ export function Footer() {
           <p className="text-display text-bass-grey-med select-none">{footerData.brandName}</p>
           <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
             <span className="text-label-medium text-bass-grey-med">{footerData.copyright}</span>
-            <span className="text-label-medium text-bass-grey-med">{footerData.designerCredit}</span>
           </div>
         </div>
       </div>

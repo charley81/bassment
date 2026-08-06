@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bass-bg text-bass-text">
+      <body className="min-h-dvh flex flex-col bg-bass-bg text-bass-text">
         {children}
         <Toaster position="bottom-center" richColors />
       </body>

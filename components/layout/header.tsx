@@ -55,7 +55,7 @@ export function Header() {
           side="right"
           className="bg-bass-dark border-bass-border pt-16"
         >
-          <nav className="flex flex-col gap-6">
+          <nav className="flex flex-col gap-6 px-4 pb-4">
             {navItems.map((item) => (
               <Link
                 key={item.label}

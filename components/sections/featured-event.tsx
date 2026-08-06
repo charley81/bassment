@@ -21,13 +21,13 @@ export async function FeaturedEvent() {
       <div className="max-w-7xl mx-auto flex flex-col gap-4">
         <h2 className="text-section-heading text-bass-white">Next event</h2>
         <div className="flex flex-col md:flex-row rounded-lg overflow-hidden">
-          <div className="w-full md:w-3xl h-[400px] md:h-[1028px] relative shrink-0">
+          <div className="w-full md:w-3xl aspect-[768/1376] relative shrink-0">
             <Image
               src={imageUrl}
               alt={event.title}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
-              className="object-contain"
+              className="object-cover"
             />
           </div>
           <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 p-6 md:p-12">

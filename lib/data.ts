@@ -7,7 +7,7 @@ import type { NavItem, SocialLink } from '@/lib/types'
 /* ── Shared: Navigation + Social ── */
 export const navItems: NavItem[] = [
   { label: 'Events', href: '/events' },
-  { label: 'Sound System', href: '/sound-system' },
+  { label: 'Sound', href: '/sound-system' },
   { label: 'Venue', href: '/venue' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'FAQ', href: '/faq' },
@@ -126,7 +126,6 @@ export const footerData = {
   newsletterCta: 'GET OUR NEWSLETTER',
   brandName: 'BASSMENT',
   copyright: '© BASSMENT 2026',
-  designerCredit: 'DESIGNED & DEVELOPED: CHRISTOPHER HARLEY',
   columns: [
     {
       title: 'BASSMENT',
