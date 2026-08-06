@@ -39,7 +39,7 @@ export function VenueInfoCard({ lat, lng, address }: Props) {
         </Link>
       </div>
 
-      <div className="relative w-full md:w-800 h-200 md:h-300 mx-auto mt-16 md:mt-20 rounded-lg overflow-hidden border border-bass-border">
+      <div className="relative w-full md:w-800 h-300 md:h-[400px] mx-auto mt-16 md:mt-20 rounded-lg overflow-hidden border border-bass-border">
         {hasCoords ? (
           <GoogleMap lat={lat} lng={lng} address={address} />
         ) : (
