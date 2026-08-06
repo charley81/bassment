@@ -27,7 +27,7 @@ export async function FeaturedEvent() {
               alt={event.title}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover grayscale"
+              className="object-cover object-top grayscale"
             />
             <div className="absolute inset-0 bg-primary/10 z-1" />
           </div>
