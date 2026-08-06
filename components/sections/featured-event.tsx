@@ -27,9 +27,8 @@ export async function FeaturedEvent() {
               alt={event.title}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
-              className="object-contain grayscale"
+              className="object-contain"
             />
-            <div className="absolute inset-0 bg-primary/10 z-1" />
           </div>
           <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 p-6 md:p-12">
             <div className="flex flex-col gap-6 md:gap-8">
