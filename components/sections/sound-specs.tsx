@@ -22,14 +22,14 @@ export function SoundSpecs({ specs }: Props) {
         {[0, 2].map((start) => (
           <div
             key={start}
-            className="flex justify-center gap-10 md:gap-20 flex-1"
+            className="flex justify-start gap-10 md:gap-20 flex-1"
           >
             {items.slice(start, start + 2).map((s) => {
               const parsed = parseSpec(s.value)
               return (
                 <div
                   key={s.label}
-                  className="flex flex-col items-center gap-3 flex-1"
+                  className="flex flex-col items-start gap-3 flex-1"
                 >
                   <span className="text-h6 text-bass-grey-light whitespace-nowrap">
                     {parsed ? <CountUp target={parsed.num} suffix={parsed.suffix} /> : s.value}

@@ -13,7 +13,7 @@ export function VenueMap({ lat, lng, address }: Props) {
 
   return (
     <section className="pb-20 md:pb-120 px-6 md:px-20 flex justify-center">
-      <div className="relative w-full max-w-1440 h-[250px] md:h-[420px] rounded-lg overflow-hidden border border-bass-border">
+      <div className="relative w-full max-w-1440 h-[350px] md:h-[520px] rounded-lg overflow-hidden border border-bass-border">
         {hasCoords ? (
           <GoogleMap lat={lat} lng={lng} address={address} />
         ) : (

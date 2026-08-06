@@ -30,7 +30,7 @@ export async function FeaturedEvent() {
               className="object-cover"
             />
           </div>
-          <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 p-6 md:p-12">
+          <div className="flex-1 flex flex-col justify-center gap-6 md:gap-8 py-6 pr-6 md:p-12">
             <div className="flex flex-col gap-6 md:gap-8">
               <div className="flex flex-col gap-1 md:gap-2">
                 <p className="text-nav text-bass-grey-light">
