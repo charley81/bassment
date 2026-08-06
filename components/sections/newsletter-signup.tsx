@@ -6,7 +6,7 @@ export function NewsletterSignup() {
   return (
     <section
       id="newsletter"
-      className="py-20 md:py-120 flex flex-col items-center bg-bass-grey-dark px-2 lg:px-20"
+      className="py-20 md:py-120 flex flex-col items-center bg-bass-grey-dark px-4 lg:px-20"
     >
       <div className="flex flex-col items-center gap-6 md:gap-8 max-w-[720px]">
         <div className="flex flex-col items-center gap-2">

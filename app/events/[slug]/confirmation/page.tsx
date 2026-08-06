@@ -78,7 +78,7 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
   return (
     <div className="flex flex-col min-h-full bg-bass-black">
       <Header />
-      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-2 lg:px-20 flex flex-col justify-center">
+      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-4 lg:px-20 flex flex-col justify-center">
         <div className="flex flex-col gap-8 w-full">
           <div className="flex flex-col gap-4">
             <h1 className="text-h2 text-bass-white">{content.heading}</h1>

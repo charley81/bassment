@@ -16,7 +16,7 @@ export function SoundSpecs({ specs }: Props) {
   if (items.length === 0) return null
 
   return (
-    <section className="py-20 md:py-120 px-2 lg:px-20 flex flex-col items-center gap-16 md:gap-20">
+    <section className="py-20 md:py-120 px-4 lg:px-20 flex flex-col items-center gap-16 md:gap-20">
       <p className="text-label text-bass-white">THE SPECS</p>
       <div className="flex flex-col md:flex-row gap-10 md:gap-20 max-w-900 w-full">
         {[0, 2].map((start) => (

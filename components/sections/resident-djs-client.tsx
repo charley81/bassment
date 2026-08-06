@@ -32,7 +32,7 @@ export function ResidentDjsClient({ djs }: Props) {
   if (!djs.length) return null
 
   return (
-    <section className="py-20 md:py-120 px-2 lg:px-20 flex flex-col items-center gap-4">
+    <section className="py-20 md:py-120 px-4 lg:px-20 flex flex-col items-center gap-4">
       <p className="text-label-medium text-primary">RESIDENT</p>
       <div className="w-full max-w-[520px] overflow-hidden" ref={emblaRef}>
         <div className="flex">

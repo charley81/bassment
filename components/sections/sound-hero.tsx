@@ -10,7 +10,7 @@ interface Props {
 
 export function SoundHero({ image, eyebrow, headline, quote }: Props) {
   return (
-    <section className="relative h-600 md:h-900 w-full flex items-center px-2 lg:px-20 overflow-hidden bg-bass-dark">
+    <section className="relative h-600 md:h-900 w-full flex items-center px-4 lg:px-20 overflow-hidden bg-bass-dark">
       <Image
         src={image}
         alt=""

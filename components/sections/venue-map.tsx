@@ -12,7 +12,7 @@ export function VenueMap({ lat, lng, address }: Props) {
   const hasCoords = typeof lat === 'number' && typeof lng === 'number'
 
   return (
-    <section className="pb-20 md:pb-120 px-2 lg:px-20 flex justify-center">
+    <section className="pb-20 md:pb-120 px-4 lg:px-20 flex justify-center">
       <div className="relative w-full max-w-1440 h-[350px] md:h-[520px] rounded-lg overflow-hidden border border-bass-border">
         {hasCoords ? (
           <GoogleMap lat={lat} lng={lng} address={address} />

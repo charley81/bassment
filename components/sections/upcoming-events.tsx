@@ -9,7 +9,7 @@ export async function UpcomingEvents() {
   const events = (sanityEvents || []).slice(0, 4).map(mapEvent)
 
   return (
-    <section className="py-20 md:py-120 px-2 lg:px-20">
+    <section className="py-20 md:py-120 px-4 lg:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
         <div className="flex justify-between items-end">
           <h2 className="text-section-title text-bass-white">UPCOMING</h2>
