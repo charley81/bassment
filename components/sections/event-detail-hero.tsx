@@ -39,10 +39,9 @@ export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketSta
             alt={event.title}
             fill
             sizes="(max-width: 768px) 100vw, 739px"
-            className="object-cover grayscale"
+            className="object-contain"
             priority
           />
-          <div className="absolute inset-0 bg-primary/10 z-1" />
         </div>
         <div className="flex flex-col gap-6 md:gap-8 flex-1">
           <div className="flex flex-col gap-6 md:gap-8">
