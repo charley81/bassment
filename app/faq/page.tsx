@@ -19,7 +19,7 @@ export default async function FAQ() {
     <div className="flex flex-col min-h-full">
       <Header />
       <main className="pt-200 md:pt-280 pb-20 md:pb-120 flex flex-col items-center gap-12 md:gap-16 px-4 lg:px-20">
-        <div className="w-full max-w-[720px] flex flex-col gap-12 md:gap-16">
+        <div className="w-full flex flex-col gap-12 md:gap-16">
           <h1 className="text-h1 text-bass-white">FAQ</h1>
           {faqs && faqs.length > 0 ? (
             <Accordion className="flex flex-col">
