@@ -39,7 +39,7 @@ export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketSta
             alt={event.title}
             fill
             sizes="(max-width: 768px) 100vw, 739px"
-            className="object-cover object-top grayscale"
+            className="object-contain grayscale"
             priority
           />
           <div className="absolute inset-0 bg-primary/10 z-1" />
