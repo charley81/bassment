@@ -5,9 +5,9 @@ import { venueHomeData } from "@/lib/data";
 
 export function VenueTeaser() {
   return (
-    <section className="py-20 md:py-[140px] px-6 md:px-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-        <div className="w-full md:w-[616px] h-[400px] md:h-[721px] relative shrink-0 rounded-lg overflow-hidden">
+    <section className="py-20 md:py-[140px] px-4 lg:px-20">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+        <div className="w-full lg:w-[616px] h-[400px] md:h-[721px] relative shrink-0 rounded-lg overflow-hidden">
           <Image
             src={venueHomeData.image}
             alt="Venue"

@@ -9,7 +9,7 @@ export async function UpcomingEvents() {
   const events = (sanityEvents || []).slice(0, 4).map(mapEvent)
 
   return (
-    <section className="py-20 md:py-120 px-6 md:px-20">
+    <section className="py-20 md:py-120 px-4 lg:px-20">
       <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
         <div className="flex justify-between items-end">
           <h2 className="text-section-title text-bass-white">UPCOMING</h2>
@@ -20,7 +20,7 @@ export async function UpcomingEvents() {
             View All Events →
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
           {events.length > 0 ? (
             events.map((e) => (
               <EventCard key={e.id} event={e} />

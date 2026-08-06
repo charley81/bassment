@@ -12,8 +12,8 @@ export function VenueHistory({ label, body }: Props) {
   if (!label && paragraphs.length === 0) return null
 
   return (
-    <section className="py-20 md:py-120 flex flex-col items-center gap-12 md:gap-16 px-6">
-      <div className="flex flex-col gap-6 md:gap-8 max-w-[720px]">
+    <section className="py-20 md:py-120 flex flex-col items-center gap-12 md:gap-16 px-4 lg:px-20">
+      <div className="flex flex-col gap-6 md:gap-8 w-full">
         {label && (
           <h2 className="text-label-center text-bass-white">{label}</h2>
         )}

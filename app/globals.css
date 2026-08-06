@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Tablet spans mobile through iPad Pro (max 1366px landscape);
+ * desktop layout kicks in above that. */
+@theme {
+  --breakpoint-lg: 85.5rem; /* 1368px */
+}
+
 /*
  * ═══════════════════════════════════════════════════════════
  * BASSMENT — Design Tokens from Figma

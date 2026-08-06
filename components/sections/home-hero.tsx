@@ -15,7 +15,7 @@ export function HomeHero() {
         priority
       />
       <div className="absolute inset-0 bg-primary/10 z-1" />
-      <div className="relative z-2 pt-200 md:pt-280 px-6 md:px-20 flex flex-col gap-4 md:gap-8 max-w-[1343px]">
+      <div className="relative z-2 pt-200 md:pt-280 px-4 lg:px-20 flex flex-col gap-4 md:gap-8 max-w-[1343px]">
         <div className="flex flex-col gap-1 md:gap-2">
           <p className="text-label-medium text-bass-grey-light">
             {heroData.eyebrow}

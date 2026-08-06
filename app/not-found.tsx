@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-full">
       <Header />
-      <main className="flex-1 flex items-center justify-center py-40 md:py-280 px-6">
+      <main className="flex-1 flex items-center justify-center py-40 md:py-280 px-4 lg:px-20">
         <div className="flex flex-col items-center gap-12 md:gap-16 max-w-1440 w-full">
           <div className="flex flex-col items-center gap-4 md:gap-6">
             <span className="text-display text-bass-white">404</span>

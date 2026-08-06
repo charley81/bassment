@@ -35,7 +35,7 @@ export function EventTabs({ upcoming, past }: Props) {
           {tab === 'past' && <div className="h-0.5 bg-bass-white" />}
         </button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
         {events.length > 0 ? (
           events.map((e) => (
             <EventCard key={e.id} event={e} />

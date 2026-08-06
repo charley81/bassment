@@ -10,17 +10,17 @@ export function SoundQuote({ quote, image }: Props) {
   if (!quote) return null
 
   return (
-    <section className="relative h-400 md:h-[700px] w-full max-w-1440 mx-auto flex items-center justify-center px-6 md:px-20 rounded-lg overflow-hidden bg-bass-dark">
+    <section className="relative h-400 md:h-[700px] w-full flex items-center justify-center overflow-hidden bg-bass-dark">
       <Image
         src={image}
         alt=""
         fill
-        sizes="(max-width: 1440px) 100vw, 1440px"
+        sizes="100vw"
         className="object-cover grayscale"
         priority
       />
       <div className="absolute inset-0 bg-primary/10 z-1" />
-      <p className="relative z-2 text-body text-center text-bass-dark max-w-800">
+      <p className="relative z-2 text-body text-center text-bass-dark max-w-800 px-4 lg:px-20">
         {quote}
       </p>
     </section>
