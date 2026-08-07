@@ -77,7 +77,7 @@ export function ResidentDjsClient({ djs }: Props) {
             transition={t}
           >
             <h3 className="text-subtitle-center text-bass-white">{dj.name}</h3>
-            <p className="text-body text-bass-grey-light">
+            <p className="text-body text-bass-grey-light min-h-[103px] md:min-h-[77px]">
               {toPlainText(dj.description)}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
