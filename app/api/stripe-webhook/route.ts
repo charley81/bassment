@@ -4,6 +4,15 @@ import { groq } from 'next-sanity'
 import { getStripe } from '@/lib/stripe'
 import { sendTicketEmail, resolveTicketRecipient } from '@/lib/ticket-email'
 import { getWriteClient, clientUncached } from '@/lib/sanity/client'
+
+/* ── Coverage ──
+   The resolveTicketRecipient logic is unit-tested in lib/ticket-email.test.ts
+   (5 cases covering the full metadata → receipt_email → billing → null
+   precedence chain). The full purchase loop — payment intent → email
+   attach → webhook → ticket record → email — is exercised by the
+   integration script (scripts/test-checkout-flow.mjs, pnpm test:integration).
+   No additional unit tests needed here; the risk lives in the external
+   integrations, which the integration script covers. */
 import { orderRefFor } from '@/lib/orders'
 import { PURCHASABLE_STATUSES } from '@/lib/tickets'
 import type { SanityTicket } from '@/lib/sanity/types'
