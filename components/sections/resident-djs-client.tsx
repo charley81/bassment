@@ -1,9 +1,8 @@
 'use client'
 
 import { toPlainText } from "@/lib/portable-text";
-import { useEffect, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
+import { Reveal } from '@/components/animations/reveal'
 import type { SanityArtist } from '@/lib/sanity/types'
 
 function artistImage(artist: SanityArtist): string {
@@ -16,39 +15,22 @@ interface Props {
 }
 
 export function ResidentDjsClient({ djs }: Props) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-
-  const autoPlay = useCallback(() => {
-    if (!emblaApi) return
-    emblaApi.scrollNext()
-  }, [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    const interval = setInterval(autoPlay, 5000)
-    return () => clearInterval(interval)
-  }, [emblaApi, autoPlay])
-
   if (!djs.length) return null
 
   return (
     <section className="py-20 md:py-120 px-4 lg:px-20 flex flex-col items-center gap-4">
       <p className="text-label-medium text-primary">RESIDENT</p>
-      <div className="w-full max-w-[520px] overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {djs.map((dj) => (
-            <div
-              key={dj._id}
-              className="flex-[0_0_100%] min-w-0 flex flex-col items-center gap-8"
-              style={{ transition: 'opacity 0.6s ease-out, transform 0.6s ease-out' }}
-            >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
+        {djs.map((dj, i) => (
+          <Reveal key={dj._id} delay={i * 0.08}>
+            <div className="group flex flex-col items-center gap-4">
               <div className="w-[180px] h-[180px] md:w-60 md:h-60 relative rounded-full overflow-hidden">
                 <Image
                   src={artistImage(dj)}
                   alt={dj.name}
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
-                  className="object-cover grayscale"
+                  className="object-cover grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/10 z-1" />
               </div>
@@ -67,24 +49,8 @@ export function ResidentDjsClient({ djs }: Props) {
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-center gap-3 mt-6">
-        <button
-          onClick={() => emblaApi?.scrollPrev()}
-          className="static w-10 h-10 rounded-full border border-bass-border text-arrow text-bass-text hover:border-primary translate-y-0 transition-colors"
-          aria-label="Previous DJ"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => emblaApi?.scrollNext()}
-          className="static w-10 h-10 rounded-full border border-bass-border text-arrow text-bass-text hover:border-primary translate-y-0 transition-colors"
-          aria-label="Next DJ"
-        >
-          →
-        </button>
+          </Reveal>
+        ))}
       </div>
     </section>
   )
