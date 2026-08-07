@@ -44,6 +44,34 @@ const PIN_SVG = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
     "</svg>"
 )}`
 
+/** Custom zoom control in brand colors (replaces Google's fixed-style one) */
+function addZoomControl(map: google.maps.Map) {
+  const el = document.createElement("div")
+  el.className =
+    "flex flex-col rounded-lg overflow-hidden border border-bass-grey-dark bg-bass-dark shadow-[0_4px_14px_rgba(9,1,2,0.35)]"
+
+  const buttonClass =
+    "w-9 h-9 flex items-center justify-center text-primary text-arrow hover:bg-bass-grey-dark hover:border-primary transition-colors cursor-pointer select-none"
+
+  const plus = document.createElement("button")
+  plus.className = buttonClass
+  plus.textContent = "+"
+  plus.setAttribute("aria-label", "Zoom in")
+  plus.addEventListener("click", () => map.setZoom((map.getZoom() ?? 16) + 1))
+
+  const divider = document.createElement("div")
+  divider.className = "h-px bg-bass-grey-dark"
+
+  const minus = document.createElement("button")
+  minus.className = buttonClass
+  minus.textContent = "−"
+  minus.setAttribute("aria-label", "Zoom out")
+  minus.addEventListener("click", () => map.setZoom((map.getZoom() ?? 16) - 1))
+
+  el.append(plus, divider, minus)
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(el)
+}
+
 export function GoogleMap({ lat, lng, address }: Props) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
@@ -71,9 +99,11 @@ export function GoogleMap({ lat, lng, address }: Props) {
           zoom: 16,
           styles: GREYSCALE_STYLES,
           disableDefaultUI: true,
-          zoomControl: true,
+          zoomControl: false,
           scrollwheel: false,
         })
+
+        addZoomControl(map)
 
         new Marker({
           map,
