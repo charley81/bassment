@@ -21,7 +21,7 @@ export default async function Venue() {
   ])
 
   return (
-    <div className="flex flex-col min-h-full bg-bass-black">
+    <div className="flex flex-col min-h-full bg-bass-bg">
       <Header />
       <VenueHero
         headline={venue?.heroHeadline || ''}

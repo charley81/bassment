@@ -16,7 +16,7 @@ export default async function SoundSystem() {
   const page = await getSoundSystemPage()
 
   return (
-    <div className="flex flex-col min-h-full bg-bass-black">
+    <div className="flex flex-col min-h-full bg-bass-bg">
       <Header />
       <SoundHero
         image={page ? sanityImageUrl(page.heroImage) : ''}
