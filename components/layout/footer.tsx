@@ -44,7 +44,7 @@ export function Footer() {
 
         <div className="flex flex-col items-stretch gap-8">
           <hr className="border-t border-bass-input" />
-          <p className="text-[clamp(2.5rem,18vw,16rem)] leading-none whitespace-nowrap text-center text-bass-grey-med select-none">
+          <p className="text-[clamp(2.5rem,18vw,16rem)] font-extrabold leading-none whitespace-nowrap text-center text-bass-grey-med select-none">
             {footerData.brandName}
           </p>
         </div>
