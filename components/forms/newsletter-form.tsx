@@ -81,7 +81,7 @@ export function NewsletterForm() {
           {pending ? "..." : newsletterData.cta}
         </button>
       </div>
-      <p className="text-caption text-bass-grey-light mt-3 text-center">{newsletterData.disclaimer}</p>
+      <p className="text-caption text-bass-grey-light mt-3 text-left">{newsletterData.disclaimer}</p>
       </Form>
     </>
   );

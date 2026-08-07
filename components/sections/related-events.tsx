@@ -4,10 +4,18 @@ import { Reveal } from "@/components/animations/reveal";
 import { getUpcomingEvents } from "@/lib/sanity/fetch";
 import { mapEvent } from "@/lib/mappers";
 
+interface Props {
+  /** The event currently being viewed — excluded so it doesn't appear in the list */
+  currentId?: string;
+}
 
-export async function RelatedEvents() {
+export async function RelatedEvents({ currentId }: Props) {
   const all = await getUpcomingEvents()
-  const events = (all || []).slice(0, 3).map(mapEvent)
+  // Drop the current event, then take the next three
+  const events = (all || [])
+    .filter((e) => e.slug !== currentId && e._id !== currentId)
+    .slice(0, 3)
+    .map(mapEvent)
 
   if (!events.length) return null
 

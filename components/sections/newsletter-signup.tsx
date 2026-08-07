@@ -6,18 +6,20 @@ export function NewsletterSignup() {
   return (
     <section
       id="newsletter"
-      className="py-20 md:py-120 flex flex-col items-center bg-bass-grey-dark px-4 lg:px-20"
+      className="py-20 md:py-120 px-4 lg:px-20"
     >
-      <div className="flex flex-col items-center gap-6 md:gap-8 max-w-[720px]">
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-subtitle-center text-bass-white">
+      <div className="max-w-[520px] lg:max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-between items-start gap-10 md:gap-14">
+        <div className="flex flex-col items-start gap-4 text-left max-w-[560px]">
+          <h3 className="text-h5 text-bass-white">
             {newsletterData.title}
           </h3>
-          <p className="text-center text-bass-grey-light">
+          <p className="text-body text-bass-grey-light">
             {newsletterData.description}
           </p>
         </div>
-        <NewsletterForm />
+        <div className="w-full lg:w-[480px] shrink-0">
+          <NewsletterForm />
+        </div>
       </div>
     </section>
   );

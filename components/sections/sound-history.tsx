@@ -14,7 +14,7 @@ export function SoundHistory({ label, body, title, image }: Props) {
   if (!label && paragraphs.length === 0 && !title) return null
 
   return (
-    <section className="py-20 md:py-[160px] px-4 lg:px-20 flex flex-col lg:flex-row justify-center gap-8 md:gap-12 max-w-1440 mx-auto">
+    <section className="py-20 md:py-120 px-4 lg:px-20 flex flex-col lg:flex-row justify-center gap-8 md:gap-12 max-w-1440 mx-auto">
       <div className="flex flex-col gap-6 md:gap-8 flex-1">
         {label && (
           <p className="text-label text-bass-white">{label}</p>

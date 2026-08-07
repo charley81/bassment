@@ -15,7 +15,7 @@ export default async function Gallery() {
   return (
     <div className="flex flex-col min-h-full">
       <Header />
-      <main className="pt-200 md:pt-280 pb-20 md:pb-120 px-4 lg:px-20 flex flex-col items-center gap-12 md:gap-16">
+      <main className="pt-[160px] md:pt-[200px] pb-20 md:pb-120 px-4 lg:px-20 flex flex-col items-center gap-12 md:gap-16">
         <div className="flex flex-col gap-10 md:gap-12 w-full max-w-7xl">
           <div className="flex justify-between items-end">
             <h1 className="text-h1 text-bass-white">GALLERY</h1>

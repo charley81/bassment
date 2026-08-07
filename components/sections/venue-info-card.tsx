@@ -39,7 +39,7 @@ export function VenueInfoCard({ lat, lng, address }: Props) {
         </Link>
       </div>
 
-      <div className="relative w-full md:w-800 h-300 md:h-[400px] mx-auto mt-16 md:mt-20 rounded-lg overflow-hidden border border-bass-border">
+      <div className="relative w-full max-w-1440 h-[350px] md:h-[520px] mt-16 md:mt-20 rounded-lg overflow-hidden border border-bass-border">
         {hasCoords ? (
           <GoogleMap lat={lat} lng={lng} address={address} />
         ) : (
@@ -50,8 +50,11 @@ export function VenueInfoCard({ lat, lng, address }: Props) {
             </div>
           </MapBackdrop>
         )}
-        {/* Hero-style overlay tint (bumped to /20 so it reads over the map) */}
-        <div className="pointer-events-none absolute inset-0 bg-primary/20 z-30" />
+        {/* Bottom gradient for address legibility */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 z-30 bg-gradient-to-t from-black/70 to-transparent" />
+        <span className="absolute bottom-4 left-4 z-40 text-nav text-bass-muted">
+          {(address || '70 PINE STREET, NEW YORK, NY 10005').toUpperCase()}
+        </span>
       </div>
     </>
   );
