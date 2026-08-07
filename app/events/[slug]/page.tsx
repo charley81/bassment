@@ -50,7 +50,7 @@ export default async function EventDetail({ params }: Props) {
           <EventLineup />
           <EventDescription />
           <VenueInfoCard lat={settings?.venueLat} lng={settings?.venueLng} address={settings?.venueAddress} />
-          <RelatedEvents />
+          <RelatedEvents currentId={sanityEvent.slug} />
         </div>
       </main>
       <Footer />
