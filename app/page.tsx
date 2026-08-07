@@ -26,7 +26,6 @@ export default function Home() {
       <ScrollReveal><VenueTeaser /></ScrollReveal>
       <ResidentDjs />
       <ScrollReveal><NewsletterSignup /></ScrollReveal>
-      <Marquee items={marqueeItems} />
       <Footer />
     </div>
   );
