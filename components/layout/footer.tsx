@@ -4,7 +4,7 @@ import { socialLinks, footerData } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="bg-bass-bg border-t-2 border-primary py-60 md:py-100 px-4 lg:px-20 pb-10">
+    <footer className="bg-bass-bg border-t-2 border-bass-grey-dark py-60 md:py-100 px-4 lg:px-20 pb-10">
       <div className="max-w-[1728px] mx-auto flex flex-col gap-16 md:gap-20">
         <div className="flex flex-col md:flex-row md:justify-between gap-12 md:gap-0">
           <div className="flex flex-col gap-12 w-full md:w-400">
