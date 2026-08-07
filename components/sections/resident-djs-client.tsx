@@ -93,32 +93,34 @@ export function ResidentDjsClient({ djs }: Props) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Name navigation — active name gets a sliding red bar */}
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-2">
+        {/* Name navigation — numbered, active name highlighted */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 mt-2">
           {djs.map((d, i) => (
             <button
               key={d._id}
               onClick={() => setIndex(i)}
               aria-label={`Show ${d.name}`}
               aria-current={i === index}
-              className="relative flex flex-col items-center pb-2 cursor-pointer"
+              className="flex flex-col items-center gap-1 cursor-pointer group/name"
             >
+              <span
+                className={`text-label tracking-widest transition-colors ${
+                  i === index
+                    ? 'text-primary'
+                    : 'text-bass-grey-dark group-hover/name:text-bass-grey-med'
+                }`}
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <span
                 className={`text-nav transition-colors ${
                   i === index
                     ? 'text-bass-white'
-                    : 'text-bass-grey-med hover:text-bass-grey-light'
+                    : 'text-bass-grey-med group-hover/name:text-bass-grey-light'
                 }`}
               >
                 {d.name}
               </span>
-              {i === index && (
-                <motion.span
-                  layoutId="resident-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                  transition={t}
-                />
-              )}
             </button>
           ))}
         </div>
