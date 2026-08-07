@@ -15,7 +15,7 @@ export function VenueStats({ stats }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section className="py-16 md:py-20 flex justify-center px-4 lg:px-20">
+    <section className="py-20 md:py-120 flex justify-center px-4 lg:px-20">
       <div className="grid grid-cols-2 md:flex md:justify-between gap-8 w-full max-w-[1000px]">
         {items.map((s) => (
           <div key={s.label} className="flex flex-col items-center gap-3">
