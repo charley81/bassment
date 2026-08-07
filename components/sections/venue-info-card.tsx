@@ -50,8 +50,6 @@ export function VenueInfoCard({ lat, lng, address }: Props) {
             </div>
           </MapBackdrop>
         )}
-        {/* Hero-style overlay tint (bumped to /20 so it reads over the map) */}
-        <div className="pointer-events-none absolute inset-0 bg-primary/20 z-30" />
       </div>
     </>
   );
