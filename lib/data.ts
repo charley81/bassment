@@ -125,7 +125,6 @@ export const footerData = {
   subscribeLabel: 'SUBSCRIBE',
   newsletterCta: 'GET OUR NEWSLETTER',
   brandName: 'BASSMENT',
-  copyright: '© BASSMENT 2026',
   columns: [
     {
       title: 'BASSMENT',
