@@ -41,15 +41,7 @@ export function Footer() {
             ))}
           </div>
         </div>
-
-        <div className="flex flex-col items-stretch">
-          <hr className="border-t border-bass-input" />
-        </div>
       </div>
-      {/* Full-bleed wordmark — wider than the viewport, edges clipped */}
-      <p className="w-screen mt-12 md:mt-16 whitespace-nowrap text-center font-extrabold leading-none text-bass-grey-med select-none text-[27vw]">
-        {footerData.brandName}
-      </p>
     </footer>
   );
 }
