@@ -42,13 +42,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-stretch gap-8">
+        <div className="flex flex-col items-stretch">
           <hr className="border-t border-bass-input" />
-          <p className="text-[clamp(2.5rem,calc(20.8vw_-_33px),16.7rem)] font-extrabold leading-none whitespace-nowrap text-center text-bass-grey-med select-none">
-            {footerData.brandName}
-          </p>
         </div>
       </div>
+      {/* Full-bleed wordmark — wider than the viewport, edges clipped */}
+      <p className="w-screen mt-12 md:mt-16 whitespace-nowrap text-center font-extrabold leading-none text-bass-grey-med select-none text-[25.4vw]">
+        {footerData.brandName}
+      </p>
     </footer>
   );
 }
