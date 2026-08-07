@@ -8,7 +8,7 @@ export function NewsletterSignup() {
       id="newsletter"
       className="py-20 md:py-120 px-4 lg:px-20"
     >
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-between items-start gap-10 md:gap-14">
+      <div className="max-w-[520px] lg:max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-between items-start gap-10 md:gap-14">
         <div className="flex flex-col items-start gap-4 text-left max-w-[560px]">
           <h3 className="text-h5 text-bass-white">
             {newsletterData.title}
