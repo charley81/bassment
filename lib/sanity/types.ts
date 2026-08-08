@@ -4,11 +4,6 @@ import type { PortableTextBlockLike } from '@/lib/portable-text'
 /* ── Site Settings ── */
 export interface SanitySiteSettings {
   _id: 'siteSettings'
-  siteName: string
-  newsletterTitle?: string
-  newsletterDescription?: string
-  newsletterPlaceholder?: string
-  newsletterDisclaimer?: string
   venueAddress?: string
   venueLat?: number
   venueLng?: number
