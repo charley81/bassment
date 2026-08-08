@@ -3,11 +3,6 @@ import { groq } from 'next-sanity'
 /* ── Site Settings ── */
 export const SITE_SETTINGS_QUERY = groq`
   *[_id == "siteSettings"][0] {
-    siteName,
-    newsletterTitle,
-    newsletterDescription,
-    newsletterPlaceholder,
-    newsletterDisclaimer,
     venueAddress,
     venueLat,
     venueLng
