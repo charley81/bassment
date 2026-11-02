@@ -27,7 +27,10 @@ export function ScrollReveal({ children, className }: Props) {
           observer.unobserve(el)
         }
       },
-      { threshold: 0.15 }
+      // Trigger when the section enters the lower 85% of the viewport.
+      // A percentage threshold can never be reached by sections taller than
+      // the viewport (for example, the stacked upcoming-events grid).
+      { threshold: 0, rootMargin: '0px 0px -15% 0px' }
     )
 
     observer.observe(el)

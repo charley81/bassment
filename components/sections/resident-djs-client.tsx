@@ -32,7 +32,6 @@ export function ResidentDjsClient({ djs }: Props) {
 
   if (!djs.length) return null
 
-  const dj = djs[index]
   const t = prefersReduced ? { duration: 0 } : transition
 
   return (
