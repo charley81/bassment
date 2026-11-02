@@ -17,7 +17,15 @@ interface EventDetailHeroProps {
   ticketPrice?: number;
 }
 
-export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketStatus, ticketSlug, ticketPrice }: EventDetailHeroProps) {
+export function EventDetailHero({
+  event,
+  targetDate,
+  doorsOpen,
+  badge,
+  ticketStatus,
+  ticketSlug,
+  ticketPrice,
+}: EventDetailHeroProps) {
   const details = [
     targetDate && { label: 'DATE', value: formatEventDateLong(targetDate) },
     doorsOpen && { label: 'DOORS', value: formatEventTime(doorsOpen) },
@@ -32,18 +40,18 @@ export function EventDetailHero({ event, targetDate, doorsOpen, badge, ticketSta
         {eventDetailData.backLabel}
       </Link>
 
-      <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12">
-        <div className="w-full md:w-[739px] aspect-[768/1376] relative shrink-0 rounded-lg overflow-hidden">
+      <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-12">
+        <div className="relative w-full max-w-[320px] md:w-[360px] md:max-w-none aspect-[768/1376] shrink-0 overflow-hidden rounded-lg">
           <Image
             src={event.image}
             alt={event.title}
             fill
-            sizes="(max-width: 768px) 100vw, 739px"
+            sizes="(max-width: 767px) 320px, 360px"
             className="object-cover"
             priority
           />
         </div>
-        <div className="flex flex-col gap-6 md:gap-8 flex-1">
+        <div className="flex w-full flex-1 flex-col gap-6 md:gap-8">
           <div className="flex flex-col gap-6 md:gap-8">
             <h1 className="text-h5 text-bass-white">
               {event.title.toUpperCase()}

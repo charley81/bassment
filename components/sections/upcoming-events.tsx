@@ -11,7 +11,7 @@ export async function UpcomingEvents() {
 
   return (
     <section className="py-20 md:py-120 px-4 lg:px-20">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
+      <div className="max-w-5xl mx-auto flex flex-col gap-12 md:gap-16">
         <div className="flex justify-between items-end">
           <h2 className="text-section-title text-bass-white">UPCOMING</h2>
           <Link
@@ -21,11 +21,14 @@ export async function UpcomingEvents() {
             View All Events →
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {events.length > 0 ? (
             events.map((e, i) => (
               <Reveal key={e.id} delay={i * 0.08}>
-                <EventCard event={e} />
+                <EventCard
+                  event={e}
+                  sizes="(max-width: 767px) 50vw, (max-width: 1367px) 25vw, 232px"
+                />
               </Reveal>
             ))
           ) : (

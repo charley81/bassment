@@ -9,9 +9,13 @@ import type { Event } from "@/lib/types";
 
 interface EventCardProps {
   event: Event;
+  sizes?: string;
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({
+  event,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw",
+}: EventCardProps) {
   return (
     <Link
       href={`/events/${event.id}`}
@@ -24,7 +28,7 @@ export function EventCard({ event }: EventCardProps) {
           alt={event.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes={sizes}
         />
       </div>
     </Link>
