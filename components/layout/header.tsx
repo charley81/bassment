@@ -48,7 +48,7 @@ export function Header() {
 
       {/* Mobile hamburger */}
       <Sheet>
-        <SheetTrigger className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-bass-border text-bass-white">
+        <SheetTrigger className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-2 border-bass-white text-bass-white">
           ☰
         </SheetTrigger>
         <SheetContent
